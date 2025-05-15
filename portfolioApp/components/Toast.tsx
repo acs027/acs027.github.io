@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
-import { StyleSheet, Animated, useColorScheme } from 'react-native';
-import { ThemedText } from './ThemedText';
-import { ThemedView } from './ThemedView';
+import { useEffect } from "react";
+import { StyleSheet, Animated, useColorScheme, Platform } from "react-native";
+import { ThemedText } from "./ThemedText";
+import { ThemedView } from "./ThemedView";
 
 interface Props {
   message: string;
@@ -35,7 +35,9 @@ export function Toast({ message, isVisible, onHide }: Props) {
 
   return (
     <Animated.View style={[styles.container, { opacity }]}>
-      <ThemedView style={theme === 'dark' ? styles.darkToast : styles.lightToast}>
+      <ThemedView
+        style={theme === "dark" ? styles.darkToast : styles.lightToast}
+      >
         <ThemedText>{message}</ThemedText>
       </ThemedView>
     </Animated.View>
@@ -44,29 +46,56 @@ export function Toast({ message, isVisible, onHide }: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-      top: 0,
-     bottom: 0,
-     left: 0,
-     right: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    alignItems: "center",
+    justifyContent: "center",
     zIndex: 1000,
   },
   darkToast: {
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 8,
-    shadowColor: '#FFF',
-    shadowRadius: 3,
-    backgroundColor: '#000',
+    backgroundColor: "#000",
+
+    ...Platform.select({
+      web: {
+        boxShadow: "0px 0px 3px rgba(255, 255, 255, 0.7)", // white-ish shadow
+      },
+      ios: {
+        shadowColor: "#FFF",
+        shadowRadius: 3,
+        shadowOffset: { width: 0, height: 0 }, // add offset if needed for iOS
+        shadowOpacity: 1,
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
   },
+
   lightToast: {
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 8,
-    shadowColor: '#000',
-    shadowRadius: 3,
-    backgroundColor: '#FFF',
+    backgroundColor: "#FFF",
+
+    ...Platform.select({
+      web: {
+        boxShadow: "0px 0px 3px rgba(0, 0, 0, 0.3)", // black-ish shadow
+      },
+      ios: {
+        shadowColor: "#000",
+        shadowRadius: 3,
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 1,
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
   },
-}); 
+});

@@ -1,17 +1,24 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, Platform, Dimensions, Pressable, Image, ImageSourcePropType } from 'react-native';
-import Animated, { 
-  useAnimatedStyle, 
-  withSpring, 
-  useSharedValue, 
+import { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  Platform,
+  Dimensions,
+  Pressable,
+  Image,
+  ImageSourcePropType,
+} from "react-native";
+import Animated, {
+  useAnimatedStyle,
+  withSpring,
+  useSharedValue,
   interpolate,
-  withTiming
-} from 'react-native-reanimated';
-import { IconSymbol } from './ui/IconSymbol';
-import { ThemedText } from './ThemedText';
-import { ThemedView } from './ThemedView';
+  withTiming,
+} from "react-native-reanimated";
+import { IconSymbol } from "./ui/IconSymbol";
+import { ThemedText } from "./ThemedText";
+import { ThemedView } from "./ThemedView";
 
-const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 const BUTTON_SIZE = 80;
 const HORIZONTAL_PADDING = 25;
 
@@ -22,7 +29,12 @@ interface Props {
   imageSource?: ImageSourcePropType;
 }
 
-export function ExpandableInfo({ onPress, name, location, imageSource }: Props) {
+export function ExpandableInfo({
+  onPress,
+  name,
+  location,
+  imageSource,
+}: Props) {
   const expanded = useSharedValue(0);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -30,21 +42,19 @@ export function ExpandableInfo({ onPress, name, location, imageSource }: Props) 
   useEffect(() => {
     expanded.value = withSpring(isHovered ? 1 : 0, {
       damping: 15,
-      stiffness: 150
+      stiffness: 150,
     });
   }, [isHovered]);
 
   const containerStyle = useAnimatedStyle(() => {
     return {
       width: interpolate(
-        expanded.value, 
-        [0, 1], 
-        [BUTTON_SIZE, SCREEN_WIDTH - (HORIZONTAL_PADDING * 2)]
+        expanded.value,
+        [0, 1],
+        [BUTTON_SIZE, SCREEN_WIDTH - HORIZONTAL_PADDING * 2]
       ),
       height: BUTTON_SIZE,
-      transform: [
-        { translateY: interpolate(expanded.value, [0, 1], [0, -4]) }
-      ]
+      transform: [{ translateY: interpolate(expanded.value, [0, 1], [0, -4]) }],
     };
   });
 
@@ -52,10 +62,10 @@ export function ExpandableInfo({ onPress, name, location, imageSource }: Props) 
     return {
       opacity: expanded.value,
       flex: 1,
-      alignItems: 'center',
+      alignItems: "center",
       transform: [
-        { translateX: interpolate(expanded.value, [0, 1], [-20, 0]) }
-      ]
+        { translateX: interpolate(expanded.value, [0, 1], [-20, 0]) },
+      ],
     };
   });
 
@@ -68,26 +78,20 @@ export function ExpandableInfo({ onPress, name, location, imageSource }: Props) 
   };
 
   return (
-    <Pressable 
+    <Pressable
       onPress={handlePress}
       onHoverIn={() => setIsHovered(true)}
       onHoverOut={() => setIsHovered(false)}
-      style={({ pressed }) => [
-        styles.pressable,
-        pressed && styles.pressed
-      ]}
+      style={({ pressed }) => [styles.pressable, pressed && styles.pressed]}
     >
       <Animated.View style={[styles.container, containerStyle]}>
         <ThemedView style={styles.content}>
           {imageSource ? (
-            <Image 
-              source={imageSource}
-              style={styles.profileImage}
-            />
+            <Image source={imageSource} style={styles.profileImage} />
           ) : (
-            <IconSymbol 
-              name="chevron.up.circle.fill" 
-              size={32} 
+            <IconSymbol
+              name="chevron.up.circle.fill"
+              size={32}
               color="#007AFF"
             />
           )}
@@ -103,10 +107,10 @@ export function ExpandableInfo({ onPress, name, location, imageSource }: Props) 
 
 const styles = StyleSheet.create({
   pressable: {
-    position: 'absolute',
+    position: "absolute",
     left: HORIZONTAL_PADDING,
     bottom: HORIZONTAL_PADDING,
-    cursor: 'pointer',
+    cursor: "pointer",
     zIndex: 100,
   },
   pressed: {
@@ -114,28 +118,35 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: Platform.select({
-      ios: '#FFFFFF99',
-      default: '#FFFFFF95',
+      ios: "#FFFFFF99",
+      default: "#FFFFFF95",
     }),
     borderRadius: BUTTON_SIZE / 2,
-    overflow: 'hidden',
-    backdropFilter: 'blur(8px)',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    elevation: 5,
+    overflow: "hidden",
+
+    ...Platform.select({
+      web: {
+        backdropFilter: "blur(8px)", // web only
+        boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
+      },
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.15,
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 5,
+      },
+    }),
   },
   content: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     gap: 0,
     padding: 0,
-    height: '100%',
+    height: "100%",
   },
   location: {
     fontSize: 12,
@@ -145,4 +156,4 @@ const styles = StyleSheet.create({
     width: BUTTON_SIZE,
     height: BUTTON_SIZE,
   },
-}); 
+});

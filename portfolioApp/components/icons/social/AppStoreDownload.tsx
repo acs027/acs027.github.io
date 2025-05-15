@@ -7,11 +7,7 @@ export function AppStoreDownloadSVG(props: { size?: number; color?: string }) {
   const [hovered, setHovered] = useState(false);
   const size = hovered ? props.size || 24 : props.size || 24;
   const theme = useColorScheme();
-  const color = hovered
-    ? "#ff6347"
-    : props.color || theme === "dark"
-    ? "#fff"
-    : "#000";
+  const color = hovered ? "#ff6347" : props.color || "#FFF";
   return (
     <Svg
       width={size * 3.373}
@@ -47,17 +43,17 @@ export function AppStoreDownloadSVG(props: { size?: number; color?: string }) {
           y2="61.386"
           gradientTransform="matrix(4.0022 0 0 4.0011 191.95 -349.736)"
         >
-          <Stop offset="0" stop-color="#1a1a1a" stop-opacity=".1" />
+          <Stop offset="0" stopColor="#1a1a1a" stopOpacity=".1" />
 
-          <Stop offset=".123" stop-color="#212121" stop-opacity=".151" />
+          <Stop offset=".123" stopColor="#212121" stopOpacity=".151" />
 
-          <Stop offset=".308" stop-color="#353535" stop-opacity=".227" />
+          <Stop offset=".308" stopColor="#353535" stopOpacity=".227" />
 
-          <Stop offset=".532" stop-color="#575757" stop-opacity=".318" />
+          <Stop offset=".532" stopColor="#575757" stopOpacity=".318" />
 
-          <Stop offset=".783" stop-color="#858585" stop-opacity=".421" />
+          <Stop offset=".783" stopColor="#858585" stopOpacity=".421" />
 
-          <Stop offset="1" stop-color="#b3b3b3" stop-opacity=".51" />
+          <Stop offset="1" stopColor="#b3b3b3" stopOpacity=".51" />
         </LinearGradient>
 
         <Path

@@ -15,7 +15,7 @@ const Projects: React.FC = () => {
         repoLink="https://github.com/acs027/FlightComputer"
         appStoreLink="https://apps.apple.com/tr/app/e6b-flight-pro/id6743019639"
         description="E6B Flight Pro is a precise digital replica of the classic E6B flight computer, built for pilots, student aviators, and aviation enthusiasts."
-        techStack={["• SwiftUI", "• MVVM Architecture"]}
+        techStack={["• SwiftUI", "• AdMob", "• MVVM Architecture"]}
         images={[
           require("../assets/images/flightcomputer01.png"),
           require("../assets/images/flightcomputer02.png"),

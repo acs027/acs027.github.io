@@ -115,10 +115,23 @@ const styles = StyleSheet.create({
   projectCard: {
     padding: 16,
     borderRadius: 12,
-    shadowColor: "#000000",
-    shadowRadius: 5,
     width: 1000,
     maxWidth: "95%",
+
+    ...Platform.select({
+      web: {
+        boxShadow: "-1px -1px 5px 4px rgba(0, 0, 0, 0.5)",
+      },
+      ios: {
+        shadowColor: "#000000",
+        shadowOffset: { width: 1, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
   },
   projectContent: {
     gap: 8,
@@ -146,7 +159,6 @@ const styles = StyleSheet.create({
     }),
   },
   deviceGIF: {
-    resizeMode: "cover",
     aspectRatio: 9 / 19.5,
     borderRadius: 16,
     borderWidth: StyleSheet.hairlineWidth,

@@ -1,5 +1,5 @@
 {
-  "name": "acs027.github.io",
+  "name": "portfolioapp",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
@@ -10,7 +10,7 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "deploy": "gh-pages --nojekyll -d dist",
+    "deploy": "gh-pages --nojekyll -d dist --repo https://github.com/acs027/acs027.github.io.git",
     "predeploy": "expo export -p web && copy .\\app\\app-ads.txt .\\dist\\app-ads.txt"
   },
   "jest": {

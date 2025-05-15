@@ -10,6 +10,8 @@ import { UIKitIcon } from '@/components/icons/skills/UIKitIcon';
 import { TypescriptIcon } from '@/components/icons/skills/TypescriptIcon';
 import { XCodeIcon } from '@/components/icons/skills/XCodeIcon';
 import { VSCodeIcon } from '@/components/icons/skills/VSCodeIcon';
+import { ExpoIcon } from '@/components/icons/skills/ExpoIcon';
+import { AdMobIcon } from '@/components/icons/skills/AdMob';
 // ... import other icons
 
 export type Skill = {
@@ -56,10 +58,6 @@ export const SKILLS: SkillCategory[] = [
         Icon: UIKitIcon
       },
       { 
-        name: 'Core Data',
-        Icon: UIKitIcon
-      },
-      { 
         name: 'React',
         Icon: ReactIcon
       },
@@ -76,14 +74,34 @@ export const SKILLS: SkillCategory[] = [
         name: 'XCode', 
         Icon: XCodeIcon
       },
+         { 
+        name: 'Core Data',
+        Icon: UIKitIcon
+      },
+         { 
+        name: 'Swift Data',
+        Icon: UIKitIcon
+      },
+          { 
+        name: 'AdMob', 
+        Icon: AdMobIcon
+      },
+        { 
+        name: 'Firebase', 
+        Icon: FirebaseIcon
+      },
+            { 
+        name: 'Expo', 
+        Icon: ExpoIcon
+      },
       { 
         name: 'VSCode', 
         Icon: VSCodeIcon
       },
-      { 
-        name: 'Firebase', 
-        Icon: FirebaseIcon
-      },
+    
+  
+     
+
       { 
         name: 'Adobe Photoshop', 
         Icon: PhotoshopIcon
