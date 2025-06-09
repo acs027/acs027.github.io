@@ -13,7 +13,6 @@ import { GithubIcon } from "./icons/social/GithubIcon";
 import { AppStoreDownloadSVG } from "./icons/social/AppStoreDownload";
 import { useThemeColors } from "./useThemeColors";
 import { ShadowStyle } from "./ShadowStyle";
-import { useThemeColor } from "@/hooks/useThemeColor";
 
 type CompactProjectCardProps = {
   title: string;
@@ -44,10 +43,12 @@ const CompactProjectCard: React.FC<CompactProjectCardProps> = ({
         />
       )}
       <View style={styles.content}>
-        <ThemedText type="title">{title}</ThemedText>
+        <ThemedText type="subtitle">{title}</ThemedText>
 
         {techStack && (
-          <ThemedText style={styles.stack}>{techStack.join(" • ")}</ThemedText>
+          <ThemedText style={styles.stack}>
+            {" • " + techStack.join(" • ")}
+          </ThemedText>
         )}
 
         {description && (
@@ -107,9 +108,6 @@ const styles = StyleSheet.create({
     position: "relative", // to position links absolutely inside
     minHeight: 195, // same height as thumbnail so links align bottom
     paddingRight: 10, // optional, for spacing on right
-  },
-  textContent: {
-    paddingBottom: 40, // give some space so text doesn’t overlap links
   },
   stack: {
     marginTop: 4,

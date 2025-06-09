@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Image, StyleSheet, Platform, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import Animated from "react-native-reanimated";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import CompactProjectCard from "@/components/CompactProjectCard";
@@ -21,7 +21,7 @@ export default function ProjectsScreen() {
           />
         }
       >
-        <View style={styles.grid}>
+        <View style={[styles.grid, { maxWidth: "90%" }]}>
           {projects.map((project, index) => (
             <CompactProjectCard
               key={index}
@@ -30,7 +30,7 @@ export default function ProjectsScreen() {
               appStoreLink={project.appStoreLink}
               techStack={project.techStack}
               thumbnail={project.thumbnail}
-              description={project.shortDescription} // <-- use shortDescription here
+              description={project.shortDescription}
             />
           ))}
         </View>
@@ -48,8 +48,6 @@ const styles = StyleSheet.create({
   reactLogo: {
     height: 290,
     width: 290,
-    // bottom: 0,
-    // left: 0,
     position: "absolute",
     justifyContent: "center",
     opacity: 0.8,

@@ -19,7 +19,7 @@ export const projects: Project[] = [
       "E6B Flight Pro is a precise digital replica of the classic E6B flight computer, built for pilots, student aviators, and aviation enthusiasts.",
     shortDescription:"A digital replica of the E6B flight computer for pilots and aviation students.",
     thumbnail:require("@/assets/images/flightcomputer01.png"),
-      techStack: ["SwiftUI", "AdMob", "MVVM Architecture"],
+      techStack: ["SwiftUI", "AdMob", "MVVM"],
     images: [
       require("../assets/images/flightcomputer01.png"),
       require("../assets/images/flightcomputer02.png"),
@@ -33,7 +33,7 @@ export const projects: Project[] = [
       "A SwiftUI-based movie app that lets users explore movies and stay updated with the latest releases. This app features API integration for fetching movie data, caching using Core Data, user-friendly interface.",
     shortDescription:"A movie discovery app with API integration and offline caching.",
     thumbnail:"https://github.com/user-attachments/assets/322c26f5-b2c8-458b-8163-0303982a8b43",
-      techStack: ["SwiftUI", "Alamofire", "Core Data", "TMDB API", "WebKit", "MVVM Architecture"],
+      techStack: ["SwiftUI", "Alamofire", "Core Data", "TMDB API", "WebKit", "MVVM"],
     images: [
       "https://github.com/user-attachments/assets/322c26f5-b2c8-458b-8163-0303982a8b43",
       "https://github.com/user-attachments/assets/9483a608-4453-47b0-8cd9-ae9595e82052",
