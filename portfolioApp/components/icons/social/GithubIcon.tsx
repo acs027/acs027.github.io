@@ -7,10 +7,12 @@ export function GithubIcon(props: {
   size?: number;
   color?: string;
   effectValue?: number;
+  scale?: number;
 }) {
   const [hovered, setHovered] = useState(false);
   const size = hovered
-    ? props.size * (props.effectValue || 1.2) || 24 * (props.effectValue || 1.2)
+    ? props.size * (props.effectValue || props.scale || 1.2) ||
+      24 * (props.effectValue || props.scale || 1.2)
     : props.size || 24;
   const theme = useColorScheme();
   const color = hovered

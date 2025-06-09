@@ -6,6 +6,8 @@ import { ExternalLink } from "./ExternalLink";
 import { Platform } from "react-native";
 import { GithubIcon } from "./icons/social/GithubIcon";
 import { AppStoreDownloadSVG } from "./icons/social/AppStoreDownload";
+import { ShadowStyle } from "./ShadowStyle";
+import { useThemeColors } from "./useThemeColors";
 
 type ProjectCardProps = {
   title: string;
@@ -27,21 +29,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   gif,
 }) => {
   const { width } = useWindowDimensions();
+  const colors = useThemeColors();
   return (
-    <ThemedView style={styles.projectCard}>
-      <ThemedView style={styles.projectContent}>
+    <ThemedView color={colors.card} style={[styles.projectCard, ShadowStyle()]}>
+      <ThemedView color={colors.card} style={[styles.projectContent]}>
         <ThemedView>
           <ThemedView
+            color={colors.card}
             style={{
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              padding: 10,
+              flexWrap: "wrap",
             }}
           >
             <ThemedText type="title">{title}</ThemedText>
 
-            <View style={{ flexDirection: "row", gap: 10 }}>
+            <View style={{ flexDirection: "row", gap: 10, flexShrink: 1 }}>
               {appStoreLink && (
                 <ExternalLink href={appStoreLink}>
                   <AppStoreDownloadSVG size={50} />
@@ -59,13 +63,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <ThemedText>{description}</ThemedText>
 
         {techStack && (
-          <ThemedView>
+          <ThemedView color={colors.card}>
             <ThemedText type="defaultSemiBold">Tech Used</ThemedText>
             <ThemedText>{techStack.join(" ")}</ThemedText>
           </ThemedView>
         )}
 
-        <ThemedView style={styles.projectImageContainer}>
+        <ThemedView color={colors.card} style={styles.projectImageContainer}>
           <ThemedView style={styles.deviceImagesContainer}>
             {images &&
               images.map((img, index) => {
@@ -73,7 +77,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 const source = isWebUri ? { uri: img } : img; // img is already a require(...) object
 
                 return (
-                  <ThemedView key={index} style={styles.deviceImagesContent}>
+                  <ThemedView
+                    color={colors.card}
+                    key={index}
+                    style={styles.deviceImagesContent}
+                  >
                     <Image
                       source={source}
                       style={[
@@ -90,7 +98,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               })}
             {gif &&
               gif.map((src, index) => (
-                <ThemedView key={index} style={styles.deviceImagesContent}>
+                <ThemedView
+                  color={colors.card}
+                  key={index}
+                  style={styles.deviceImagesContent}
+                >
                   <Image
                     source={typeof src === "string" ? { uri: src } : src}
                     style={[
@@ -117,21 +129,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     width: 1000,
     maxWidth: "95%",
-
-    ...Platform.select({
-      web: {
-        boxShadow: "-1px -1px 5px 4px rgba(0, 0, 0, 0.5)",
-      },
-      ios: {
-        shadowColor: "#000000",
-        shadowOffset: { width: 1, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 5,
-      },
-      android: {
-        elevation: 3,
-      },
-    }),
   },
   projectContent: {
     gap: 8,
@@ -162,10 +159,6 @@ const styles = StyleSheet.create({
     aspectRatio: 9 / 19.5,
     borderRadius: 16,
     borderWidth: StyleSheet.hairlineWidth,
-    // borderColor: Platform.select({
-    //   ios: '#00000015',
-    //   default: '#00000010',
-    // }),
   },
 
   projectImageContainer: {

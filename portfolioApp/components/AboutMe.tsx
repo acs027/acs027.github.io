@@ -1,19 +1,20 @@
 import React from "react";
-import { Dimensions, StyleSheet, useColorScheme, Platform } from "react-native";
+import { StyleSheet } from "react-native";
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";
 import { HelloWave } from "./HelloWave";
+import { ShadowStyle } from "./ShadowStyle";
+import { useThemeColors } from "./useThemeColors";
 
 const AboutMe: React.FC = () => {
-  const theme = useColorScheme();
+  const colors = useThemeColors();
   return (
-    <ThemedView style={styles.summaryContainer}>
+    <ThemedView color={colors.background} style={styles.summaryContainer}>
       <ThemedView
-        style={
-          theme === "dark" ? styles.darkRoundedRect : styles.lightRoundedRect
-        }
+        color={colors.card}
+        style={[styles.roundedRect, ShadowStyle()]}
       >
-        <ThemedView style={styles.titleContainer}>
+        <ThemedView color={colors.card} style={[styles.titleContainer]}>
           <ThemedText type="title">
             Hi! <HelloWave />
           </ThemedText>
@@ -21,7 +22,7 @@ const AboutMe: React.FC = () => {
           <ThemedText type="subtitle">iOS Developer</ThemedText>
         </ThemedView>
 
-        <ThemedView style={styles.sectionContainer}>
+        <ThemedView color={colors.card} style={[styles.sectionContainer]}>
           <ThemedText>
             Passionate iOS developer with a background in mechanical engineering
             and software development. I began programming during the pandemic
@@ -41,60 +42,19 @@ const styles = StyleSheet.create({
   sectionContainer: {
     gap: 16,
     marginBottom: 24,
-    // alignItems: 'center',
   },
   summaryContainer: {
     alignItems: "center",
   },
-  lightRoundedRect: {
+  roundedRect: {
     borderRadius: 16,
     padding: 16,
     marginVertical: 8,
     alignItems: "baseline",
     width: 1000,
     maxWidth: "95%",
-
-    ...Platform.select({
-      web: {
-        boxShadow: "0px 2px 4px rgba(0,0,0,0.5)", // boxShadow for web
-      },
-      ios: {
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.5,
-        shadowRadius: 4,
-      },
-      android: {
-        elevation: 2,
-      },
-    }),
-  },
-  darkRoundedRect: {
-    borderRadius: 16,
-    padding: 16,
-    marginVertical: 8,
-    alignItems: "baseline",
-    width: 1000,
-    maxWidth: "95%",
-
-    ...Platform.select({
-      web: {
-        // white-ish shadow for dark background on web
-        boxShadow: "0px 2px 4px rgba(255, 255, 255, 0.5)",
-      },
-      ios: {
-        shadowColor: "#fff",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.5,
-        shadowRadius: 4,
-      },
-      android: {
-        elevation: 2,
-      },
-    }),
   },
   titleContainer: {
-    // flexDirection: 'row',
     alignItems: "baseline",
     gap: 8,
     marginBottom: 16,

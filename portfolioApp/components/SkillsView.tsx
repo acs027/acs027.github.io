@@ -1,26 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Pressable, useColorScheme, Platform } from "react-native";
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";
 import { SKILLS } from "@/constants/Skills";
+import { ShadowStyle } from "./ShadowStyle";
+import { useThemeColors } from "./useThemeColors";
 
 const SkillsView: React.FC = () => {
-  const theme = useColorScheme();
+  const colors = useThemeColors();
+
   return (
-    <ThemedView style={styles.sectionContainer}>
+    <ThemedView color={colors.background} style={[styles.sectionContainer]}>
       <ThemedText type="subtitle">SKILLS</ThemedText>
       <ThemedView
-        style={
-          theme === "dark" ? styles.darkRoundedRect : styles.lightRoundedRect
-        }
+        color={colors.card}
+        style={[styles.roundedRect, ShadowStyle()]}
       >
         {SKILLS.map((category) => (
-          <ThemedView key={category.title} style={styles.skillCategory}>
+          <ThemedView
+            color={colors.card}
+            key={category.title}
+            style={[styles.skillCategory]}
+          >
             <ThemedText type="defaultSemiBold" style={styles.categoryTitle}>
               {category.title}
             </ThemedText>
-            <ThemedView style={styles.skillContainer}>
-              <ThemedView style={styles.skillsGrid}>
+            <ThemedView color={colors.card} style={[styles.skillContainer]}>
+              <ThemedView color={colors.card} style={[styles.skillsGrid]}>
                 {category.skills.map((skill) => {
                   if (!skill.Icon) return null;
                   const SkillIcon = skill.Icon;
@@ -28,21 +34,17 @@ const SkillsView: React.FC = () => {
                     <Pressable
                       key={skill.name}
                       style={({ pressed, hovered }) => [
-                        theme === "dark"
-                          ? styles.darkSkillBadge
-                          : styles.lightSkillBadge,
+                        styles.skillBadge,
+                        { backgroundColor: colors.skillBadgeBgColor },
                         pressed && styles.pressed,
-                        hovered && styles.hovered, // Web hover effect
+                        hovered && [
+                          styles.hovered,
+                          { backgroundColor: colors.skillHoveredColor },
+                        ], // Web hover effect
                       ]}
                     >
                       <SkillIcon size={32} />
-                      <ThemedText
-                        style={
-                          theme === "dark"
-                            ? styles.darkSkillText
-                            : styles.lightSkillText
-                        }
-                      >
+                      <ThemedText style={[styles.skillText]}>
                         {skill.name}
                       </ThemedText>
                     </Pressable>
@@ -63,51 +65,12 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     alignItems: "center",
   },
-  lightRoundedRect: {
-    // backgroundColor: '#f0f0f0',
+  roundedRect: {
     borderRadius: 16,
     padding: 16,
     marginVertical: 8,
     width: 1000,
     maxWidth: "95%",
-
-    ...Platform.select({
-      web: {
-        boxShadow: "0px 2px 4px rgba(0,0,0,0.5)",
-      },
-      ios: {
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.5,
-        shadowRadius: 4,
-      },
-      android: {
-        elevation: 2,
-      },
-    }),
-  },
-  darkRoundedRect: {
-    borderRadius: 16,
-    padding: 16,
-    marginVertical: 8,
-    width: 1000,
-    maxWidth: "95%",
-
-    ...Platform.select({
-      web: {
-        // Use a white-ish box shadow for the light shadow effect
-        boxShadow: "0px 2px 4px rgba(255, 255, 255, 0.5)",
-      },
-      ios: {
-        shadowColor: "#fff",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.5,
-        shadowRadius: 4,
-      },
-      android: {
-        elevation: 2,
-      },
-    }),
   },
   skillContainer: {
     justifyContent: "center",
@@ -128,18 +91,16 @@ const styles = StyleSheet.create({
   },
   skillCategory: {
     marginTop: 24,
-    // alignItems: 'center',
   },
   categoryTitle: {
     opacity: 0.8,
     marginBottom: 8,
   },
-  darkSkillBadge: {
+  skillBadge: {
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
     justifyContent: "space-between",
-    backgroundColor: "#FFF",
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderRadius: 12,
@@ -147,26 +108,7 @@ const styles = StyleSheet.create({
     height: 60,
     transition: "all 0.2s ease-in-out",
   },
-  lightSkillBadge: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-    justifyContent: "space-between",
-    backgroundColor: "#EEE8",
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderRadius: 12,
-    width: 210,
-    height: 60,
-    transition: "all 0.2s ease-in-out",
-  },
-  darkSkillText: {
-    color: "#000",
-    fontWeight: "bold",
-    textAlign: "right",
-  },
-  lightSkillText: {
-    color: "#000",
+  skillText: {
     fontWeight: "bold",
     textAlign: "right",
   },
@@ -175,7 +117,6 @@ const styles = StyleSheet.create({
   },
   hovered: {
     transform: [{ scale: 1.05 }], // Slightly increase size on hover
-    backgroundColor: "#f0f0f0", // Change background color on hover
   },
 });
 

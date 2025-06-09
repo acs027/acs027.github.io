@@ -9,6 +9,7 @@ import { PhoneIcon } from "./icons/social/PhoneIcon";
 import { EmailIcon } from "./icons/social/EmailIcon";
 import { LinkedinIcon } from "./icons/social/LinkedinIcon";
 import { GithubIcon } from "./icons/social/GithubIcon";
+import { useThemeColors } from "./useThemeColors";
 
 interface SocialViewProps {
   setShowToast: (value: boolean) => void;
@@ -21,23 +22,25 @@ const SocialView: React.FC<SocialViewProps> = ({ setShowToast }) => {
     setShowToast(true);
   };
 
+  const colors = useThemeColors();
+
   return (
     <>
-      <ThemedView style={styles.connectGrid}>
+      <ThemedView color={colors.background} style={styles.connectGrid}>
         <ExternalLink href="mailto:alicihansarac@gmail.com">
-          <ThemedView style={styles.connectCard}>
+          <ThemedView color={colors.socialIconBg} style={styles.connectCard}>
             <EmailIcon size={32} />
           </ThemedView>
         </ExternalLink>
 
         <ExternalLink href="https://www.linkedin.com/in/alicihansarac/">
-          <ThemedView style={styles.connectCard}>
+          <ThemedView color={colors.socialIconBg} style={styles.connectCard}>
             <LinkedinIcon size={32} />
           </ThemedView>
         </ExternalLink>
 
         <ExternalLink href="https://github.com/acs027">
-          <ThemedView style={styles.connectCard}>
+          <ThemedView color={colors.socialIconBg} style={styles.connectCard}>
             <GithubIcon size={32} />
           </ThemedView>
         </ExternalLink>

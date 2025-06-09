@@ -58,8 +58,6 @@ const styles = StyleSheet.create({
   reactLogo: {
     height: 290,
     width: 290,
-    // bottom: 0,
-    // left: 0,
     position: "absolute",
     justifyContent: "center",
     opacity: 0.8,
