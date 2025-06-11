@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, useWindowDimensions } from "react-native";
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";
 import { HelloWave } from "./HelloWave";
@@ -8,6 +8,7 @@ import { useThemeColors } from "./useThemeColors";
 
 const AboutMe: React.FC = () => {
   const colors = useThemeColors();
+  const { width } = useWindowDimensions();
   return (
     <ThemedView color={colors.background} style={styles.summaryContainer}>
       <ThemedView
@@ -51,8 +52,8 @@ const styles = StyleSheet.create({
     padding: 16,
     marginVertical: 8,
     alignItems: "baseline",
-    width: 1000,
-    maxWidth: "95%",
+    width: "95%",
+    maxWidth: 1000,
   },
   titleContainer: {
     alignItems: "baseline",

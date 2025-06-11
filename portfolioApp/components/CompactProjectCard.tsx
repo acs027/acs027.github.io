@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 12,
     gap: 12,
-    width: 450,
-    maxWidth: "100%",
+    width: "95%",
+    maxWidth: 450,
 
     ...Platform.select({
       web: {

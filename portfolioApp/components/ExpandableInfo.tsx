@@ -19,7 +19,7 @@ import { ThemedText } from "./ThemedText";
 import { ThemedView } from "./ThemedView";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
-const BUTTON_SIZE = 80;
+const BUTTON_SIZE = 60;
 const HORIZONTAL_PADDING = 25;
 
 interface Props {
@@ -47,12 +47,9 @@ export function ExpandableInfo({
   }, [isHovered]);
 
   const containerStyle = useAnimatedStyle(() => {
+    const maxWidth = Math.min(SCREEN_WIDTH - HORIZONTAL_PADDING * 2, 400);
     return {
-      width: interpolate(
-        expanded.value,
-        [0, 1],
-        [BUTTON_SIZE, SCREEN_WIDTH - HORIZONTAL_PADDING * 2]
-      ),
+      width: interpolate(expanded.value, [0, 1], [BUTTON_SIZE, maxWidth]),
       height: BUTTON_SIZE,
       transform: [{ translateY: interpolate(expanded.value, [0, 1], [0, -4]) }],
     };

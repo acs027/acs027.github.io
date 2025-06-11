@@ -31,7 +31,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const { width } = useWindowDimensions();
   const colors = useThemeColors();
   return (
-    <ThemedView color={colors.card} style={[styles.projectCard, ShadowStyle()]}>
+    <ThemedView
+      color={colors.card}
+      style={[
+        styles.projectCard,
+        ShadowStyle(),
+        width < 1000 && { width: "95%" },
+      ]}
+    >
       <ThemedView color={colors.card} style={[styles.projectContent]}>
         <ThemedView>
           <ThemedView
@@ -41,19 +48,28 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               alignItems: "center",
               justifyContent: "space-between",
               flexWrap: "wrap",
+              gap: 8,
             }}
           >
             <ThemedText type="title">{title}</ThemedText>
 
-            <View style={{ flexDirection: "row", gap: 10, flexShrink: 1 }}>
+            <View
+              style={{
+                flexDirection: "row",
+                gap: 10,
+                flexShrink: 0,
+                flexGrow: 1,
+                justifyContent: "flex-end",
+              }}
+            >
               {appStoreLink && (
                 <ExternalLink href={appStoreLink}>
-                  <AppStoreDownloadSVG size={50} />
+                  <AppStoreDownloadSVG size={40} />
                 </ExternalLink>
               )}
               {repoLink && (
                 <ExternalLink href={repoLink}>
-                  <GithubIcon size={50} effectValue={1} />
+                  <GithubIcon size={40} effectValue={1} />
                 </ExternalLink>
               )}
             </View>
@@ -65,7 +81,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {techStack && (
           <ThemedView color={colors.card}>
             <ThemedText type="defaultSemiBold">Tech Used</ThemedText>
-            <ThemedText>{techStack.join(" ")}</ThemedText>
+            <View style={styles.techStackContainer}>
+              {techStack.map((tech, index) => (
+                <View
+                  key={index}
+                  style={[
+                    styles.techBadge,
+                    { backgroundColor: colors.skillBadgeBgColor },
+                  ]}
+                >
+                  <ThemedText style={styles.techBadgeText}>{tech}</ThemedText>
+                </View>
+              ))}
+            </View>
           </ThemedView>
         )}
 
@@ -87,9 +115,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                       style={[
                         styles.deviceImage,
                         {
-                          height: width < 450 ? 400 : 600,
+                          height: width <= 750 ? 200 : 400,
                           width:
-                            width < 450 ? (400 * 9) / 19.5 : (600 * 9) / 19.5,
+                            width < 750 ? (200 * 9) / 19.5 : (400 * 9) / 19.5,
                         },
                       ]}
                     />
@@ -108,9 +136,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                     style={[
                       styles.deviceGIF,
                       {
-                        height: width < 450 ? 400 : 600,
+                        height: width <= 750 ? 200 : 400,
                         width:
-                          width < 450 ? (400 * 9) / 19.5 : (600 * 9) / 19.5,
+                          width < 750 ? (200 * 9) / 19.5 : (400 * 9) / 19.5,
                       },
                     ]}
                   />
@@ -128,7 +156,6 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 12,
     width: 1000,
-    maxWidth: "95%",
   },
   projectContent: {
     gap: 8,
@@ -163,6 +190,24 @@ const styles = StyleSheet.create({
 
   projectImageContainer: {
     alignItems: "center",
+  },
+
+  techStackContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+    marginTop: 4,
+  },
+
+  techBadge: {
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
+    backgroundColor: "#eee", // fallback
+  },
+
+  techBadgeText: {
+    fontSize: 13,
   },
 });
 

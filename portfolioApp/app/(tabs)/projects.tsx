@@ -4,6 +4,7 @@ import Animated from "react-native-reanimated";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import CompactProjectCard from "@/components/CompactProjectCard";
 import { projects } from "@/data/projects";
+import Projects from "@/components/Projects";
 
 export default function ProjectsScreen() {
   const scrollViewRef = useRef<Animated.ScrollView>(null);
@@ -21,18 +22,8 @@ export default function ProjectsScreen() {
           />
         }
       >
-        <View style={[styles.grid, { maxWidth: "90%" }]}>
-          {projects.map((project, index) => (
-            <CompactProjectCard
-              key={index}
-              title={project.title}
-              repoLink={project.repoLink}
-              appStoreLink={project.appStoreLink}
-              techStack={project.techStack}
-              thumbnail={project.thumbnail}
-              description={project.shortDescription}
-            />
-          ))}
+        <View style={[styles.container]}>
+          <Projects />
         </View>
       </ParallaxScrollView>
     </>
@@ -40,10 +31,11 @@ export default function ProjectsScreen() {
 }
 
 const styles = StyleSheet.create({
-  grid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "flex-start",
+  container: {
+    marginTop: 12,
+    justifyContent: "center",
+    alignContent: "center",
+    alignSelf: "center",
   },
   reactLogo: {
     height: 290,
