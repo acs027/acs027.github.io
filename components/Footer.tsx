@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet, Pressable, Linking } from "react-native";
-import { FontAwesome, Feather, AntDesign, Entypo } from "@expo/vector-icons";
+import { View, StyleSheet, Pressable, Linking } from "react-native";
+import { Feather, Entypo } from "@expo/vector-icons";
 import { useThemeColors } from "./useThemeColors";
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";

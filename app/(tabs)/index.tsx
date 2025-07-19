@@ -2,15 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   Image,
   StyleSheet,
-  Platform,
   View,
   ScrollView,
-  useWindowDimensions,
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from "react-native";
-import Animated from "react-native-reanimated";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ExpandableInfo } from "@/components/ExpandableInfo";
 import Projects from "@/components/Projects";
 import SkillsView from "@/components/SkillsView";

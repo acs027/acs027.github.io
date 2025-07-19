@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, useWindowDimensions } from "react-native";
+import { StyleSheet } from "react-native";
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";
 import { HelloWave } from "./HelloWave";
@@ -8,7 +8,6 @@ import { useThemeColors } from "./useThemeColors";
 
 const AboutMe: React.FC = () => {
   const colors = useThemeColors();
-  const { width } = useWindowDimensions();
   return (
     <ThemedView color={colors.background} style={styles.summaryContainer}>
       <ThemedView

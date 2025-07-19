@@ -1,14 +1,8 @@
 import React, { useRef } from "react";
-import { Image, StyleSheet, View } from "react-native";
-import Animated from "react-native-reanimated";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import CompactProjectCard from "@/components/CompactProjectCard";
-import { projects } from "@/data/projects";
-import Projects from "@/components/Projects";
+import { StyleSheet } from "react-native";
 import HomeScreen from ".";
 
 export default function ProjectsScreen() {
-  const scrollViewRef = useRef<Animated.ScrollView>(null);
   document.title = "aCsPortfolio";
 
   return <HomeScreen section="projects" />;

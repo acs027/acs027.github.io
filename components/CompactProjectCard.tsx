@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Image,
-  StyleSheet,
-  View,
-  Platform,
-  useColorScheme,
-} from "react-native";
+import { Image, StyleSheet, View, Platform } from "react-native";
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";
 import { ExternalLink } from "./ExternalLink";

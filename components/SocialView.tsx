@@ -1,23 +1,9 @@
 import * as React from "react";
-import { useState } from "react";
 import { StyleSheet, Clipboard, Platform } from "react-native";
 import { ThemedView } from "./ThemedView";
 import { ExternalLink } from "./ExternalLink";
-import { Pressable } from "react-native";
-import { Toast } from "./Toast";
-import { PhoneIcon } from "./icons/social/PhoneIcon";
-import { EmailIcon } from "./icons/social/EmailIcon";
-import { LinkedinIcon } from "./icons/social/LinkedinIcon";
-import { GithubIcon } from "./icons/social/GithubIcon";
 import { useThemeColors } from "./useThemeColors";
-import { MediumIcon } from "./icons/social/MediumIcon";
-import {
-  AntDesign,
-  Entypo,
-  FontAwesome,
-  FontAwesome5,
-  Zocial,
-} from "@expo/vector-icons";
+import { AntDesign, Entypo } from "@expo/vector-icons";
 import { HoverableIcon } from "./HoverableIcon";
 
 interface SocialViewProps {
