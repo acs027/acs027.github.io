@@ -1,9 +1,9 @@
 import React from "react";
 import { View, StyleSheet, Pressable, Linking } from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
-import { useThemeColors } from "./useThemeColors";
-import { ThemedView } from "./ThemedView";
-import { ThemedText } from "./ThemedText";
+import { useThemeColors } from "../utils/useThemeColors";
+import { ThemedView } from "../utils/ThemedView";
+import { ThemedText } from "../utils/ThemedText";
 
 export default function Footer() {
   const colors = useThemeColors();

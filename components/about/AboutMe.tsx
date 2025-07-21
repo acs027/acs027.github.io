@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { ThemedView } from "./ThemedView";
-import { ThemedText } from "./ThemedText";
-import { HelloWave } from "./HelloWave";
-import { ShadowStyle } from "./ShadowStyle";
-import { useThemeColors } from "./useThemeColors";
+import { ThemedView } from "../utils/ThemedView";
+import { ThemedText } from "../utils/ThemedText";
+import { HelloWave } from "../utils/HelloWave";
+import { ShadowStyle } from "../utils/ShadowStyle";
+import { useThemeColors } from "../utils/useThemeColors";
 
 const AboutMe: React.FC = () => {
   const colors = useThemeColors();

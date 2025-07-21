@@ -14,7 +14,7 @@ import Animated, {
   interpolate,
   withTiming,
 } from "react-native-reanimated";
-import { IconSymbol } from "./ui/IconSymbol";
+import { IconSymbol } from "../ui/IconSymbol";
 import { ThemedText } from "./ThemedText";
 import { ThemedView } from "./ThemedView";
 

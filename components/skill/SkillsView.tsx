@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Pressable, useColorScheme, Platform } from "react-native";
-import { ThemedView } from "./ThemedView";
-import { ThemedText } from "./ThemedText";
+import { ThemedView } from "../utils/ThemedView";
+import { ThemedText } from "../utils/ThemedText";
 import { SKILLS } from "@/constants/Skills";
-import { ShadowStyle } from "./ShadowStyle";
-import { useThemeColors } from "./useThemeColors";
+import { ShadowStyle } from "../utils/ShadowStyle";
+import { useThemeColors } from "../utils/useThemeColors";
 
 const SkillsView: React.FC = () => {
   const colors = useThemeColors();

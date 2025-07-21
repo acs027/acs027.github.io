@@ -1,16 +1,18 @@
 import React from "react";
 import { Image, StyleSheet, View, Platform } from "react-native";
-import { ThemedView } from "./ThemedView";
-import { ThemedText } from "./ThemedText";
-import { ExternalLink } from "./ExternalLink";
-import { GithubIcon } from "./icons/social/GithubIcon";
-import { AppStoreDownloadSVG } from "./icons/social/AppStoreDownload";
-import { useThemeColors } from "./useThemeColors";
-import { ShadowStyle } from "./ShadowStyle";
+import { ThemedView } from "../utils/ThemedView";
+import { ThemedText } from "../utils/ThemedText";
+import { ExternalLink } from "../utils/ExternalLink";
+import { GithubIcon } from "../icons/social/GithubIcon";
+import { AppStoreDownloadSVG } from "../icons/social/AppStoreDownload";
+import { useThemeColors } from "../utils/useThemeColors";
+import { ShadowStyle } from "../utils/ShadowStyle";
+import TestFlightButton from "../utils/TestFlightButton";
 
 type CompactProjectCardProps = {
   title: string;
   repoLink: string;
+  testFlightLink?: string;
   appStoreLink?: string;
   techStack?: string[];
   thumbnail?: string | number;
@@ -20,6 +22,7 @@ type CompactProjectCardProps = {
 const CompactProjectCard: React.FC<CompactProjectCardProps> = ({
   title,
   repoLink,
+  testFlightLink,
   appStoreLink,
   techStack,
   thumbnail,
@@ -64,6 +67,9 @@ const CompactProjectCard: React.FC<CompactProjectCardProps> = ({
             <ExternalLink href={repoLink}>
               <GithubIcon size={32} scale={1} />
             </ExternalLink>
+          )}
+          {testFlightLink && (
+            <TestFlightButton size={32} link={testFlightLink} />
           )}
           {appStoreLink && (
             <ExternalLink href={appStoreLink}>

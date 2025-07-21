@@ -1,18 +1,20 @@
 import React from "react";
 import { Image, StyleSheet, useWindowDimensions, View } from "react-native";
-import { ThemedView } from "./ThemedView";
-import { ThemedText } from "./ThemedText";
-import { ExternalLink } from "./ExternalLink";
+import { ThemedView } from "../utils/ThemedView";
+import { ThemedText } from "../utils/ThemedText";
+import { ExternalLink } from "../utils/ExternalLink";
 import { Platform } from "react-native";
-import { GithubIcon } from "./icons/social/GithubIcon";
-import { AppStoreDownloadSVG } from "./icons/social/AppStoreDownload";
-import { ShadowStyle } from "./ShadowStyle";
-import { useThemeColors } from "./useThemeColors";
+import { GithubIcon } from "../icons/social/GithubIcon";
+import { AppStoreDownloadSVG } from "../icons/social/AppStoreDownload";
+import { ShadowStyle } from "../utils/ShadowStyle";
+import { useThemeColors } from "../utils/useThemeColors";
+import TestFlightButton from "../utils/TestFlightButton";
 
 type ProjectCardProps = {
   title: string;
   repoLink: string;
   appStoreLink?: string;
+  testFlightLink?: string;
   description: string;
   techStack?: string[];
   images?: string[];
@@ -23,6 +25,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   repoLink,
   appStoreLink,
+  testFlightLink,
   description,
   techStack,
   images,
@@ -67,6 +70,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                   <AppStoreDownloadSVG size={40} />
                 </ExternalLink>
               )}
+
+              {testFlightLink && (
+                <TestFlightButton size={40} link={testFlightLink} />
+              )}
+
               {repoLink && (
                 <ExternalLink href={repoLink}>
                   <GithubIcon size={40} effectValue={1} />

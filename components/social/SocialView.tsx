@@ -1,10 +1,10 @@
 import * as React from "react";
 import { StyleSheet, Clipboard, Platform } from "react-native";
-import { ThemedView } from "./ThemedView";
-import { ExternalLink } from "./ExternalLink";
-import { useThemeColors } from "./useThemeColors";
+import { ThemedView } from "../utils/ThemedView";
+import { ExternalLink } from "../utils/ExternalLink";
+import { useThemeColors } from "../utils/useThemeColors";
 import { AntDesign, Entypo } from "@expo/vector-icons";
-import { HoverableIcon } from "./HoverableIcon";
+import { HoverableIcon } from "../utils/HoverableIcon";
 
 interface SocialViewProps {
   setShowToast: (value: boolean) => void;

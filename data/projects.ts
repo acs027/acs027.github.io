@@ -2,6 +2,7 @@ export type Project = {
   title: string;
   repoLink: string;
   appStoreLink?: string;
+  testFlightLink?: string;
   description: string;
   shortDescription: string;
   thumbnail: string | any;
@@ -30,6 +31,7 @@ export const projects: Project[] = [
   {
     title: "Aircraft Identifier",
     repoLink: "https://github.com/acs027/AircraftIdentifier",
+    testFlightLink: "https://testflight.apple.com/join/BBa8QBGy",
     description:
       "An iOS application for identifying aircraft from photos using AI-powered image analysis.",
     shortDescription:"An iOS application for identifying aircraft from photos using AI-powered image analysis.",
@@ -56,6 +58,22 @@ export const projects: Project[] = [
     ],
     gif: ["https://github.com/user-attachments/assets/52409856-b198-4f1b-a7b0-dc1d6f6c996e"],
   },
+
+  {
+    title: "ATPL Tester",
+    repoLink: "https://github.com/acs027/ATPLTester.git",
+    description:
+      "Modern iOS app designed to help users prepare for the Airline Transport Pilot License (ATPL) exams.",
+    shortDescription:"Modern iOS app designed to help users prepare for the Airline Transport Pilot License (ATPL) exams",
+    thumbnail:"https://private-user-images.githubusercontent.com/63219511/468454541-d141107f-fbbf-428a-8eca-fa57a90dde03.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTMwNzE1MjEsIm5iZiI6MTc1MzA3MTIyMSwicGF0aCI6Ii82MzIxOTUxMS80Njg0NTQ1NDEtZDE0MTEwN2YtZmJiZi00MjhhLThlY2EtZmE1N2E5MGRkZTAzLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzIxVDA0MTM0MVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTgzYjFiZDVhMDAxY2IwNGJiNjVlNTJjY2RiOTc0YzhhN2FkMWViMGI3NGFlMDU4YmRlMjBmZjk4OGIzYTdiOGQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.fjWJE3Yd4-p562gKFa7Bw3PTmNQWqlI2VOZ9OXRAwZc",
+      techStack: ["SwiftUI", "SwiftData", "MVVM"],
+    images: [
+      "https://private-user-images.githubusercontent.com/63219511/468454541-d141107f-fbbf-428a-8eca-fa57a90dde03.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTMwNzE1MjEsIm5iZiI6MTc1MzA3MTIyMSwicGF0aCI6Ii82MzIxOTUxMS80Njg0NTQ1NDEtZDE0MTEwN2YtZmJiZi00MjhhLThlY2EtZmE1N2E5MGRkZTAzLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzIxVDA0MTM0MVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTgzYjFiZDVhMDAxY2IwNGJiNjVlNTJjY2RiOTc0YzhhN2FkMWViMGI3NGFlMDU4YmRlMjBmZjk4OGIzYTdiOGQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.fjWJE3Yd4-p562gKFa7Bw3PTmNQWqlI2VOZ9OXRAwZc",
+      "https://private-user-images.githubusercontent.com/63219511/468454554-00aac982-79a4-42b6-84cd-534879fde3a2.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTMwNzE1MjEsIm5iZiI6MTc1MzA3MTIyMSwicGF0aCI6Ii82MzIxOTUxMS80Njg0NTQ1NTQtMDBhYWM5ODItNzlhNC00MmI2LTg0Y2QtNTM0ODc5ZmRlM2EyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzIxVDA0MTM0MVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTdjMzE1YzZkNGMyNjczOTg2ZWMwMDZiMGI3NDBjZmE4MzVmM2Y1MDFiNWYxNDVmZmYwZjBlZWJiMmUxZjA4NzEmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.eG9ikr3schuVhrlcr4tdFeOlEKZ5UMHEXLLM9a_n03Y",
+      "https://private-user-images.githubusercontent.com/63219511/468454565-457a3bfb-a305-4f85-a7f7-234f23a94759.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTMwNzE1MjEsIm5iZiI6MTc1MzA3MTIyMSwicGF0aCI6Ii82MzIxOTUxMS80Njg0NTQ1NjUtNDU3YTNiZmItYTMwNS00Zjg1LWE3ZjctMjM0ZjIzYTk0NzU5LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzIxVDA0MTM0MVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWRlZTRlMDllNDRhY2MzZGQ5YzY4NzQyNWNjMjliMDdlMDAwNTUxOWExZGM4Njg3NWVkMGIxNTNhZTc1YmY0YzQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.NaFViinB2diVmyicBFPCa0EwesyOFXjZg1v3uctmldg",
+    ],
+  },
+
   {
     title: "Chat App",
     repoLink: "https://github.com/acs027/ChatApp",

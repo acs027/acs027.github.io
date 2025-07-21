@@ -7,16 +7,16 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from "react-native";
-import { ExpandableInfo } from "@/components/ExpandableInfo";
-import Projects from "@/components/Projects";
-import SkillsView from "@/components/SkillsView";
-import SocialView from "@/components/SocialView";
-import AboutMe from "@/components/AboutMe";
-import { Toast } from "@/components/Toast";
-import { useThemeColors } from "@/components/useThemeColors";
-import HeaderNavBar from "@/components/HeaderNavBar";
+import { ExpandableInfo } from "@/components/utils/ExpandableInfo";
+import Projects from "@/components/project/Projects";
+import SkillsView from "@/components/skill/SkillsView";
+import SocialView from "@/components/social/SocialView";
+import AboutMe from "@/components/about/AboutMe";
+import { Toast } from "@/components/utils/Toast";
+import { useThemeColors } from "@/components/utils/useThemeColors";
+import HeaderNavBar from "@/components/header/HeaderNavBar";
 import { useNavigation } from "expo-router";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer/Footer";
 
 export default function HomeScreen({ section }: { section?: string }) {
   const scrollViewRef = useRef<ScrollView>(null);

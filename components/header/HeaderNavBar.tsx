@@ -6,9 +6,9 @@ import {
   StyleSheet,
   useWindowDimensions,
 } from "react-native";
-import { useThemeColors } from "./useThemeColors";
-import { ThemedView } from "./ThemedView";
-import { ThemedText } from "./ThemedText";
+import { useThemeColors } from "../utils/useThemeColors";
+import { ThemedView } from "../utils/ThemedView";
+import { ThemedText } from "../utils/ThemedText";
 import { Feather } from "@expo/vector-icons"; // for hamburger icon
 
 type HeaderNavBarProps = {

@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, useWindowDimensions } from "react-native";
-import { ThemedView } from "./ThemedView";
+import { ThemedView } from "../utils/ThemedView";
 import ProjectCard from "./ProjectCard";
-import { ThemedText } from "./ThemedText";
-import { useThemeColors } from "./useThemeColors";
+import { ThemedText } from "../utils/ThemedText";
+import { useThemeColors } from "../utils/useThemeColors";
 import { projects } from "@/data/projects";
 import CompactProjectCard from "./CompactProjectCard";
 
@@ -33,6 +33,7 @@ const Projects: React.FC = () => {
               key={index}
               title={project.title}
               repoLink={project.repoLink}
+              testFlightLink={project.testFlightLink}
               appStoreLink={project.appStoreLink}
               techStack={project.techStack}
               thumbnail={project.thumbnail}
