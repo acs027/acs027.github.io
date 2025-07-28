@@ -13,6 +13,8 @@ export const Colors = {
     socialIconFill: "#1A1A1A",
     socialIconHoveredColor: "#3B82F6",
     navigationItems: "#3B82F6",
+    placeholder: "rgba(0,0,0,0.5)",
+    textInputBgColor: "#F1F5F9", 
   },
 
   dark: {
@@ -29,6 +31,8 @@ export const Colors = {
     socialIconFill: "#F5F5F5",
     socialIconHoveredColor: "#3B82F6",
     navigationItems: "#3B82F6",
+    placeholder: "rgba(0,0,0,0.5)",
+     textInputBgColor: "#F5F5F5",
   },
 };
 

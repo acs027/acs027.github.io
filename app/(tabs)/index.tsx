@@ -6,6 +6,7 @@ import {
   ScrollView,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  useWindowDimensions,
 } from "react-native";
 import { ExpandableInfo } from "@/components/utils/ExpandableInfo";
 import Projects from "@/components/project/Projects";
@@ -17,8 +18,10 @@ import { useThemeColors } from "@/components/utils/useThemeColors";
 import HeaderNavBar from "@/components/header/HeaderNavBar";
 import { useNavigation } from "expo-router";
 import Footer from "@/components/footer/Footer";
+import Contact from "@/components/contact/Contact";
 
 export default function HomeScreen({ section }: { section?: string }) {
+  const { width } = useWindowDimensions();
   const scrollViewRef = useRef<ScrollView>(null);
   const projectViewRef = useRef<ScrollView>(null);
   const [showToast, setShowToast] = useState(false);
@@ -39,8 +42,8 @@ export default function HomeScreen({ section }: { section?: string }) {
   useEffect(() => {
     const refs = [
       { key: "about", ref: aboutRef },
-      { key: "skills", ref: skillsRef },
       { key: "projects", ref: projectsRef },
+      { key: "skills", ref: skillsRef },
       { key: "contact", ref: contactRef },
     ];
 
@@ -150,6 +153,13 @@ export default function HomeScreen({ section }: { section?: string }) {
         </View>
 
         <View
+          ref={projectsRef}
+          style={[styles.section, { backgroundColor: colors.background }]}
+        >
+          <Projects />
+        </View>
+
+        <View
           ref={skillsRef}
           style={[
             styles.section,
@@ -160,11 +170,16 @@ export default function HomeScreen({ section }: { section?: string }) {
         </View>
 
         <View
-          ref={projectsRef}
-          style={[styles.section, { backgroundColor: colors.background }]}
+          ref={contactRef}
+          style={[
+            styles.section,
+            { backgroundColor: colors.background },
+            ...(width >= 750 ? [{ height: 1250 }] : []),
+          ]}
         >
-          <Projects />
+          <Contact />
         </View>
+
         <Footer />
       </ScrollView>
 
