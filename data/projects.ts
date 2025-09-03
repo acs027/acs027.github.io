@@ -43,8 +43,8 @@ export const projects: Project[] = [
     ],
     gif: [require("../assets/AircraftIdentifier/demo.gif"),],
   },
-    
-  {
+
+    {
     title: "MyMovieApp",
     repoLink: "https://github.com/acs027/MyMovieApp",
     description:
@@ -57,6 +57,21 @@ export const projects: Project[] = [
       "https://github.com/user-attachments/assets/9483a608-4453-47b0-8cd9-ae9595e82052",
     ],
     gif: ["https://github.com/user-attachments/assets/52409856-b198-4f1b-a7b0-dc1d6f6c996e"],
+  },
+    
+  {
+    title: "TravelPlanner",
+    repoLink: "https://github.com/acs027/TravelPlanner",
+    description:
+      "An AI-powered iOS travel planning application that helps users discover and explore destinations. It leverages Google's Gemini AI along with interactive maps, onboarding, authentication, and local persistence.",
+    shortDescription:"An AI-powered iOS travel planning application that helps users discover and explore destinations.",
+    thumbnail:require("../assets/TravelPlanner/travelplanner1.png"),
+      techStack: ["UIKit", "VIPER", "Modular","XIB", "Programmatic UI", "Core Data", "MapKit", "Firebase", "Gemini AI"],
+    images: [
+      require("../assets/TravelPlanner/travelplanner1.png"),
+      require("../assets/TravelPlanner/travelplanner2.png"),
+    ],
+    gif: [require("../assets/TravelPlanner/travelplannergif.gif")],
   },
 
   {

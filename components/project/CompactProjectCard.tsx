@@ -85,7 +85,7 @@ const CompactProjectCard: React.FC<CompactProjectCardProps> = ({
 const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
-    alignItems: "flex-end", // Align thumbnail & content to top
+    alignItems: "center", // Align thumbnail & content to top
     justifyContent: "center",
     padding: 12,
     borderRadius: 10,
