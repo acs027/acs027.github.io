@@ -19,6 +19,7 @@ import HeaderNavBar from "@/components/header/HeaderNavBar";
 import { useNavigation } from "expo-router";
 import Footer from "@/components/footer/Footer";
 import Contact from "@/components/contact/Contact";
+import ReactGA from "react-ga4";
 
 export default function HomeScreen({ section }: { section?: string }) {
   const { width } = useWindowDimensions();
@@ -38,6 +39,11 @@ export default function HomeScreen({ section }: { section?: string }) {
   const [currentSection, setCurrentSection] = useState(section ?? "about");
 
   const sectionPositions = useRef<Record<string, number>>({});
+
+  useEffect(() => {
+    ReactGA.initialize("G-HC71E8M7SR");
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+  }, []);
 
   useEffect(() => {
     const refs = [
