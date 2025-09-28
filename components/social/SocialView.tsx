@@ -3,7 +3,7 @@ import { StyleSheet, Clipboard, Platform } from "react-native";
 import { ThemedView } from "../utils/ThemedView";
 import { ExternalLink } from "../utils/ExternalLink";
 import { useThemeColors } from "../utils/useThemeColors";
-import { AntDesign, Entypo } from "@expo/vector-icons";
+import { AntDesign, Entypo, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { HoverableIcon } from "../utils/HoverableIcon";
 
 interface SocialViewProps {
@@ -26,10 +26,6 @@ const SocialView: React.FC<SocialViewProps> = ({ setShowToast }) => {
     <>
       <ThemedView color={colors.background} style={styles.connectGrid}>
         <ExternalLink href="mailto:alicihansarac@gmail.com">
-          {/* <ThemedView color={colors.socialIconBg} style={styles.connectCard}>
-            <EmailIcon size={32} />
-          </ThemedView> */}
-          {/* <Zocial name="email" size={64} color="black" /> */}
           <HoverableIcon
             IconComponent={Entypo}
             name="mail-with-circle"
@@ -40,9 +36,6 @@ const SocialView: React.FC<SocialViewProps> = ({ setShowToast }) => {
         </ExternalLink>
 
         <ExternalLink href="https://www.linkedin.com/in/alicihansarac/">
-          {/* <ThemedView color={colors.socialIconBg} style={styles.connectCard}>
-            <LinkedinIcon size={32} />
-          </ThemedView> */}
           <HoverableIcon
             IconComponent={Entypo}
             name="linkedin-with-circle"
@@ -53,9 +46,6 @@ const SocialView: React.FC<SocialViewProps> = ({ setShowToast }) => {
         </ExternalLink>
 
         <ExternalLink href="https://github.com/acs027">
-          {/* <ThemedView color={colors.socialIconBg} style={styles.connectCard}>
-            <GithubIcon size={32} />
-          </ThemedView> */}
           <HoverableIcon
             IconComponent={AntDesign}
             name="github"
@@ -66,12 +56,19 @@ const SocialView: React.FC<SocialViewProps> = ({ setShowToast }) => {
         </ExternalLink>
 
         <ExternalLink href="https://medium.com/@alicihansarac">
-          {/* <ThemedView color={colors.socialIconBg} style={styles.connectCard}>
-            <MediumIcon size={32} />
-          </ThemedView> */}
           <HoverableIcon
             IconComponent={Entypo}
             name="medium-with-circle"
+            size={54}
+            defaultColor={socialFillColor}
+            hoverColor={socialIconHoverColor}
+          />
+        </ExternalLink>
+
+        <ExternalLink href="https://apps.apple.com/us/developer/ali-cihan-sarac/id1800877163">
+          <HoverableIcon
+            IconComponent={Ionicons}
+            name="logo-apple-appstore"
             size={54}
             defaultColor={socialFillColor}
             hoverColor={socialIconHoverColor}

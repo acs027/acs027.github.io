@@ -21,14 +21,15 @@ const Projects: React.FC = () => {
           window.width < 450 && styles.compactProjectStyles,
         ]}
       >
-        {projects.map((project, index) =>
-          window.width > 450 ? (
-            <ProjectCard
-              key={index}
-              {...project}
-              techStack={project.techStack?.map((tech) => `• ${tech}`)}
-            />
-          ) : (
+        {projects.map(
+          (project, index) => (
+            // window.width > 450 ? (
+            //   <ProjectCard
+            //     key={index}
+            //     {...project}
+            //     techStack={project.techStack?.map((tech) => `• ${tech}`)}
+            //   />
+            // ) : (
             <CompactProjectCard
               key={index}
               title={project.title}
@@ -40,6 +41,7 @@ const Projects: React.FC = () => {
               description={project.shortDescription}
             />
           )
+          // )
         )}
       </ThemedView>
     </ThemedView>
@@ -55,7 +57,13 @@ const styles = StyleSheet.create({
     maxWidth: 1000,
   },
 
-  projectsContainer: { gap: 12, marginBottom: 24, alignItems: "center" },
+  projectsContainer: {
+    gap: 12,
+    marginBottom: 24,
+    alignItems: "center",
+    flexWrap: "wrap",
+    flexDirection: "row",
+  },
 
   compactProjectStyles: {
     flexDirection: "row",

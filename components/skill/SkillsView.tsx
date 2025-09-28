@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, Pressable, useColorScheme, Platform } from "react-native";
+import {
+  StyleSheet,
+  Pressable,
+  useColorScheme,
+  Platform,
+  View,
+} from "react-native";
 import { ThemedView } from "../utils/ThemedView";
 import { ThemedText } from "../utils/ThemedText";
 import { SKILLS } from "@/constants/Skills";
@@ -43,7 +49,9 @@ const SkillsView: React.FC = () => {
                         ], // Web hover effect
                       ]}
                     >
-                      <SkillIcon size={32} />
+                      <View style={[styles.iconWrapper]}>
+                        <SkillIcon size={32} />
+                      </View>
                       <ThemedText style={[styles.skillText]}>
                         {skill.name}
                       </ThemedText>
@@ -99,17 +107,18 @@ const styles = StyleSheet.create({
   skillBadge: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 12,
+    gap: 6,
     justifyContent: "space-between",
-    paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 6,
     borderRadius: 12,
     maxWidth: 200,
     minWidth: 100,
-    height: 60,
+    height: 40,
     transition: "all 0.2s ease-in-out",
   },
   skillText: {
+    fontSize: 16,
     fontWeight: "bold",
     textAlign: "right",
   },
@@ -118,6 +127,15 @@ const styles = StyleSheet.create({
   },
   hovered: {
     transform: [{ scale: 1.05 }], // Slightly increase size on hover
+  },
+
+  iconWrapper: {
+    width: 32,
+    height: 32,
+    borderRadius: 12, // rounds the corners
+    overflow: "hidden", // crops the content
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

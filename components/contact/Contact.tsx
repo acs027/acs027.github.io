@@ -287,6 +287,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     margin: 5,
     width: "100%",
+    maxWidth: 1000,
   },
   header: {
     fontSize: 28,
