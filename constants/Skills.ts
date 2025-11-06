@@ -12,7 +12,8 @@ import { XCodeIcon } from '@/components/icons/skills/XCodeIcon';
 import { VSCodeIcon } from '@/components/icons/skills/VSCodeIcon';
 import { ExpoIcon } from '@/components/icons/skills/ExpoIcon';
 import { AdMobIcon } from '@/components/icons/skills/AdMob';
-// ... import other icons
+import { GithubActionsIcon } from '@/components/icons/skills/GithubActions';
+import { FastlaneIcon } from '@/components/icons/skills/FastlaneIcon';
 
 export type Skill = {
   name: string;
@@ -61,47 +62,94 @@ export const SKILLS: SkillCategory[] = [
         name: 'React',
         Icon: ReactIcon
       },
+             { 
+        name: 'Expo', 
+        Icon: ExpoIcon
+      },
+        { 
+        name: 'MapKit', 
+        Icon: SwiftIcon
+      },
+        { 
+        name: 'WebKit', 
+        Icon: SwiftIcon
+      },
+      { 
+        name: 'SnapKit', 
+        Icon: SwiftIcon
+      },
+    ]
+  },
+  {
+    title: 'Architecture & Principles',
+    skills: [
+      {
+        name: 'MVVM',
+        Icon: SwiftIcon
+      },
+      {
+        name: 'VIPER',
+        Icon: SwiftIcon
+      },
+      {
+        name: 'Modular Architecture',
+        Icon: SwiftIcon
+      },
+      {
+        name: 'SOLID Principles',
+        Icon: SwiftIcon
+      },
     ]
   },
   {
     title: 'Tools & Technologies',
     skills: [
+        { 
+        name: 'XCode', 
+        Icon: XCodeIcon
+      },
       { 
         name: 'Git', 
         Icon: GitIcon
       },
-      { 
-        name: 'XCode', 
-        Icon: XCodeIcon
+       { 
+        name: 'Github Actions', 
+        Icon: GithubActionsIcon
       },
+       { 
+        name: 'Fastlane', 
+        Icon: FastlaneIcon
+      },
+
+    
          { 
-        name: 'Core Data',
+        name: 'CoreData',
         Icon: UIKitIcon
       },
          { 
-        name: 'Swift Data',
+        name: 'SwiftData',
         Icon: UIKitIcon
       },
+
+        {
+        name: 'Alamofire',
+        Icon: SwiftIcon
+      },
+         { 
+        name: 'Firebase', 
+        Icon: FirebaseIcon
+      },
+
+ 
           { 
         name: 'AdMob', 
         Icon: AdMobIcon
       },
-        { 
-        name: 'Firebase', 
-        Icon: FirebaseIcon
-      },
-            { 
-        name: 'Expo', 
-        Icon: ExpoIcon
-      },
-      { 
+       { 
         name: 'VSCode', 
         Icon: VSCodeIcon
       },
-    
-  
      
-
       { 
         name: 'Adobe Photoshop', 
         Icon: PhotoshopIcon
@@ -109,6 +157,27 @@ export const SKILLS: SkillCategory[] = [
       { 
         name: 'Adobe Illustrator', 
         Icon: IllustratorIcon
+      },
+    ]
+  },
+  {
+    title: 'Other',
+    skills: [
+                   { 
+        name: 'RESTful APIs', 
+        Icon: SwiftIcon
+      },
+                   { 
+        name: 'Combine', 
+        Icon: SwiftIcon
+      },
+                   { 
+        name: 'Programmatic UI', 
+        Icon: SwiftIcon
+      },
+                 { 
+        name: 'App Intents', 
+        Icon: SwiftIcon
       },
     ]
   }

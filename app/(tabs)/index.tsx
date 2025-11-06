@@ -22,50 +22,36 @@ import Contact from "@/components/contact/Contact";
 import ReactGA from "react-ga4";
 
 export default function HomeScreen({ section }: { section?: string }) {
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
+
   const scrollViewRef = useRef<ScrollView>(null);
   const projectViewRef = useRef<ScrollView>(null);
+
   const [showToast, setShowToast] = useState(false);
   const colors = useThemeColors();
   document.title = "aCsPortfolio";
 
+  const navigation = useNavigation();
+
+  // ✅ REFS
   const aboutRef = useRef<View>(null);
   const skillsRef = useRef<View>(null);
   const projectsRef = useRef<View>(null);
   const contactRef = useRef<View>(null);
 
-  const navigation = useNavigation();
-
+  // ✅ Current section logic
   const [currentSection, setCurrentSection] = useState(section ?? "about");
 
+  // ✅ Dinamik pozisyonlar
   const sectionPositions = useRef<Record<string, number>>({});
 
+  // Google Analytics
   useEffect(() => {
     ReactGA.initialize("G-HC71E8M7SR");
     ReactGA.send({ hitType: "pageview", page: window.location.pathname });
   }, []);
 
-  useEffect(() => {
-    const refs = [
-      { key: "about", ref: aboutRef },
-      { key: "projects", ref: projectsRef },
-      { key: "skills", ref: skillsRef },
-      { key: "contact", ref: contactRef },
-    ];
-
-    setTimeout(() => {
-      refs.forEach(({ key, ref }) => {
-        ref.current?.measureLayout(
-          scrollViewRef.current!.getInnerViewNode(),
-          (x, y) => {
-            sectionPositions.current[key] = y;
-          },
-          () => console.log("Measure failed:")
-        );
-      });
-    }, 1000);
-  }, []);
-
+  // ✅ Scroll'da hangi section'da olduğumuzu bul
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const y = event.nativeEvent.contentOffset.y;
     const buffer = 100;
@@ -79,26 +65,29 @@ export default function HomeScreen({ section }: { section?: string }) {
     }
   };
 
+  // ✅ Tıklayınca nav çalışması
   const scrollToSection = (section: string) => {
     const position = sectionPositions.current[section];
     if (position !== undefined) {
       scrollViewRef.current?.scrollTo({ y: position, animated: true });
-      // setCurrentSection(section); // Ensure indicator updates on tap
     }
   };
 
+  // Tabbar gizle
   useEffect(() => {
     navigation.setOptions({
       tabBarStyle: { display: "none" },
     });
   }, [navigation]);
 
+  // Dışarıdan projects gelirse scroll et
   useEffect(() => {
     if (section === "projects") {
-      handleNavigation(section);
+      scrollToSection("projects");
     }
   }, [section]);
 
+  // Top'a dön
   const scrollToTop = () => {
     projectViewRef.current?.scrollTo();
     scrollViewRef.current?.scrollTo({
@@ -107,26 +96,8 @@ export default function HomeScreen({ section }: { section?: string }) {
     });
   };
 
-  const handleNavigation = (section: string) => {
-    console.log(section);
-    const refMap: Record<string, React.RefObject<View>> = {
-      about: aboutRef,
-      skills: skillsRef,
-      projects: projectsRef,
-      contact: contactRef,
-    };
-
-    const ref = refMap[section];
-    if (ref?.current && scrollViewRef.current) {
-      ref.current.measureLayout(
-        scrollViewRef.current.getInnerViewNode(),
-        (x, y) => {
-          scrollViewRef.current?.scrollTo({ y, animated: true });
-        },
-        () => console.warn()
-      );
-    }
-  };
+  // ✅ COMMON STYLES
+  const fullHeight = width > 750 ? height : undefined;
 
   return (
     <>
@@ -134,20 +105,24 @@ export default function HomeScreen({ section }: { section?: string }) {
         onNavigate={scrollToSection}
         currentSection={currentSection}
       />
+
       <ScrollView
         ref={scrollViewRef}
         onScroll={handleScroll}
         decelerationRate="fast"
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ flexGrow: 1 }}
-        snapToAlignment="center"
         scrollEventThrottle={16}
       >
+        {/* ✅ ABOUT */}
         <View
           ref={aboutRef}
+          onLayout={(e) => {
+            sectionPositions.current["about"] = e.nativeEvent.layout.y;
+          }}
           style={[
             styles.section,
-            { backgroundColor: colors.background, height: 1250 },
+            { backgroundColor: colors.background, minHeight: fullHeight },
           ]}
         >
           <Image
@@ -158,29 +133,43 @@ export default function HomeScreen({ section }: { section?: string }) {
           <SocialView setShowToast={setShowToast} />
         </View>
 
+        {/* ✅ PROJECTS */}
         <View
           ref={projectsRef}
-          style={[styles.section, { backgroundColor: colors.background }]}
+          onLayout={(e) => {
+            sectionPositions.current["projects"] = e.nativeEvent.layout.y;
+          }}
+          style={[
+            styles.section,
+            { backgroundColor: colors.background, minHeight: fullHeight },
+          ]}
         >
           <Projects />
         </View>
 
+        {/* ✅ SKILLS */}
         <View
           ref={skillsRef}
+          onLayout={(e) => {
+            sectionPositions.current["skills"] = e.nativeEvent.layout.y;
+          }}
           style={[
             styles.section,
-            { backgroundColor: colors.background, height: 1250 },
+            { backgroundColor: colors.background, minHeight: fullHeight },
           ]}
         >
           <SkillsView />
         </View>
 
+        {/* ✅ CONTACT */}
         <View
           ref={contactRef}
+          onLayout={(e) => {
+            sectionPositions.current["contact"] = e.nativeEvent.layout.y;
+          }}
           style={[
             styles.section,
-            { backgroundColor: colors.background },
-            ...(width >= 750 ? [{ height: 1250 }] : []),
+            { backgroundColor: colors.background, minHeight: fullHeight },
           ]}
         >
           <Contact />
@@ -204,6 +193,7 @@ export default function HomeScreen({ section }: { section?: string }) {
     </>
   );
 }
+
 const styles = StyleSheet.create({
   reactLogo: {
     height: 290,

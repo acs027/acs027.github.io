@@ -1,0 +1,33 @@
+name: Deploy Expo Web
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm Install
+
+      - name: Install Expo CLI
+        run: npx expo Install
+
+      - name: Export Expo Web Build
+        run: npx expo export -p Web
+
+      - name: Copy app-ads.txt
+        run: cp./app/app-ads.txt ./dist/app-ads.txt
+
+      - name: Deploy to Github Pages repo
+        run: npx gh-pages --nojekyll -d dist --repo https://github.com/acs027/acs027.github.io.git

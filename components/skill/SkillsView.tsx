@@ -118,8 +118,8 @@ const styles = StyleSheet.create({
     transition: "all 0.2s ease-in-out",
   },
   skillText: {
-    fontSize: 16,
-    fontWeight: "bold",
+    fontSize: 15,
+    fontWeight: "500",
     textAlign: "right",
   },
   pressed: {

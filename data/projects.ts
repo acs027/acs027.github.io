@@ -20,7 +20,14 @@ export const projects: Project[] = [
       "E6B Flight Pro is a precise digital replica of the classic E6B flight computer, built for pilots, student aviators, and aviation enthusiasts.",
     shortDescription:"A digital replica of the E6B flight computer for pilots and aviation students.",
     thumbnail:require("@/assets/images/flightcomputer01.png"),
-      techStack: ["SwiftUI", "AdMob", "MVVM"],
+      techStack: [
+        "SwiftUI", 
+        "MVVM", 
+        "XCTest",
+        "Fastlane", 
+        "Github Actions",
+        "AdMob"
+      ],
     images: [
       require("../assets/images/flightcomputer01.png"),
       require("../assets/images/flightcomputer02.png"),
@@ -36,7 +43,15 @@ export const projects: Project[] = [
       "An iOS application for identifying aircraft from photos using AI-powered image analysis.",
     shortDescription:"An iOS application for identifying aircraft from photos using AI-powered image analysis.",
     thumbnail:require("../assets/AircraftIdentifier/mainimage.png"),
-      techStack: ["SwiftUI", "Firebase App Check", "Firebase AI Logic", "Gemini", "App Intent", "Siri", "MVVM"],
+      techStack: [
+        "SwiftUI", 
+        "MVVM",
+        "App Intent",
+        "Siri", 
+        "Gemini", 
+        "Firebase AI Logic", 
+        "Firebase App Check", 
+      ],
     images: [
       require("../assets/AircraftIdentifier/mainimage.png"),
       require("../assets/AircraftIdentifier/resultimage.png"),
@@ -51,7 +66,14 @@ export const projects: Project[] = [
       "A SwiftUI-based movie app that lets users explore movies and stay updated with the latest releases. This app features API integration for fetching movie data, caching using Core Data, user-friendly interface.",
     shortDescription:"A movie discovery app with API integration and offline caching.",
     thumbnail:"https://github.com/user-attachments/assets/322c26f5-b2c8-458b-8163-0303982a8b43",
-      techStack: ["SwiftUI", "Alamofire", "Core Data", "TMDB API", "WebKit", "MVVM"],
+      techStack: [
+        "SwiftUI", 
+        "MVVM",
+        "Alamofire", 
+        "Core Data", 
+        "TMDB API", 
+        "WebKit", 
+      ],
     images: [
       "https://github.com/user-attachments/assets/322c26f5-b2c8-458b-8163-0303982a8b43",
       "https://github.com/user-attachments/assets/9483a608-4453-47b0-8cd9-ae9595e82052",
@@ -66,7 +88,17 @@ export const projects: Project[] = [
       "An AI-powered iOS travel planning application that helps users discover and explore destinations. It leverages Google's Gemini AI along with interactive maps, onboarding, authentication, and local persistence.",
     shortDescription:"An AI-powered iOS travel planning application that helps users discover and explore destinations.",
     thumbnail:require("../assets/TravelPlanner/travelplanner1.png"),
-      techStack: ["UIKit", "VIPER", "Modular","XIB", "Programmatic UI", "Core Data", "MapKit", "Firebase", "Gemini AI"],
+      techStack: [
+        "UIKit", 
+        "VIPER", 
+        "Modular",
+        "Programmatic UI", 
+        "XIB", 
+        "Core Data", 
+        "MapKit", 
+        "Firebase", 
+        "Gemini AI"
+      ],
     images: [
       require("../assets/TravelPlanner/travelplanner1.png"),
       require("../assets/TravelPlanner/travelplanner2.png"),
@@ -81,7 +113,7 @@ export const projects: Project[] = [
       "Modern iOS app designed to help users prepare for the Airline Transport Pilot License (ATPL) exams.",
     shortDescription:"Modern iOS app designed to help users prepare for the Airline Transport Pilot License (ATPL) exams",
     thumbnail:require("../assets/AtplTester/atpltester1.png"),
-      techStack: ["SwiftUI", "SwiftData", "MVVM"],
+      techStack: ["SwiftUI", "MVVM", "SwiftData", ],
     images: [
       require("../assets/AtplTester/atpltester1.png"),
       require("../assets/AtplTester/atpltester2.png"),
