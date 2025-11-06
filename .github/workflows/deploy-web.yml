@@ -2,7 +2,7 @@ name: Deploy Expo Web
 
 on:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   deploy:
@@ -24,7 +24,7 @@ jobs:
         run: npx expo install
 
       - name: Export Expo Web Build
-        run: npx expo export -p Web
+        run: npx expo export -p web
 
       - name: Copy app-ads.txt
         run: cp ./app/app-ads.txt ./dist/app-ads.txt
