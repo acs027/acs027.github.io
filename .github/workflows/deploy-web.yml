@@ -18,16 +18,16 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm Install
+        run: npm install
 
       - name: Install Expo CLI
-        run: npx expo Install
+        run: npx expo install
 
       - name: Export Expo Web Build
         run: npx expo export -p Web
 
       - name: Copy app-ads.txt
-        run: cp./app/app-ads.txt ./dist/app-ads.txt
+        run: cp ./app/app-ads.txt ./dist/app-ads.txt
 
       - name: Deploy to Github Pages repo
         run: npx gh-pages --nojekyll -d dist --repo https://github.com/acs027/acs027.github.io.git
