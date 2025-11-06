@@ -40,5 +40,5 @@ jobs:
         run: |
           npx gh-pages --nojekyll -d dist \
             --repo "https://x-access-token:${GITHUB_TOKEN}@github.com/acs027/acs027.github.io.git" \
-            --branch master \
+            --branch gh-pages \
             --message "Deploy"
