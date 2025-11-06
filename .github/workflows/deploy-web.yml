@@ -37,7 +37,8 @@ jobs:
       - name: Deploy to Github Pages repo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx gh-pages --nojekyll -d dist \
-          --repo https://x-access-token:${GITHUB_TOKEN}@github.com/acs027/acs027.github.io.git \
-          --branch master \
-          --message "Deploy"
+        run: |
+          npx gh-pages --nojekyll -d dist \
+            --repo "https://x-access-token:${GITHUB_TOKEN}@github.com/acs027/acs027.github.io.git" \
+            --branch master \
+            --message "Deploy"
