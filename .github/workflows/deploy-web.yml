@@ -29,5 +29,10 @@ jobs:
       - name: Copy app-ads.txt
         run: cp ./app/app-ads.txt ./dist/app-ads.txt
 
+      - name: Set Git identity
+        run: |
+          git config --global user.email "acs027@users.noreply.github.com"
+          git config --global user.name "acs027"
+
       - name: Deploy to Github Pages repo
         run: npx gh-pages --nojekyll -d dist --repo https://github.com/acs027/acs027.github.io.git
