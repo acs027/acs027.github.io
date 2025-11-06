@@ -35,4 +35,9 @@ jobs:
           git config --global user.name "acs027"
 
       - name: Deploy to Github Pages repo
-        run: npx gh-pages --nojekyll -d dist --repo https://github.com/acs027/acs027.github.io.git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx gh-pages --nojekyll -d dist \
+          --repo https://x-access-token:${GITHUB_TOKEN}@github.com/acs027/acs027.github.io.git \
+          --branch master \
+          --message "Deploy"
