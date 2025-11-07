@@ -13,7 +13,7 @@ const Projects: React.FC = () => {
 
   return (
     <ThemedView color={colors.background} style={[styles.sectionContainer]}>
-      <ThemedText type="subtitle">PROJECTS</ThemedText>
+      <ThemedText type="subtitle">FEATURED PROJECTS</ThemedText>
       <ThemedView
         color={colors.background}
         style={[
@@ -21,15 +21,14 @@ const Projects: React.FC = () => {
           window.width < 450 && styles.compactProjectStyles,
         ]}
       >
-        {projects.map(
-          (project, index) => (
-            // window.width > 450 ? (
-            //   <ProjectCard
-            //     key={index}
-            //     {...project}
-            //     techStack={project.techStack?.map((tech) => `• ${tech}`)}
-            //   />
-            // ) : (
+        {projects.map((project, index) =>
+          window.width > 450 ? (
+            <ProjectCard
+              key={index}
+              {...project}
+              techStack={project.techStack?.map((tech) => `• ${tech}`)}
+            />
+          ) : (
             <CompactProjectCard
               key={index}
               title={project.title}
@@ -41,7 +40,6 @@ const Projects: React.FC = () => {
               description={project.shortDescription}
             />
           )
-          // )
         )}
       </ThemedView>
     </ThemedView>
@@ -53,7 +51,7 @@ const styles = StyleSheet.create({
     gap: 12,
     marginBottom: 50,
     alignItems: "center",
-    width: "100%",
+    width: "95%",
     maxWidth: 1000,
   },
 

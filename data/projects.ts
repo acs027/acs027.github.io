@@ -35,6 +35,31 @@ export const projects: Project[] = [
     gif: [require("../assets/gifs/flightcomputergif.gif")],
   },
 
+    {
+    title: "TravelPlanner",
+    repoLink: "https://github.com/acs027/TravelPlanner",
+    description:
+      "An AI-powered iOS travel planning application that helps users discover and explore destinations. It leverages Google's Gemini AI along with interactive maps, onboarding, authentication, and local persistence.",
+    shortDescription:"An AI-powered iOS travel planning application that helps users discover and explore destinations.",
+    thumbnail:require("../assets/TravelPlanner/travelplanner1.png"),
+      techStack: [
+        "UIKit", 
+        "VIPER", 
+        "Modular",
+        "Programmatic UI", 
+        "XIB", 
+        "Core Data", 
+        "MapKit", 
+        "Firebase", 
+        "Gemini AI"
+      ],
+    images: [
+      require("../assets/TravelPlanner/travelplanner1.png"),
+      require("../assets/TravelPlanner/travelplanner2.png"),
+    ],
+    gif: [require("../assets/TravelPlanner/travelplannergif.gif")],
+  },
+
   {
     title: "Aircraft Identifier",
     repoLink: "https://github.com/acs027/AircraftIdentifier",
@@ -81,30 +106,7 @@ export const projects: Project[] = [
     gif: ["https://github.com/user-attachments/assets/52409856-b198-4f1b-a7b0-dc1d6f6c996e"],
   },
     
-  {
-    title: "TravelPlanner",
-    repoLink: "https://github.com/acs027/TravelPlanner",
-    description:
-      "An AI-powered iOS travel planning application that helps users discover and explore destinations. It leverages Google's Gemini AI along with interactive maps, onboarding, authentication, and local persistence.",
-    shortDescription:"An AI-powered iOS travel planning application that helps users discover and explore destinations.",
-    thumbnail:require("../assets/TravelPlanner/travelplanner1.png"),
-      techStack: [
-        "UIKit", 
-        "VIPER", 
-        "Modular",
-        "Programmatic UI", 
-        "XIB", 
-        "Core Data", 
-        "MapKit", 
-        "Firebase", 
-        "Gemini AI"
-      ],
-    images: [
-      require("../assets/TravelPlanner/travelplanner1.png"),
-      require("../assets/TravelPlanner/travelplanner2.png"),
-    ],
-    gif: [require("../assets/TravelPlanner/travelplannergif.gif")],
-  },
+
 
   {
     title: "ATPL Tester",
@@ -121,20 +123,20 @@ export const projects: Project[] = [
     ],
   },
 
-  {
-    title: "Chat App",
-    repoLink: "https://github.com/acs027/ChatApp",
-    description:
-      "This app allows users to communicate in real-time, featuring user authentication, message storage, and user profile photos, all powered by Firebase.",
-    shortDescription:"A real-time messaging app with authentication and media support.",
-    thumbnail:"https://github.com/user-attachments/assets/330470c6-957a-4d73-be7a-92dfb0eb524b",
-      techStack: ["SwiftUI", "Firebase Auth", "Firebase Storage", "Firestore"],
-    images: [
-      "https://github.com/user-attachments/assets/330470c6-957a-4d73-be7a-92dfb0eb524b",
-      "https://github.com/user-attachments/assets/f7a58bf1-d890-465a-a964-e441b3c2f0b8",
-      "https://github.com/user-attachments/assets/dce5ab5d-5524-45fb-a36d-1e06f1c3a837",
-    ],
-  },
+  // {
+  //   title: "Chat App",
+  //   repoLink: "https://github.com/acs027/ChatApp",
+  //   description:
+  //     "This app allows users to communicate in real-time, featuring user authentication, message storage, and user profile photos, all powered by Firebase.",
+  //   shortDescription:"A real-time messaging app with authentication and media support.",
+  //   thumbnail:"https://github.com/user-attachments/assets/330470c6-957a-4d73-be7a-92dfb0eb524b",
+  //     techStack: ["SwiftUI", "Firebase Auth", "Firebase Storage", "Firestore"],
+  //   images: [
+  //     "https://github.com/user-attachments/assets/330470c6-957a-4d73-be7a-92dfb0eb524b",
+  //     "https://github.com/user-attachments/assets/f7a58bf1-d890-465a-a964-e441b3c2f0b8",
+  //     "https://github.com/user-attachments/assets/dce5ab5d-5524-45fb-a36d-1e06f1c3a837",
+  //   ],
+  // },
   {
     title: "GLOOMHAVEN ATTACKER",
     repoLink: "https://github.com/acs027/Gloomhaven-Attacker",
@@ -148,32 +150,32 @@ export const projects: Project[] = [
       "https://github.com/user-attachments/assets/d7ff6980-c426-40f0-9d96-d5d193322a88",
     ],
   },
-  {
-    title: "Insta Profile",
-    repoLink: "https://github.com/acs027/InstaProfileStudy",
-    description:
-      "A replica of the Instagram profile screen built using UIKit. This project is designed to practice and enhance my skills with UIKit.",
-    techStack: ["UIKit", "MVVM", "Combine", "Alamofire"],
-    shortDescription:"A replica of the Instagram profile screen built with UIKit.",
-    thumbnail:"https://github.com/acs027/InstaProfileStudy/blob/main/screenshots/screenshot1.png?raw=true",
-    images: [
-      "https://github.com/acs027/InstaProfileStudy/blob/main/screenshots/screenshot1.png?raw=true",
-      "https://github.com/acs027/InstaProfileStudy/blob/main/screenshots/screenshot2.png?raw=true",
-    ],
-    gif: [
-      "https://github.com/acs027/InstaProfileStudy/blob/main/screenshots/app.gif?raw=true",
-    ],
-  },
-  {
-    title: "XFeed",
-    repoLink: "https://github.com/acs027/XFeedStudy",
-    description:
-      "A replica of the X Feed screen built using UIKit. This project is designed to practice and enhance my skills with UIKit.",
-    techStack: ["UIKit", "MVVM", "Combine", "SnapKit"],
-    shortDescription:"A UIKit-based replica of the X (Twitter) feed screen.",
-    thumbnail:"https://github.com/acs027/XFeedStudy/blob/main/screenshots/screenshot1.png?raw=true",
-    images: [
-      "https://github.com/acs027/XFeedStudy/blob/main/screenshots/screenshot1.png?raw=true",
-    ],
-  },
+  // {
+  //   title: "Insta Profile",
+  //   repoLink: "https://github.com/acs027/InstaProfileStudy",
+  //   description:
+  //     "A replica of the Instagram profile screen built using UIKit. This project is designed to practice and enhance my skills with UIKit.",
+  //   techStack: ["UIKit", "MVVM", "Combine", "Alamofire"],
+  //   shortDescription:"A replica of the Instagram profile screen built with UIKit.",
+  //   thumbnail:"https://github.com/acs027/InstaProfileStudy/blob/main/screenshots/screenshot1.png?raw=true",
+  //   images: [
+  //     "https://github.com/acs027/InstaProfileStudy/blob/main/screenshots/screenshot1.png?raw=true",
+  //     "https://github.com/acs027/InstaProfileStudy/blob/main/screenshots/screenshot2.png?raw=true",
+  //   ],
+  //   gif: [
+  //     "https://github.com/acs027/InstaProfileStudy/blob/main/screenshots/app.gif?raw=true",
+  //   ],
+  // },
+  // {
+  //   title: "XFeed",
+  //   repoLink: "https://github.com/acs027/XFeedStudy",
+  //   description:
+  //     "A replica of the X Feed screen built using UIKit. This project is designed to practice and enhance my skills with UIKit.",
+  //   techStack: ["UIKit", "MVVM", "Combine", "SnapKit"],
+  //   shortDescription:"A UIKit-based replica of the X (Twitter) feed screen.",
+  //   thumbnail:"https://github.com/acs027/XFeedStudy/blob/main/screenshots/screenshot1.png?raw=true",
+  //   images: [
+  //     "https://github.com/acs027/XFeedStudy/blob/main/screenshots/screenshot1.png?raw=true",
+  //   ],
+  // },
 ];
