@@ -20,6 +20,7 @@ import { useNavigation } from "expo-router";
 import Footer from "@/components/footer/Footer";
 import Contact from "@/components/contact/Contact";
 import ReactGA from "react-ga4";
+import Contributions from "@/components/contributions/Contributions";
 
 export default function HomeScreen({ section }: { section?: string }) {
   const { width, height } = useWindowDimensions();
@@ -36,6 +37,7 @@ export default function HomeScreen({ section }: { section?: string }) {
   // ✅ REFS
   const aboutRef = useRef<View>(null);
   const skillsRef = useRef<View>(null);
+  const contributionsRef = useRef<View>(null);
   const projectsRef = useRef<View>(null);
   const contactRef = useRef<View>(null);
 
@@ -131,6 +133,20 @@ export default function HomeScreen({ section }: { section?: string }) {
           />
           <AboutMe />
           <SocialView setShowToast={setShowToast} />
+        </View>
+
+        {/* ✅ CONTRIBUTIONS */}
+        <View
+          ref={contributionsRef}
+          onLayout={(e) => {
+            sectionPositions.current["contributions"] = e.nativeEvent.layout.y;
+          }}
+          style={[
+            styles.section,
+            { backgroundColor: colors.background, minHeight: fullHeight },
+          ]}
+        >
+          <Contributions />
         </View>
 
         {/* ✅ PROJECTS */}

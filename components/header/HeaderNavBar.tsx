@@ -20,7 +20,7 @@ export default function HeaderNavBar({
   onNavigate,
   currentSection,
 }: HeaderNavBarProps) {
-  const tabs = ["About", "Projects", "Skills", "Contact"];
+  const tabs = ["About", "Contributions", "Projects", "Skills", "Contact"];
   const colors = useThemeColors();
   const { width } = useWindowDimensions();
   const isSmall = width < 768; // you can adjust this breakpoint
