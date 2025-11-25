@@ -192,7 +192,7 @@ export default function HomeScreen({ section }: { section?: string }) {
       </ScrollView>
 
       {/* ✅ CHAT */}
-      {/* <ChatOverlay /> */}
+      <ChatOverlay />
 
       <ExpandableInfo
         onPress={scrollToTop}

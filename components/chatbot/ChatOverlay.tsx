@@ -20,6 +20,7 @@ export default function ChatOverlay() {
   );
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [sessionId, setSessionId] = useState("");
 
   const scrollRef = useRef<ScrollView>(null);
   const animatedText = useRef(new Animated.Value(0)).current;
@@ -33,6 +34,15 @@ export default function ChatOverlay() {
       scrollRef.current?.scrollToEnd({ animated: true });
     }, 150);
   }, [messages]);
+
+  useEffect(() => {
+    let id = localStorage.getItem("chat_session_id");
+    if (!id) {
+      id = crypto.randomUUID();
+      localStorage.setItem("chat_session_id", id);
+    }
+    setSessionId(id);
+  }, []);
 
   // Typewriter animation for the bot reply
   const typeWriter = (fullText: string, callback: (txt: string) => void) => {
@@ -50,22 +60,31 @@ export default function ChatOverlay() {
   async function sendMessage() {
     if (!input.trim() || loading) return;
 
-    const userMessage = { from: "user", text: input };
-    setMessages((prev) => [...prev, userMessage]);
+    const userText = input;
     setInput("");
     setLoading(true);
 
-    const reply = await askGemini(input);
+    // 1. Add user message
+    setMessages((prev) => [...prev, { from: "user", text: userText }]);
 
-    // Start with empty bot message
-    const botMessage = { from: "bot", text: "" };
-    setMessages((prev) => [...prev, botMessage]);
+    const reply = await askGemini(userText, sessionId);
 
-    const index = messages.length; // bot msg index
+    // 2. Add empty bot message at the end
+    setMessages((prev) => [...prev, { from: "bot", text: "" }]);
+
+    // 3. Stream into the *last* message (the bot bubble)
     typeWriter(reply, (partial) => {
       setMessages((prev) => {
+        if (prev.length === 0) return prev;
+
         const updated = [...prev];
-        updated[index] = { from: "bot", text: partial };
+        const lastIndex = updated.length - 1;
+        const last = updated[lastIndex];
+
+        // safety check: only update if last is bot
+        if (last.from !== "bot") return updated;
+
+        updated[lastIndex] = { ...last, text: partial };
         return updated;
       });
     });
