@@ -1,23 +1,19 @@
 import React from "react";
-import {
-  StyleSheet,
-  Pressable,
-  useColorScheme,
-  Platform,
-  View,
-} from "react-native";
+import { StyleSheet, Pressable, View } from "react-native";
 import { ThemedView } from "../utils/ThemedView";
 import { ThemedText } from "../utils/ThemedText";
 import { SKILLS } from "@/constants/Skills";
 import { ShadowStyle } from "../utils/ShadowStyle";
 import { useThemeColors } from "../utils/useThemeColors";
+import { useTranslation } from "react-i18next";
 
 const SkillsView: React.FC = () => {
   const colors = useThemeColors();
+  const { t } = useTranslation();
 
   return (
     <ThemedView color={colors.background} style={[styles.sectionContainer]}>
-      <ThemedText type="subtitle">SKILLS</ThemedText>
+      <ThemedText type="subtitle">{t("skills.title")}</ThemedText>
       <ThemedView
         color={colors.card}
         style={[styles.roundedRect, ShadowStyle()]}
@@ -29,7 +25,7 @@ const SkillsView: React.FC = () => {
             style={[styles.skillCategory]}
           >
             <ThemedText type="defaultSemiBold" style={styles.categoryTitle}>
-              {category.title}
+              {t(`skills.${category.title}`)}
             </ThemedText>
             <ThemedView color={colors.card} style={[styles.skillContainer]}>
               <ThemedView color={colors.card} style={[styles.skillsGrid]}>

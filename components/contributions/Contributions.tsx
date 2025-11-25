@@ -1,20 +1,19 @@
 import React from "react";
-import { StyleSheet, useWindowDimensions } from "react-native";
+import { StyleSheet } from "react-native";
 import { ThemedView } from "../utils/ThemedView";
 import { ThemedText } from "../utils/ThemedText";
 import { useThemeColors } from "../utils/useThemeColors";
-import OpenSourceTimeline from "./OpenSourceTimeline";
-import ContributionGraph from "./OpenSourceTimeline";
 import ContributionCard from "./ContributionCard";
 import { contributions } from "@/data/contributions";
+import { useTranslation } from "react-i18next";
 
 const Contributions: React.FC = () => {
   const colors = useThemeColors();
-  const window = useWindowDimensions();
+  const { t } = useTranslation();
 
   return (
     <ThemedView color={colors.background} style={[styles.sectionContainer]}>
-      <ThemedText type="subtitle">OPEN SOURCE CONTRIBUTIONS</ThemedText>
+      <ThemedText type="subtitle"> {t("contributions.title")}</ThemedText>
       <ThemedView color={colors.background} style={[styles.projectsContainer]}>
         {contributions.map((c, index) => (
           <ContributionCard

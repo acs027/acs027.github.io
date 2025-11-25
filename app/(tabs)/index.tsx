@@ -21,6 +21,9 @@ import Footer from "@/components/footer/Footer";
 import Contact from "@/components/contact/Contact";
 import ReactGA from "react-ga4";
 import Contributions from "@/components/contributions/Contributions";
+import ChatOverlay from "@/components/chatbot/ChatOverlay";
+
+import "@/src/i18n";
 
 export default function HomeScreen({ section }: { section?: string }) {
   const { width, height } = useWindowDimensions();
@@ -44,7 +47,6 @@ export default function HomeScreen({ section }: { section?: string }) {
   // ✅ Current section logic
   const [currentSection, setCurrentSection] = useState(section ?? "about");
 
-  // ✅ Dinamik pozisyonlar
   const sectionPositions = useRef<Record<string, number>>({});
 
   // Google Analytics
@@ -53,7 +55,6 @@ export default function HomeScreen({ section }: { section?: string }) {
     ReactGA.send({ hitType: "pageview", page: window.location.pathname });
   }, []);
 
-  // ✅ Scroll'da hangi section'da olduğumuzu bul
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const y = event.nativeEvent.contentOffset.y;
     const buffer = 100;
@@ -67,7 +68,6 @@ export default function HomeScreen({ section }: { section?: string }) {
     }
   };
 
-  // ✅ Tıklayınca nav çalışması
   const scrollToSection = (section: string) => {
     const position = sectionPositions.current[section];
     if (position !== undefined) {
@@ -75,21 +75,18 @@ export default function HomeScreen({ section }: { section?: string }) {
     }
   };
 
-  // Tabbar gizle
   useEffect(() => {
     navigation.setOptions({
       tabBarStyle: { display: "none" },
     });
   }, [navigation]);
 
-  // Dışarıdan projects gelirse scroll et
   useEffect(() => {
     if (section === "projects") {
       scrollToSection("projects");
     }
   }, [section]);
 
-  // Top'a dön
   const scrollToTop = () => {
     projectViewRef.current?.scrollTo();
     scrollViewRef.current?.scrollTo({
@@ -193,6 +190,9 @@ export default function HomeScreen({ section }: { section?: string }) {
 
         <Footer />
       </ScrollView>
+
+      {/* ✅ CHAT */}
+      {/* <ChatOverlay /> */}
 
       <ExpandableInfo
         onPress={scrollToTop}

@@ -1,0 +1,134 @@
+{
+  "navbar": {
+    "logo": "aCs",
+    "tabs": {
+      "about": "Hakkımda",
+      "contributions": "Katkılar",
+      "projects": "Projeler",
+      "skills": "Yetenekler",
+      "contact": "İletişim"
+    }
+  },
+
+  "aboutMe": {
+    "title_hi": "Merhaba!",
+    "title_name": "Ben Ali Cihan",
+    "title_role": "iOS Geliştirici",
+
+    "paragraph": "Makine mühendisliği ve yazılım geliştirme geçmişine sahip, tutkulu bir iOS geliştiricisiyim. Pandemi döneminde Harvard’ın CS50 programı ile yazılıma başladım ve sonrasında Swift ile iOS alanında uzmanlaştım. Kişisel projelerim ve Tüpraş’taki stajım sayesinde pratik deneyim kazandım. Yeni teknolojileri öğrenmeye, değişen koşullara uyum sağlamaya ve yüksek kaliteli uygulamalar geliştirmeye her zaman hevesliyim."
+  },
+
+  "contributions": {
+    "title": "AÇIK KAYNAK KATKILARI"
+  },
+
+  "projects": {
+    "title": "Öne Çıkan Projeler",
+
+    "E6B Flight Pro": {
+      "title": "E6B Flight Pro",
+      "description": "E6B Flight Pro, pilotlar, öğrenci pilotlar ve havacılık meraklıları için klasik E6B uçuş bilgisayarının hassas bir dijital replikasıdır.",
+      "short": "Pilotlar ve havacılık öğrencileri için dijital E6B uçuş bilgisayarı."
+    },
+
+    "TravelPlanner": {
+      "title": "TravelPlanner",
+      "description": "Kullanıcıların yeni destinasyonlar keşfetmesine ve planlamasına yardımcı olan, Google'ın Gemini yapay zekasını kullanan bir iOS seyahat planlama uygulaması. Etkileşimli haritalar, onboarding, kimlik doğrulama ve yerel veri saklama özelliklerini içerir.",
+      "short": "Gemini AI destekli iOS seyahat planlama uygulaması."
+    },
+
+    "Aircraft Identifier": {
+      "title": "Aircraft Identifier",
+      "description": "Fotoğraflardan uçak tanımlamak için yapay zeka destekli görüntü analizi kullanan bir iOS uygulaması.",
+      "short": "Yapay zekayla fotoğraflardan uçak tanımlama uygulaması."
+    },
+
+    "MyMovieApp": {
+      "title": "MyMovieApp",
+      "description": "SwiftUI ile geliştirilmiş, kullanıcıların filmleri keşfetmesini sağlayan bir uygulama. API üzerinden film verilerini çeker, Core Data ile önbellekleme yapar ve kullanıcı dostu bir arayüz sunar.",
+      "short": "API entegrasyonlu ve çevrimdışı önbellekli film keşif uygulaması."
+    },
+
+    "ATPL Tester": {
+      "title": "ATPL Tester",
+      "description": "ATPL sınavlarına hazırlanan kullanıcılar için modern bir iOS uygulaması.",
+      "short": "ATPL sınavlarına hazırlık için modern bir iOS uygulaması."
+    },
+
+    "GLOOMHAVEN ATTACKER": {
+      "title": "Gloomhaven Attacker",
+      "description": "Gloomhaven kutu oyunu için yardımcı bir uygulama.",
+      "short": "Gloomhaven oyununda saldırıları yönetmek için yardımcı uygulama."
+    }
+  },
+
+  "skills": {
+    "title": "YETENEKLER",
+    "Programming Languages": "Programlama Dilleri",
+    "Frameworks": "Frameworkler",
+    "Architecture & Principles": "Mimari & Prensipler",
+    "Tools & Technologies": "Araçlar & Teknolojiler",
+    "Other": "Diğer"
+  },
+
+  "contact": {
+    "header": "Birlikte Çalışalım",
+    "subheader": "Aklınızda bir proje mi var? Dinlemek ve iOS uygulama fikrinizi nasıl hayata geçirebileceğimizi konuşmak isterim.",
+
+    "form": {
+      "title": "Bana bir mesaj gönder",
+
+      "firstName": "Ad",
+      "firstName_placeholder": "Deckard",
+
+      "lastName": "Soyad",
+      "lastName_placeholder": "Cain",
+
+      "email": "Email",
+      "email_placeholder": "deckardcain@gmail.com",
+
+      "subject": "Konu",
+      "subject_placeholder": "...",
+
+      "message": "Mesaj",
+      "message_placeholder": "...",
+
+      "button_send": "Mesaj Gönder",
+      "button_sending": "Gönderiliyor...",
+
+      "validation_fillAll": "Lütfen tüm alanları doldurun.",
+      "validation_invalidEmail": "Lütfen geçerli bir e-posta adresi girin.",
+
+      "success": "Form Başarıyla Gönderildi",
+      "error_generic": "Gönderim başarısız",
+      "error_network": "Ağ hatası"
+    },
+
+    "info": {
+      "title": "İletişime geçin",
+      "description": "Yeni iOS projelerinde çalışmayı ve harika ekiplerle iş birliği yapmayı her zaman heyecan verici buluyorum. Sıfırdan bir uygulama geliştirmek veya mevcut bir uygulamayı iyileştirmek istiyorsanız, vizyonunuzu hayata geçirmenize nasıl yardımcı olabileceğimizi konuşalım.",
+
+      "email_label": "Email",
+      "location_label": "Konum"
+    },
+
+    "social": {
+      "title": "Beni takip edin",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "medium": "Medium"
+    }
+  },
+
+  "footer": {
+    "name": "Ali Cihan Saraç",
+    "title": "iOS Geliştirici"
+  },
+
+  "chatbot": {
+    "header": "aCsAI'ye Sor",
+    "typing": "Yazıyor...",
+    "placeholder": "Her şeyi sorabilirsiniz...",
+    "send_button": "Gönder"
+    }
+}

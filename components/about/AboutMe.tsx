@@ -5,9 +5,12 @@ import { ThemedText } from "../utils/ThemedText";
 import { HelloWave } from "../utils/HelloWave";
 import { ShadowStyle } from "../utils/ShadowStyle";
 import { useThemeColors } from "../utils/useThemeColors";
+import { useTranslation } from "react-i18next";
 
 const AboutMe: React.FC = () => {
   const colors = useThemeColors();
+  const { t } = useTranslation();
+
   return (
     <ThemedView color={colors.background} style={styles.summaryContainer}>
       <ThemedView
@@ -16,22 +19,15 @@ const AboutMe: React.FC = () => {
       >
         <ThemedView color={colors.card} style={[styles.titleContainer]}>
           <ThemedText type="title">
-            Hi! <HelloWave />
+            {t("aboutMe.title_hi")}
+            <HelloWave />
           </ThemedText>
-          <ThemedText type="title">I'm Ali Cihan</ThemedText>
-          <ThemedText type="subtitle">iOS Developer</ThemedText>
+          <ThemedText type="title">{t("aboutMe.title_name")}</ThemedText>
+          <ThemedText type="subtitle">{t("aboutMe.title_role")}</ThemedText>
         </ThemedView>
 
         <ThemedView color={colors.card} style={[styles.sectionContainer]}>
-          <ThemedText>
-            Passionate iOS developer with a background in mechanical engineering
-            and software development. I began programming during the pandemic
-            with Harvard's CS50 and later specialized in Swift and iOS. Through
-            personal projects and an internship at Tüpraş, I gained hands-on
-            experience in frontend and backend development. I am eager to learn
-            new technologies, adapt to challenges, and build high-quality
-            applications.
-          </ThemedText>
+          <ThemedText>{t("aboutMe.paragraph")}</ThemedText>
         </ThemedView>
       </ThemedView>
     </ThemedView>

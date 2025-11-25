@@ -1,0 +1,133 @@
+{
+  "navbar": {
+  "logo": "aCs",
+  "tabs": {
+    "about": "About",
+    "contributions": "Contributions",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact"
+    }
+  },
+
+  "aboutMe": {
+    "title_hi": "Hi!",
+    "title_name": "I'm Ali Cihan",
+    "title_role": "iOS Developer",
+
+    "paragraph": "Passionate iOS developer with a background in mechanical engineering and software development. I began programming during the pandemic with Harvard's CS50 and later specialized in Swift and iOS. Through personal projects and an internship at Tüpraş, I gained hands-on experience. I am eager to learn new technologies, adapt to challenges, and build high-quality applications."
+  },
+
+    "contributions": {
+    "title": "OPEN SOURCE CONTRIBUTIONS"
+  },
+
+   "projects": {
+    "title": "Featured Projects",
+     "E6B Flight Pro": {
+      "title": "E6B Flight Pro",
+      "description": "E6B Flight Pro is a precise digital replica of the classic E6B flight computer, built for pilots, student aviators, and aviation enthusiasts.",
+      "short": "A digital replica of the E6B flight computer for pilots and aviation students."
+    },
+
+    "TravelPlanner": {
+      "title": "TravelPlanner",
+      "description": "An AI-powered iOS travel planning application that helps users discover and explore destinations. It leverages Google's Gemini AI along with interactive maps, onboarding, authentication, and local persistence.",
+      "short": "An AI-powered iOS travel planning application that helps users discover and explore destinations."
+    },
+
+    "Aircraft Identifier": {
+      "title": "Aircraft Identifier",
+      "description": "An iOS application for identifying aircraft from photos using AI-powered image analysis.",
+      "short": "An iOS application for identifying aircraft from photos using AI-powered image analysis."
+    },
+
+    "MyMovieApp": {
+      "title": "MyMovieApp",
+      "description": "A SwiftUI-based movie app that lets users explore movies and stay updated with the latest releases. This app features API integration for fetching movie data, caching using Core Data, user-friendly interface.",
+      "short": "A movie discovery app with API integration and offline caching."
+    },
+
+    "ATPL Tester": {
+      "title": "ATPL Tester",
+      "description": "Modern iOS app designed to help users prepare for the Airline Transport Pilot License (ATPL) exams.",
+      "short": "Modern iOS app designed to help users prepare for the Airline Transport Pilot License (ATPL) exams."
+    },
+
+    "GLOOMHAVEN ATTACKER": {
+      "title": "Gloomhaven Attacker",
+      "description": "Helper app for the Gloomhaven boardgame.",
+      "short": "A helper app for managing attacks in the Gloomhaven board game."
+    }
+  },
+
+  "skills": {
+    "title": "SKILLS",
+    "Programming Languages": "Programming Languages",
+    "Frameworks": "Frameworks",
+    "Architecture & Principles": "Architecture & Principles",
+    "Tools & Technologies": "Tools & Technologies",
+    "Other": "Other"
+  },
+
+   "contact": {
+    "header": "Let's Work Together",
+    "subheader": "Have a project in mind? I'd love to hear about it and discuss how we can bring your iOS app idea to life.",
+
+    "form": {
+      "title": "Send me a message",
+
+      "firstName": "First Name",
+      "firstName_placeholder": "Deckard",
+
+      "lastName": "Last Name",
+      "lastName_placeholder": "Cain",
+
+      "email": "Email",
+      "email_placeholder": "deckardcain@gmail.com",
+
+      "subject": "Subject",
+      "subject_placeholder": "...",
+
+      "message": "Message",
+      "message_placeholder": "...",
+
+      "button_send": "Send Message",
+      "button_sending": "Sending...",
+
+      "validation_fillAll": "Please fill in all fields.",
+      "validation_invalidEmail": "Please enter a valid email address.",
+
+      "success": "Form Submitted Successfully",
+      "error_generic": "Submission failed",
+      "error_network": "Network error"
+    },
+
+    "info": {
+      "title": "Get in touch",
+      "description": "I'm always excited to work on new iOS projects and collaborate with amazing teams. Whether you need a new app built from scratch or want to improve an existing one, let's discuss how I can help bring your vision to life.",
+
+      "email_label": "Email",
+      "location_label": "Location"
+    },
+
+    "social": {
+      "title": "Follow me",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "medium": "Medium"
+    }
+  },
+
+   "footer": {
+    "name": "Ali Cihan Saraç",
+    "title": "iOS Developer"
+  },
+
+  "chatbot": {
+    "header": "Ask to aCsAI",
+    "typing": "Typing...",
+    "placeholder": "Ask me anything...",
+    "send_button": "Send"
+  }
+}

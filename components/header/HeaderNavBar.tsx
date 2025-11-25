@@ -10,6 +10,8 @@ import { useThemeColors } from "../utils/useThemeColors";
 import { ThemedView } from "../utils/ThemedView";
 import { ThemedText } from "../utils/ThemedText";
 import { Feather } from "@expo/vector-icons"; // for hamburger icon
+import { useTranslation } from "react-i18next";
+import i18n from "@/src/i18n";
 
 type HeaderNavBarProps = {
   currentSection: string;
@@ -20,59 +22,75 @@ export default function HeaderNavBar({
   onNavigate,
   currentSection,
 }: HeaderNavBarProps) {
-  const tabs = ["About", "Contributions", "Projects", "Skills", "Contact"];
+  const { t } = useTranslation();
+  const tabs = [
+    { key: "about", label: t("navbar.tabs.about") },
+    { key: "contributions", label: t("navbar.tabs.contributions") },
+    { key: "projects", label: t("navbar.tabs.projects") },
+    { key: "skills", label: t("navbar.tabs.skills") },
+    { key: "contact", label: t("navbar.tabs.contact") },
+  ];
   const colors = useThemeColors();
   const { width } = useWindowDimensions();
   const isSmall = width < 768; // you can adjust this breakpoint
 
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // 🌍 Toggle Language (EN ↔ TR)
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "tr" : "en";
+    i18n.changeLanguage(newLang);
+  };
+
   return (
     <ThemedView color={colors.card} style={styles.container}>
-      <Text style={styles.logo}>aCs</Text>
+      <Text style={styles.logo}>{t("navbar.logo")}</Text>
 
-      {isSmall ? (
-        <Pressable onPress={() => setMenuOpen((prev) => !prev)}>
-          <Feather name="menu" size={24} color="#374151" />
+      <ThemedView style={styles.nav} color={colors.card}>
+        {isSmall ? (
+          <Pressable onPress={() => setMenuOpen((prev) => !prev)}>
+            <Feather name="menu" size={24} color="#374151" />
+          </Pressable>
+        ) : (
+          <ThemedView style={styles.nav} color={colors.card}>
+            {tabs.map((tab) => {
+              const isActive = currentSection === tab.key;
+
+              return (
+                <Pressable key={tab.key} onPress={() => onNavigate(tab.key)}>
+                  <View style={styles.tabContainer}>
+                    <ThemedText
+                      style={[styles.navItem, isActive && styles.activeText]}
+                    >
+                      {tab.label}
+                    </ThemedText>
+                    {isActive && <View style={styles.indicator} />}
+                  </View>
+                </Pressable>
+              );
+            })}
+          </ThemedView>
+        )}
+
+        <Pressable onPress={toggleLanguage} style={styles.langButton}>
+          <Text style={styles.langText}>
+            {i18n.language === "en" ? "TR" : "EN"}
+          </Text>
         </Pressable>
-      ) : (
-        <ThemedView style={styles.nav} color={colors.card}>
-          {tabs.map((tab) => {
-            const sectionKey = tab.toLowerCase() as
-              | "about"
-              | "projects"
-              | "skills"
-              | "contact";
-            const isActive = currentSection === sectionKey;
-
-            return (
-              <Pressable key={tab} onPress={() => onNavigate(sectionKey)}>
-                <View style={styles.tabContainer}>
-                  <ThemedText
-                    style={[styles.navItem, isActive && styles.activeText]}
-                  >
-                    {tab}
-                  </ThemedText>
-                  {isActive && <View style={styles.indicator} />}
-                </View>
-              </Pressable>
-            );
-          })}
-        </ThemedView>
-      )}
+      </ThemedView>
 
       {/* Dropdown menu for small screens */}
       {isSmall && menuOpen && (
         <ThemedView style={styles.dropdown} color={colors.card}>
           {tabs.map((tab) => (
             <Pressable
-              key={tab}
+              key={tab.key}
               onPress={() => {
-                onNavigate(tab.toLowerCase() as any);
+                onNavigate(tab.key.toLowerCase() as any);
                 setMenuOpen(false);
               }}
             >
-              <ThemedText style={styles.dropdownItem}>{tab}</ThemedText>
+              <ThemedText style={styles.dropdownItem}>{tab.label}</ThemedText>
             </Pressable>
           ))}
         </ThemedView>
@@ -140,5 +158,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#2563eb",
     marginTop: 4,
     borderRadius: 2,
+  },
+  // 🌍 Language switch button styles
+  langButton: {
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 6,
+    backgroundColor: "#2563eb",
+  },
+  langText: {
+    color: "white",
+    fontWeight: "bold",
   },
 });

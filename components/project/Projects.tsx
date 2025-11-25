@@ -6,14 +6,18 @@ import { ThemedText } from "../utils/ThemedText";
 import { useThemeColors } from "../utils/useThemeColors";
 import { projects } from "@/data/projects";
 import CompactProjectCard from "./CompactProjectCard";
+import { useTranslation } from "react-i18next";
 
 const Projects: React.FC = () => {
   const colors = useThemeColors();
   const window = useWindowDimensions();
+  const { t } = useTranslation();
 
   return (
     <ThemedView color={colors.background} style={[styles.sectionContainer]}>
-      <ThemedText type="subtitle">FEATURED PROJECTS</ThemedText>
+      <ThemedText type="subtitle">
+        {t("projects.title").toUpperCase()}
+      </ThemedText>
       <ThemedView
         color={colors.background}
         style={[
@@ -26,18 +30,20 @@ const Projects: React.FC = () => {
             <ProjectCard
               key={index}
               {...project}
+              title={t(`projects.${project.title}.title`)}
+              description={t(`projects.${project.title}.description`)}
               techStack={project.techStack?.map((tech) => `• ${tech}`)}
             />
           ) : (
             <CompactProjectCard
               key={index}
-              title={project.title}
+              title={t(`projects.${project.title}.title`)}
               repoLink={project.repoLink}
               testFlightLink={project.testFlightLink}
               appStoreLink={project.appStoreLink}
               techStack={project.techStack}
               thumbnail={project.thumbnail}
-              description={project.shortDescription}
+              description={t(`projects.${project.title}.short`)}
             />
           )
         )}

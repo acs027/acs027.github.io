@@ -11,11 +11,13 @@ import { Entypo, Feather } from "@expo/vector-icons";
 import { useThemeColors } from "../utils/useThemeColors"; // Optional: replace with your theme system
 import { ThemedText } from "../utils/ThemedText";
 import { ThemedView } from "../utils/ThemedView";
+import { useTranslation } from "react-i18next";
 
 export default function Contact() {
   const { width } = useWindowDimensions();
   const isLargeScreen = width >= 750;
   const colors = useThemeColors();
+  const { t } = useTranslation();
 
   const accessKey = "371da1cf-d6e9-485e-928d-ebce5f9dc12c"; //Public Key
 
@@ -24,7 +26,7 @@ export default function Contact() {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-  const [result, setResult] = useState("Send Message");
+  const [result, setResult] = useState(t("contact.form.button_send"));
   const [isInvalidInput, setIsInvalidInput] = useState(false);
 
   const isValidEmail = (email: string) => {
@@ -34,12 +36,12 @@ export default function Contact() {
 
   const checkForm = () => {
     if (!name || !lastName || !email || !subject || !message) {
-      setResult("Please fill in all fields.");
+      setResult(t("contact.form.validation.fillAll"));
       return false;
     }
 
     if (!isValidEmail(email)) {
-      setResult("Please enter a valid email address.");
+      setResult(t("contact.form.validation_invalidEmail"));
       return false;
     }
 
@@ -53,7 +55,7 @@ export default function Contact() {
       return;
     }
 
-    setResult("Sending...");
+    setResult(t("contact.form.button_sending"));
 
     const formData = new FormData();
     formData.append("access_key", accessKey);
@@ -72,32 +74,30 @@ export default function Contact() {
       const data = await response.json();
 
       if (data.success) {
-        setResult("Form Submitted Successfully");
+        setResult(t("contact.form.success"));
         setName("");
         setLastName("");
         setEmail("");
         setSubject("");
         setMessage("");
       } else {
-        console.error("Submission error:", data);
-        setResult(data.message || "Submission failed");
+        setResult(data.message || t("contact.form.error_generic"));
       }
     } catch (error) {
-      console.error("Network error:", error);
-      setResult("Network error");
+      setResult(t("contact.form.error_network"));
     }
   };
 
   const contactInfo = [
     {
       icon: <Feather name="mail" size={24} color={colors.text} />,
-      label: "Email",
+      label: t("contact.info.email_label"),
       value: "alicihansarac@gmail.com",
       href: "mailto:alicihansarac@gmail.com",
     },
     {
       icon: <Feather name="map-pin" size={24} color={colors.text} />,
-      label: "Location",
+      label: t("contact.info.location_label"),
       value: "Kocaeli, Türkiye",
       href: "",
     },
@@ -106,19 +106,19 @@ export default function Contact() {
   const socialLinks = [
     {
       icon: <Feather name="github" size={24} color={colors.text} />,
-      label: "GitHub",
+      label: t("contact.social.github"),
       href: "https://github.com/acs027",
       username: "@acs027",
     },
     {
       icon: <Feather name="linkedin" size={24} color={colors.text} />,
-      label: "LinkedIn",
+      label: t("contact.social.linkedin"),
       href: "https://www.linkedin.com/in/alicihansarac/",
       username: "/in/alicihansarac",
     },
     {
       icon: <Entypo name="medium" size={24} color={colors.text} />,
-      label: "Medium",
+      label: t("contact.social.medium"),
       href: "https://medium.com/@alicihansarac",
       username: "@alicihansarac",
     },
@@ -128,11 +128,8 @@ export default function Contact() {
     <ThemedView
       style={[styles.container, { backgroundColor: colors.background }]}
     >
-      <ThemedText style={styles.header}>Let's Work Together</ThemedText>
-      <ThemedText style={styles.subheader}>
-        Have a project in mind? I'd love to hear about it and discuss how we can
-        bring your iOS app idea to life.
-      </ThemedText>
+      <ThemedText style={styles.header}>{t("contact.header")}</ThemedText>
+      <ThemedText style={styles.subheader}>{t("contact.subheader")}</ThemedText>
 
       <ThemedView
         color={colors.background}
@@ -146,18 +143,22 @@ export default function Contact() {
           color={colors.projectCardBg}
           style={[styles.card, isLargeScreen && styles.cardHalf]}
         >
-          <ThemedText style={styles.cardTitle}>Send me a message</ThemedText>
+          <ThemedText style={styles.cardTitle}>
+            {t("contact.form.title")}
+          </ThemedText>
 
           <ThemedView color={colors.projectCardBg} style={styles.row}>
             {/* First Name */}
             <ThemedView color={colors.projectCardBg} style={{ width: "50%" }}>
-              <ThemedText style={styles.inputLabel}> First Name </ThemedText>
+              <ThemedText style={styles.inputLabel}>
+                {t("contact.form.firstName")}
+              </ThemedText>
               <TextInput
                 style={[
                   styles.input,
                   { backgroundColor: colors.textInputBgColor },
                 ]}
-                placeholder="Deckard"
+                placeholder={t("contact.form.firstName_placeholder")}
                 placeholderTextColor={colors.placeholder}
                 onChangeText={setName}
                 value={name}
@@ -166,13 +167,16 @@ export default function Contact() {
 
             {/* Last Name */}
             <ThemedView color={colors.projectCardBg} style={{ width: "50%" }}>
-              <ThemedText style={styles.inputLabel}> Last Name </ThemedText>
+              <ThemedText style={styles.inputLabel}>
+                {" "}
+                {t("contact.form.lastName")}{" "}
+              </ThemedText>
               <TextInput
                 style={[
                   styles.input,
                   { backgroundColor: colors.textInputBgColor },
                 ]}
-                placeholder="Cain"
+                placeholder={t("contact.form.lastName_placeholder")}
                 placeholderTextColor={colors.placeholder}
                 value={lastName}
                 onChangeText={setLastName}
@@ -181,14 +185,17 @@ export default function Contact() {
           </ThemedView>
 
           {/* Email */}
-          <ThemedText style={styles.inputLabel}> Email </ThemedText>
+          <ThemedText style={styles.inputLabel}>
+            {" "}
+            {t("contact.form.email")}{" "}
+          </ThemedText>
           <ThemedView color={colors.projectCardBg} style={styles.row}>
             <TextInput
               style={[
                 styles.input,
                 { backgroundColor: colors.textInputBgColor },
               ]}
-              placeholder="deckardcain@gmail.com"
+              placeholder={t("contact.form.email_placeholder")}
               placeholderTextColor={colors.placeholder}
               keyboardType="email-address"
               value={email}
@@ -197,14 +204,17 @@ export default function Contact() {
           </ThemedView>
 
           {/* Subject */}
-          <ThemedText style={styles.inputLabel}> Subject </ThemedText>
+          <ThemedText style={styles.inputLabel}>
+            {" "}
+            {t("contact.form.subject")}{" "}
+          </ThemedText>
           <ThemedView color={colors.projectCardBg} style={styles.row}>
             <TextInput
               style={[
                 styles.input,
                 { backgroundColor: colors.textInputBgColor },
               ]}
-              placeholder="..."
+              placeholder={t("contact.form.subject_placeholder")}
               placeholderTextColor={colors.placeholder}
               value={subject}
               onChangeText={setSubject}
@@ -212,14 +222,17 @@ export default function Contact() {
           </ThemedView>
 
           {/* Message */}
-          <ThemedText style={styles.inputLabel}> Message </ThemedText>
+          <ThemedText style={styles.inputLabel}>
+            {" "}
+            {t("contact.form.message")}{" "}
+          </ThemedText>
           <ThemedView style={styles.row}>
             <TextInput
               style={[
                 styles.input,
                 { backgroundColor: colors.textInputBgColor, height: 120 },
               ]}
-              placeholder="..."
+              placeholder={t("contact.form.message_placeholder")}
               placeholderTextColor={colors.placeholder}
               multiline
               value={message}
@@ -240,12 +253,11 @@ export default function Contact() {
 
         {/* Contact Info */}
         <ThemedView style={[styles.card, isLargeScreen && styles.cardHalf]}>
-          <ThemedText style={styles.cardTitle}>Get in touch</ThemedText>
+          <ThemedText style={styles.cardTitle}>
+            {t("contact.info.title")}
+          </ThemedText>
           <ThemedText style={styles.subheader}>
-            I'm always excited to work on new iOS projects and collaborate with
-            amazing teams. Whether you need a new app built from scratch or want
-            to improve an existing one, let's discuss how I can help bring your
-            vision to life.
+            {t("contact.info.description")}
           </ThemedText>
 
           {contactInfo.map((info, index) => (
@@ -262,7 +274,9 @@ export default function Contact() {
             </TouchableOpacity>
           ))}
 
-          <ThemedText style={styles.socialTitle}>Follow me</ThemedText>
+          <ThemedText style={styles.socialTitle}>
+            {t("contact.social.title")}
+          </ThemedText>
           {socialLinks.map((social, index) => (
             <TouchableOpacity
               key={index}

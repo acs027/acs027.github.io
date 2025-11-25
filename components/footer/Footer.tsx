@@ -4,14 +4,17 @@ import { Feather, Entypo } from "@expo/vector-icons";
 import { useThemeColors } from "../utils/useThemeColors";
 import { ThemedView } from "../utils/ThemedView";
 import { ThemedText } from "../utils/ThemedText";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
   const colors = useThemeColors();
+  const { t } = useTranslation();
+
   return (
     <ThemedView style={styles.container} color={colors.card}>
       <View style={styles.left}>
-        <ThemedText style={styles.name}>Ali Cihan Saraç</ThemedText>
-        <ThemedText style={styles.title}>iOS Developer</ThemedText>
+        <ThemedText style={styles.name}>{t("footer.name")}</ThemedText>
+        <ThemedText style={styles.title}>{t("footer.title")}</ThemedText>
       </View>
 
       <View style={styles.right}>

@@ -47,7 +47,11 @@ export function ExpandableInfo({
   }, [isHovered]);
 
   const containerStyle = useAnimatedStyle(() => {
-    const maxWidth = Math.max(SCREEN_WIDTH - HORIZONTAL_PADDING * 3, 380);
+    // const maxWidth = Math.max(
+    //   SCREEN_WIDTH - HORIZONTAL_PADDING * 3 - 45,
+    //   380 - 45
+    // );
+    const maxWidth = 300;
     return {
       width: interpolate(expanded.value, [0, 1], [BUTTON_SIZE, maxWidth]),
       height: BUTTON_SIZE,
@@ -124,7 +128,7 @@ const styles = StyleSheet.create({
     ...Platform.select({
       web: {
         backdropFilter: "blur(8px)", // web only
-        boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
+        boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.35)",
       },
       ios: {
         shadowColor: "#000",
