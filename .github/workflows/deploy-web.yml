@@ -34,7 +34,7 @@ jobs:
         run: cp ./app/app-ads.txt ./dist/app-ads.txt
 
       - name: Add CNAME
-      - run: echo "www.alicihansarac.com" > dist/CNAME
+        run: echo "www.alicihansarac.com" > dist/CNAME
 
       - name: Set Git identity
         run: |
