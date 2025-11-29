@@ -33,7 +33,7 @@ export default function HomeScreen({ section }: { section?: string }) {
 
   const [showToast, setShowToast] = useState(false);
   const colors = useThemeColors();
-  document.title = "aCsPortfolio";
+  document.title = "aCs";
 
   const navigation = useNavigation();
 

@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import HomeScreen from ".";
 
 export default function ProjectsScreen() {
-  document.title = "aCsPortfolio";
+  document.title = "aCs";
 
   return <HomeScreen section="projects" />;
   /*<>
