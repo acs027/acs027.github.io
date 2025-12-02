@@ -65,9 +65,13 @@
     "title": "SKILLS",
     "Programming Languages": "Programming Languages",
     "Frameworks": "Frameworks",
-    "Architecture & Principles": "Architecture & Principles",
+    "Architectures & Principles": "Architecture & Principles",
     "Tools & Technologies": "Tools & Technologies",
-    "Other": "Other"
+    "Other": "Other",
+    "iOS Frameworks & UI": "iOS Frameworks & UI",
+    "Data, Networking & Services": "Data, Networking & Services",
+    "Developer Tools": "Developer Tools",
+    "Design Tools": "Design Tools"
   },
 
    "contact": {

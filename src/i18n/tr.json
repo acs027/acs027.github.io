@@ -68,7 +68,12 @@
     "Frameworks": "Frameworkler",
     "Architecture & Principles": "Mimari & Prensipler",
     "Tools & Technologies": "Araçlar & Teknolojiler",
-    "Other": "Diğer"
+    "Other": "Diğer",
+    "Architectures & Principles": "Mimari & Prensipler",
+    "iOS Frameworks & UI": "iOS Frameworkleri & UI",
+    "Data, Networking & Services": "Data, Networking & Servisler",
+    "Developer Tools": "Geliştirici Araçları",
+    "Design Tools": "Tasarım Araçları"
   },
 
   "contact": {

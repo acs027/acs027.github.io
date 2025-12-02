@@ -14,6 +14,7 @@ import { ExpoIcon } from '@/components/icons/skills/ExpoIcon';
 import { AdMobIcon } from '@/components/icons/skills/AdMob';
 import { GithubActionsIcon } from '@/components/icons/skills/GithubActions';
 import { FastlaneIcon } from '@/components/icons/skills/FastlaneIcon';
+import { JiraIcon } from '@/components/icons/skills/JiraIcon';
 
 export type Skill = {
   name: string;
@@ -29,156 +30,67 @@ export const SKILLS: SkillCategory[] = [
   {
     title: 'Programming Languages',
     skills: [
-      { 
-        name: 'Swift',
-        Icon: SwiftIcon
-      },
-      { 
-        name: 'Javascript',
-        Icon: JavaScriptIcon
-      },
-      { 
-        name: 'Typescript',
-        Icon: TypescriptIcon
-      },
-      { 
-        name: 'Python', 
-        Icon: PythonIcon
-      },
-    ]
+      { name: 'Swift', Icon: SwiftIcon },
+      { name: 'JavaScript', Icon: JavaScriptIcon },
+      { name: 'TypeScript', Icon: TypescriptIcon },
+      { name: 'Python', Icon: PythonIcon },
+    ],
   },
-  {
-    title: 'Frameworks',
-    skills: [
-      { 
-        name: 'SwiftUI',
-        Icon: SwiftIcon
-      },
-      { 
-        name: 'UIKit',
-        Icon: UIKitIcon
-      },
-      { 
-        name: 'React',
-        Icon: ReactIcon
-      },
-             { 
-        name: 'Expo', 
-        Icon: ExpoIcon
-      },
-        { 
-        name: 'MapKit', 
-        Icon: SwiftIcon
-      },
-        { 
-        name: 'WebKit', 
-        Icon: SwiftIcon
-      },
-      { 
-        name: 'SnapKit', 
-        Icon: SwiftIcon
-      },
-    ]
-  },
-  {
-    title: 'Architecture & Principles',
-    skills: [
-      {
-        name: 'MVVM',
-        Icon: SwiftIcon
-      },
-      {
-        name: 'VIPER',
-        Icon: SwiftIcon
-      },
-      {
-        name: 'Modular Architecture',
-        Icon: SwiftIcon
-      },
-      {
-        name: 'SOLID Principles',
-        Icon: SwiftIcon
-      },
-    ]
-  },
-  {
-    title: 'Tools & Technologies',
-    skills: [
-        { 
-        name: 'XCode', 
-        Icon: XCodeIcon
-      },
-      { 
-        name: 'Git', 
-        Icon: GitIcon
-      },
-       { 
-        name: 'Github Actions', 
-        Icon: GithubActionsIcon
-      },
-       { 
-        name: 'Fastlane', 
-        Icon: FastlaneIcon
-      },
 
-    
-         { 
-        name: 'CoreData',
-        Icon: UIKitIcon
-      },
-         { 
-        name: 'SwiftData',
-        Icon: UIKitIcon
-      },
-
-        {
-        name: 'Alamofire',
-        Icon: SwiftIcon
-      },
-         { 
-        name: 'Firebase', 
-        Icon: FirebaseIcon
-      },
-
- 
-          { 
-        name: 'AdMob', 
-        Icon: AdMobIcon
-      },
-       { 
-        name: 'VSCode', 
-        Icon: VSCodeIcon
-      },
-     
-      { 
-        name: 'Adobe Photoshop', 
-        Icon: PhotoshopIcon
-      },
-      { 
-        name: 'Adobe Illustrator', 
-        Icon: IllustratorIcon
-      },
-    ]
-  },
   {
-    title: 'Other',
+    title: 'iOS Frameworks & UI',
     skills: [
-                   { 
-        name: 'RESTful APIs', 
-        Icon: SwiftIcon
-      },
-                   { 
-        name: 'Combine', 
-        Icon: SwiftIcon
-      },
-                   { 
-        name: 'Programmatic UI', 
-        Icon: SwiftIcon
-      },
-                 { 
-        name: 'App Intents', 
-        Icon: SwiftIcon
-      },
-    ]
-  }
-]; 
+      { name: 'SwiftUI', Icon: SwiftIcon },
+      { name: 'UIKit', Icon: UIKitIcon },
+      { name: 'Combine', Icon: SwiftIcon },
+      { name: 'MapKit', Icon: SwiftIcon },
+      { name: 'WebKit', Icon: SwiftIcon },
+      { name: 'SnapKit', Icon: SwiftIcon },
+      { name: 'Programmatic UI', Icon: SwiftIcon },
+      { name: 'App Intents', Icon: SwiftIcon },
+    ],
+  },
+
+  {
+    title: 'Architectures & Principles',
+    skills: [
+      { name: 'MVVM', Icon: SwiftIcon },
+      { name: 'VIPER', Icon: SwiftIcon },
+      { name: 'Modular Architecture', Icon: SwiftIcon },
+      { name: 'SOLID Principles', Icon: SwiftIcon },
+    ],
+  },
+
+  {
+    title: 'Data, Networking & Services',
+    skills: [
+      { name: 'CoreData', Icon: UIKitIcon },
+      { name: 'SwiftData', Icon: UIKitIcon },
+      { name: 'RESTful APIs', Icon: SwiftIcon },
+      { name: 'Alamofire', Icon: SwiftIcon },
+      { name: 'Firebase', Icon: FirebaseIcon },
+      { name: 'AdMob', Icon: AdMobIcon }, // ✔ moved here
+    ],
+  },
+
+  {
+    title: 'Developer Tools',
+    skills: [
+      { name: 'Xcode', Icon: XCodeIcon },
+      { name: 'Git', Icon: GitIcon },
+      { name: 'GitHub Actions', Icon: GithubActionsIcon },
+      { name: 'Fastlane', Icon: FastlaneIcon },
+      { name: 'SPM', Icon: SwiftIcon },
+      { name: 'VSCode', Icon: VSCodeIcon },
+      { name: 'Jira', Icon: JiraIcon },
+    ],
+  },
+
+  {
+    title: 'Design Tools',
+    skills: [
+      { name: 'Adobe Photoshop', Icon: PhotoshopIcon },
+      { name: 'Adobe Illustrator', Icon: IllustratorIcon },
+    ],
+  },
+];
