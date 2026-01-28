@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  Image,
   StyleSheet,
   View,
   ScrollView,
@@ -8,6 +7,7 @@ import {
   NativeScrollEvent,
   useWindowDimensions,
 } from "react-native";
+import { Image } from "expo-image";
 import { ExpandableInfo } from "@/components/utils/ExpandableInfo";
 import Projects from "@/components/project/Projects";
 import SkillsView from "@/components/skill/SkillsView";

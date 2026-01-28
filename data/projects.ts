@@ -65,7 +65,7 @@ export const projects: Project[] = [
   {
     title: "Aircraft Identifier",
     repoLink: "https://github.com/acs027/AircraftIdentifier",
-    testFlightLink: "https://testflight.apple.com/join/BBa8QBGy",
+    //testFlightLink: "https://testflight.apple.com/join/BBa8QBGy",
     description:
       "An iOS application for identifying aircraft from photos using AI-powered image analysis.",
     shortDescription:"An iOS application for identifying aircraft from photos using AI-powered image analysis.",

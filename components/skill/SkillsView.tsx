@@ -77,10 +77,10 @@ const styles = StyleSheet.create({
     maxWidth: 1000,
   },
   skillContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
-    alignContent: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
+    // alignSelf: "center",
+    // alignContent: "center",
     width: "100%", // Ensures proper centering
     paddingBottom: 20,
   },
@@ -88,10 +88,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 12,
-    justifyContent: "center", // Ensures new rows start from the left
-    alignItems: "center",
-    alignSelf: "center",
-    alignContent: "center", // Helps in multi-line centering
+    // justifyContent: "center", // Ensures new rows start from the left
+    // alignItems: "center",
+    // alignSelf: "center",
+    // alignContent: "center", // Helps in multi-line centering
   },
   skillCategory: {
     marginTop: 24,

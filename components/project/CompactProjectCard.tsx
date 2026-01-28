@@ -1,5 +1,6 @@
 import React from "react";
-import { Image, StyleSheet, View, Platform } from "react-native";
+import { StyleSheet, View, Platform } from "react-native";
+import { Image } from "expo-image";
 import { ThemedView } from "../utils/ThemedView";
 import { ThemedText } from "../utils/ThemedText";
 import { ExternalLink } from "../utils/ExternalLink";

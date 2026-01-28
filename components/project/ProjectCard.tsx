@@ -1,5 +1,6 @@
 import React from "react";
-import { Image, StyleSheet, useWindowDimensions, View } from "react-native";
+import { StyleSheet, useWindowDimensions, View } from "react-native";
+import { Image } from "expo-image";
 import { ThemedView } from "../utils/ThemedView";
 import { ThemedText } from "../utils/ThemedText";
 import { ExternalLink } from "../utils/ExternalLink";
@@ -128,6 +129,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                             width < 750 ? (200 * 9) / 19.5 : (400 * 9) / 19.5,
                         },
                       ]}
+                      
                     />
                   </ThemedView>
                 );
