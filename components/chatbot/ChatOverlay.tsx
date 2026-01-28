@@ -12,6 +12,7 @@ import {
 import { ThemedView } from "../utils/ThemedView";
 import { useThemeColors } from "../utils/useThemeColors";
 import { useTranslation } from "react-i18next";
+import { renderTextWithLinks } from "../utils/LinkTextHelper";
 
 export default function ChatOverlay() {
   const [open, setOpen] = useState(false);
@@ -173,6 +174,18 @@ export default function ChatOverlay() {
                 }}
               >
                 <Text
+                    style={{
+                      fontSize: 15,
+                      lineHeight: 20,
+                    }}
+                  >
+                    {renderTextWithLinks(
+                      msg.text,
+                      msg.from === "user" ? "#fff" : "#000",
+                      "#1e90ff" // link color
+                    )}
+</Text>
+                {/* <Text
                   style={{
                     color: msg.from === "user" ? "#fff" : "#000",
                     fontSize: 15,
@@ -180,7 +193,7 @@ export default function ChatOverlay() {
                   }}
                 >
                   {msg.text}
-                </Text>
+                </Text> */}
               </View>
             ))}
 
