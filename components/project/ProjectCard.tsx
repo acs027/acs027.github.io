@@ -1,15 +1,12 @@
-import React from "react";
-import { StyleSheet, useWindowDimensions, View } from "react-native";
+import { StyleSheet, useWindowDimensions, View, Platform, Pressable } from "react-native";
 import { Image } from "expo-image";
-import { ThemedView } from "../utils/ThemedView";
 import { ThemedText } from "../utils/ThemedText";
 import { ExternalLink } from "../utils/ExternalLink";
-import { Platform } from "react-native";
-import { GithubIcon } from "../icons/social/GithubIcon";
-import { AppStoreDownloadSVG } from "../icons/social/AppStoreDownload";
-import { ShadowStyle } from "../utils/ShadowStyle";
 import { useThemeColors } from "../utils/useThemeColors";
 import TestFlightButton from "../utils/TestFlightButton";
+import { Ionicons } from "@expo/vector-icons";
+import { ThemedView } from "../utils/ThemedView";
+import { useTranslation } from "react-i18next";
 
 type ProjectCardProps = {
   title: string;
@@ -23,91 +20,29 @@ type ProjectCardProps = {
 };
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
-  title,
-  repoLink,
-  appStoreLink,
-  testFlightLink,
-  description,
-  techStack,
-  images,
-  gif,
+  title, repoLink, appStoreLink, testFlightLink, description, techStack, images, gif
 }) => {
+    const colors = useThemeColors();
   const { width } = useWindowDimensions();
-  const colors = useThemeColors();
+  const isMobile = width < 600;
+  const { t } = useTranslation();
+
+  // Combine media
+  const mainMedia = gif?.[0] || images?.[0];
+
   return (
-    <ThemedView
-      color={colors.card}
-      style={[
-        styles.projectCard,
-        ShadowStyle(),
-        width < 1000 && { width: "95%" },
-      ]}
-    >
-      <ThemedView color={colors.card} style={[styles.projectContent]}>
-        <ThemedView>
-          <ThemedView
-            color={colors.card}
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              gap: 8,
-            }}
-          >
-            <ThemedText type="title">{title}</ThemedText>
-
-            <View
-              style={{
-                flexDirection: "row",
-                gap: 10,
-                flexShrink: 0,
-                flexGrow: 1,
-                justifyContent: "flex-end",
-              }}
-            >
-              {appStoreLink && (
-                <ExternalLink href={appStoreLink}>
-                  <AppStoreDownloadSVG size={40} />
-                </ExternalLink>
-              )}
-
-              {testFlightLink && (
-                <TestFlightButton size={40} link={testFlightLink} />
-              )}
-
-              {repoLink && (
-                <ExternalLink href={repoLink}>
-                  <GithubIcon size={40} effectValue={1} />
-                </ExternalLink>
-              )}
-            </View>
-          </ThemedView>
-        </ThemedView>
-
-        <ThemedText>{description}</ThemedText>
-
-        {techStack && (
-          <ThemedView color={colors.card}>
-            <ThemedText type="defaultSemiBold">Tech Used</ThemedText>
-            <View style={styles.techStackContainer}>
-              {techStack.map((tech, index) => (
-                <View
-                  key={index}
-                  style={[
-                    styles.techBadge,
-                    { backgroundColor: colors.skillBadgeBgColor },
-                  ]}
-                >
-                  <ThemedText style={styles.techBadgeText}>{tech}</ThemedText>
-                </View>
-              ))}
-            </View>
-          </ThemedView>
-        )}
-
-        <ThemedView color={colors.card} style={styles.projectImageContainer}>
-          <ThemedView style={styles.deviceImagesContainer}>
+    <View style={styles.cardContainer}>
+      <Pressable 
+        style={({ pressed, hovered }) => [
+          styles.bentoCard,
+          hovered && Platform.OS === 'web' && styles.cardHovered,
+          pressed && { transform: [{ scale: 0.98 }] }
+        ]}
+      >
+        {/* Visual Top Section - Clean Single Background Color */}
+        {/* <View style={styles.mediaContainer}>
+          <View style={styles.phoneMockup}> */}
+               <ThemedView style={styles.deviceImagesContainer}>
             {images &&
               images.map((img, index) => {
                 const isWebUri = typeof img === "string";
@@ -115,7 +50,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
                 return (
                   <ThemedView
-                    color={colors.card}
+                    color={colors.background}
                     key={index}
                     style={styles.deviceImagesContent}
                   >
@@ -137,7 +72,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {gif &&
               gif.map((src, index) => (
                 <ThemedView
-                  color={colors.card}
+                  color={colors.background}
                   key={index}
                   style={styles.deviceImagesContent}
                 >
@@ -155,23 +90,150 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 </ThemedView>
               ))}
           </ThemedView>
-        </ThemedView>
-      </ThemedView>
-    </ThemedView>
+          {/* </View>
+        </View> */}
+
+        {/* Content Bottom Section */}
+        <View style={styles.contentSection}>
+          <View style={styles.techWrapper}>
+            {techStack?.map((tech, i) => (
+              <View key={i} style={styles.skillTag}>
+                <ThemedText style={styles.skillTagText}>{tech}</ThemedText>
+              </View>
+            ))}
+          </View>
+
+          <ThemedText style={styles.projectTitle}>{title}</ThemedText>
+          <ThemedText style={styles.descriptionText}>{description}</ThemedText>
+
+          <View style={styles.footer}>
+            <ExternalLink href={repoLink || "#"} style={styles.caseStudyLink}>
+              <ThemedText style={styles.caseStudyText}>
+                {t("projects.viewSource")}
+              </ThemedText>
+            </ExternalLink>
+            
+            <View style={styles.iconGroup}>
+              {testFlightLink && <TestFlightButton size={24} link={testFlightLink} />}
+              {appStoreLink && (
+                <ExternalLink href={appStoreLink}>
+                  <Ionicons name="logo-apple" size={22} color="#636366" />
+                </ExternalLink>
+              )}
+            </View>
+          </View>
+        </View>
+      </Pressable>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  projectCard: {
-    padding: 16,
-    borderRadius: 12,
-    width: 1000,
+  cardContainer: {
+    width: '100%',
+    marginBottom: 20,
   },
-  projectContent: {
+  bentoCard: {
+    borderRadius: 24,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: 'rgba(28, 28, 30, 0.7)',
+    overflow: "hidden",
+    ...Platform.select({
+      web: {
+        backdropFilter: 'blur(12px)',
+        transition: 'all 0.4s ease',
+      }
+    })
+  },
+  cardHovered: {
+    borderColor: "#007AFF", 
+    transform: [{ translateY: -5 }],
+  },
+  mediaContainer: {
+    height: 280, 
+    
+    backgroundColor: "#09090b", // Pure Zinc-950 background
+    alignItems: 'center',
+    justifyContent: 'center', // Centered alignment
+    overflow: 'hidden',
+  },
+  phoneMockup: {
+    // width: 150, // More prominent frame
+    aspectRatio: 1/2, // Taller aspect ratio for modern phones
+    height: 300,
+    
+    backgroundColor: "#18181b", 
+    borderRadius: 36, 
+    // borderWidth: 3,
+    borderColor: "#27272a", 
+    marginTop: 100, // Pushes it "down" so it stays partially hidden at bottom
+    zIndex: 2,
+    overflow: 'hidden',
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 15 },
+    shadowOpacity: 0.6,
+    shadowRadius: 25,
+  },
+  screenshot: {
+    width: '100%',
+    height: '100%',
+  },
+  contentSection: {
+    padding: 24,
+  },
+  techWrapper: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 8,
-    padding: 10,
+    marginBottom: 12,
   },
-  deviceImagesContainer: {
+  skillTag: {
+    backgroundColor: "rgba(255, 255, 255, 0.08)",
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.05)",
+  },
+  skillTagText: {
+    color: "#FFFFFF",
+    fontSize: 11,
+    fontWeight: "600",
+  },
+  projectTitle: {
+    fontSize: 24,
+    fontWeight: "700",
+    color: "#FFFFFF",
+    marginBottom: 8,
+    letterSpacing: -0.5,
+  },
+  descriptionText: {
+    fontSize: 14,
+    lineHeight: 20,
+    color: "#A1A1AA", 
+    marginBottom: 20,
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 'auto',
+  },
+  caseStudyLink: {
+    paddingVertical: 4,
+  },
+  caseStudyText: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#007AFF", // Target UI iOS Blue
+  },
+  iconGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+    deviceImagesContainer: {
     marginVertical: 12,
     flexDirection: "row",
     flexWrap: "wrap",
@@ -196,28 +258,6 @@ const styles = StyleSheet.create({
     aspectRatio: 9 / 19.5,
     borderRadius: 16,
     borderWidth: StyleSheet.hairlineWidth,
-  },
-
-  projectImageContainer: {
-    alignItems: "center",
-  },
-
-  techStackContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 8,
-    marginTop: 4,
-  },
-
-  techBadge: {
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 12,
-    backgroundColor: "#eee", // fallback
-  },
-
-  techBadgeText: {
-    fontSize: 13,
   },
 });
 

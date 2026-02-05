@@ -10,12 +10,7 @@ interface SocialViewProps {
   setShowToast: (value: boolean) => void;
 }
 
-const SocialView: React.FC<SocialViewProps> = ({ setShowToast }) => {
-  const handleCopyPhone = () => {
-    const phoneNumber = "1";
-    Clipboard.setString(phoneNumber);
-    setShowToast(true);
-  };
+export default function SocialView() {
 
   const colors = useThemeColors();
 
@@ -74,19 +69,6 @@ const SocialView: React.FC<SocialViewProps> = ({ setShowToast }) => {
             hoverColor={socialIconHoverColor}
           />
         </ExternalLink>
-
-        {/*
-                <Pressable 
-                    onPress={handleCopyPhone}
-                    style={({ pressed }) => [
-                        styles.connectCard,
-                        pressed && styles.pressed,
-                        styles.cursorPointer,
-                    ]}
-                >
-                    <PhoneIcon size={32} />
-                </Pressable>
-                */}
       </ThemedView>
     </>
   );
@@ -121,5 +103,3 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
 });
-
-export default SocialView;

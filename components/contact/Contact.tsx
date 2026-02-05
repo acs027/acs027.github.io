@@ -4,27 +4,27 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  ScrollView,
   useWindowDimensions,
+  View,
 } from "react-native";
 import { Entypo, Feather } from "@expo/vector-icons";
-import { useThemeColors } from "../utils/useThemeColors"; // Optional: replace with your theme system
+import { useThemeColors } from "../utils/useThemeColors";
 import { ThemedText } from "../utils/ThemedText";
 import { ThemedView } from "../utils/ThemedView";
 import { useTranslation } from "react-i18next";
 
 export default function Contact() {
   const { width } = useWindowDimensions();
-  const isLargeScreen = width >= 750;
+  const isLargeScreen = width >= 850;
   const colors = useThemeColors();
   const { t } = useTranslation();
 
-  const accessKey = "371da1cf-d6e9-485e-928d-ebce5f9dc12c"; //Public Key
+  const accessKey = "371da1cf-d6e9-485e-928d-ebce5f9dc12c";
 
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
+  const [subject, setSubject] = useState("aCsWEBForm");
   const [message, setMessage] = useState("");
   const [result, setResult] = useState(t("contact.form.button_send"));
   const [isInvalidInput, setIsInvalidInput] = useState(false);
@@ -39,28 +39,23 @@ export default function Contact() {
       setResult(t("contact.form.validation.fillAll"));
       return false;
     }
-
     if (!isValidEmail(email)) {
       setResult(t("contact.form.validation_invalidEmail"));
       return false;
     }
-
     return true;
   };
 
   const handleSubmit = async () => {
     const isFormReady = checkForm();
     setIsInvalidInput(!isFormReady);
-    if (!isFormReady) {
-      return;
-    }
+    if (!isFormReady) return;
 
     setResult(t("contact.form.button_sending"));
 
     const formData = new FormData();
     formData.append("access_key", accessKey);
-    formData.append("name", name);
-    formData.append("lastName", lastName);
+    formData.append("name", `${name} ${lastName}`);
     formData.append("email", email);
     formData.append("subject", subject);
     formData.append("message", message);
@@ -70,16 +65,10 @@ export default function Contact() {
         method: "POST",
         body: formData,
       });
-
       const data = await response.json();
-
       if (data.success) {
         setResult(t("contact.form.success"));
-        setName("");
-        setLastName("");
-        setEmail("");
-        setSubject("");
-        setMessage("");
+        setName(""); setLastName(""); setEmail(""); setSubject("aCsWEBForm"); setMessage("");
       } else {
         setResult(data.message || t("contact.form.error_generic"));
       }
@@ -88,306 +77,218 @@ export default function Contact() {
     }
   };
 
-  const contactInfo = [
-    {
-      icon: <Feather name="mail" size={24} color={colors.text} />,
-      label: t("contact.info.email_label"),
-      value: "alicihansarac@gmail.com",
-      href: "mailto:alicihansarac@gmail.com",
-    },
-    {
-      icon: <Feather name="map-pin" size={24} color={colors.text} />,
-      label: t("contact.info.location_label"),
-      value: "Kocaeli, Türkiye",
-      href: "",
-    },
-  ];
-
-  const socialLinks = [
-    {
-      icon: <Feather name="github" size={24} color={colors.text} />,
-      label: t("contact.social.github"),
-      href: "https://github.com/acs027",
-      username: "@acs027",
-    },
-    {
-      icon: <Feather name="linkedin" size={24} color={colors.text} />,
-      label: t("contact.social.linkedin"),
-      href: "https://www.linkedin.com/in/alicihansarac/",
-      username: "/in/alicihansarac",
-    },
-    {
-      icon: <Entypo name="medium" size={24} color={colors.text} />,
-      label: t("contact.social.medium"),
-      href: "https://medium.com/@alicihansarac",
-      username: "@alicihansarac",
-    },
-  ];
-
   return (
-    <ThemedView
-      style={[styles.container, { backgroundColor: colors.background }]}
-    >
-      <ThemedText style={styles.header}>{t("contact.header")}</ThemedText>
-      <ThemedText style={styles.subheader}>{t("contact.subheader")}</ThemedText>
+    <ThemedView color={colors.background} style={styles.outerContainer}>
+      <View style={styles.headerWrapper}>
+        <ThemedText style={styles.sectionLabel}>GET IN TOUCH</ThemedText>
+        <ThemedText style={styles.mainTitle}>{t("contact.header")}</ThemedText>
+      </View>
 
-      <ThemedView
-        color={colors.background}
-        style={[
-          styles.contentWrapper,
-          { flexDirection: isLargeScreen ? "row" : "column" },
-        ]}
-      >
-        {/* Contact Form */}
-        <ThemedView
-          color={colors.projectCardBg}
-          style={[styles.card, isLargeScreen && styles.cardHalf]}
-        >
-          <ThemedText style={styles.cardTitle}>
-            {t("contact.form.title")}
-          </ThemedText>
+      <View style={[styles.contentWrapper, { flexDirection: isLargeScreen ? "row" : "column" }]}>
+        
+        {/* Left Side: Info & Socials */}
+        <View style={[styles.infoSide, isLargeScreen && { flex: 0.7 }]}>
+           <View style={styles.glassCard}>
+             <ThemedText style={styles.cardHeaderSmall}>CONTACT INFO</ThemedText>
+             
+             <TouchableOpacity style={styles.systemRow} onPress={() => Linking.openURL("mailto:alicihansarac@gmail.com")}>
+               <View style={[styles.iconBox, { backgroundColor: '#007AFF' }]}><Feather name="mail" size={18} color="white" /></View>
+               <View style={styles.rowTextStack}>
+                 <ThemedText style={styles.rowLabel}>{t("contact.info.email_label")}</ThemedText>
+                 <ThemedText style={styles.rowValue}>alicihansarac@gmail.com</ThemedText>
+               </View>
+             </TouchableOpacity>
 
-          <ThemedView color={colors.projectCardBg} style={styles.row}>
-            {/* First Name */}
-            <ThemedView color={colors.projectCardBg} style={{ width: "50%" }}>
-              <ThemedText style={styles.inputLabel}>
-                {t("contact.form.firstName")}
-              </ThemedText>
-              <TextInput
-                style={[
-                  styles.input,
-                  { backgroundColor: colors.textInputBgColor },
-                ]}
-                placeholder={t("contact.form.firstName_placeholder")}
-                placeholderTextColor={colors.placeholder}
-                onChangeText={setName}
-                value={name}
-              />
-            </ThemedView>
+             <View style={styles.systemRow}>
+               <View style={[styles.iconBox, { backgroundColor: '#34C759' }]}><Feather name="map-pin" size={18} color="white" /></View>
+               <View style={styles.rowTextStack}>
+                 <ThemedText style={styles.rowLabel}>{t("contact.info.location_label")}</ThemedText>
+                 <ThemedText style={styles.rowValue}>Kocaeli, Türkiye</ThemedText>
+               </View>
+             </View>
 
-            {/* Last Name */}
-            <ThemedView color={colors.projectCardBg} style={{ width: "50%" }}>
-              <ThemedText style={styles.inputLabel}>
-                {" "}
-                {t("contact.form.lastName")}{" "}
-              </ThemedText>
-              <TextInput
-                style={[
-                  styles.input,
-                  { backgroundColor: colors.textInputBgColor },
-                ]}
-                placeholder={t("contact.form.lastName_placeholder")}
-                placeholderTextColor={colors.placeholder}
-                value={lastName}
-                onChangeText={setLastName}
-              />
-            </ThemedView>
-          </ThemedView>
+             <ThemedText style={[styles.cardHeaderSmall, { marginTop: 32 }]}>SOCIALS</ThemedText>
+             
+             <TouchableOpacity style={styles.systemRow} onPress={() => Linking.openURL("https://github.com/acs027")}>
+               <View style={[styles.iconBox, { backgroundColor: '#333' }]}><Feather name="github" size={18} color="white" /></View>
+               <ThemedText style={styles.rowValue}>@acs027</ThemedText>
+             </TouchableOpacity>
 
-          {/* Email */}
-          <ThemedText style={styles.inputLabel}>
-            {" "}
-            {t("contact.form.email")}{" "}
-          </ThemedText>
-          <ThemedView color={colors.projectCardBg} style={styles.row}>
-            <TextInput
-              style={[
-                styles.input,
-                { backgroundColor: colors.textInputBgColor },
-              ]}
-              placeholder={t("contact.form.email_placeholder")}
-              placeholderTextColor={colors.placeholder}
+             <TouchableOpacity style={[styles.systemRow, { borderBottomWidth: 0 }]} onPress={() => Linking.openURL("https://linkedin.com/in/alicihansarac")}>
+               <View style={[styles.iconBox, { backgroundColor: '#0077B5' }]}><Feather name="linkedin" size={18} color="white" /></View>
+               <ThemedText style={styles.rowValue}>/in/alicihansarac</ThemedText>
+             </TouchableOpacity>
+           </View>
+        </View>
+
+        {/* Right Side: Contact Form */}
+        <View style={[styles.formSide, isLargeScreen && { flex: 1.3 }]}>
+          <View style={styles.glassCard}>
+            <View style={[styles.inputGrid, { flexDirection: width < 600 ? 'column' : 'row' }]}>
+              <View style={{ flex: 1 }}>
+                <ThemedText style={styles.formLabel}>{t("contact.form.firstName")}</ThemedText>
+                <TextInput 
+                  style={styles.iosInput} 
+                  placeholder={t("contact.form.firstName_placeholder")}
+                  placeholderTextColor="#666"
+                  value={name} onChangeText={setName}
+                />
+              </View>
+              <View style={{ flex: 1 }}>
+                <ThemedText style={styles.formLabel}>{t("contact.form.lastName")}</ThemedText>
+                <TextInput 
+                  style={styles.iosInput} 
+                  placeholder={t("contact.form.lastName_placeholder")}
+                  placeholderTextColor="#666"
+                  value={lastName} onChangeText={setLastName}
+                />
+              </View>
+            </View>
+
+            <ThemedText style={styles.formLabel}>{t("contact.form.email")}</ThemedText>
+            <TextInput 
+              style={styles.iosInput} 
+              placeholder="email@example.com"
+              placeholderTextColor="#666"
               keyboardType="email-address"
-              value={email}
-              onChangeText={setEmail}
+              value={email} onChangeText={setEmail}
             />
-          </ThemedView>
 
-          {/* Subject */}
-          <ThemedText style={styles.inputLabel}>
-            {" "}
-            {t("contact.form.subject")}{" "}
-          </ThemedText>
-          <ThemedView color={colors.projectCardBg} style={styles.row}>
-            <TextInput
-              style={[
-                styles.input,
-                { backgroundColor: colors.textInputBgColor },
-              ]}
-              placeholder={t("contact.form.subject_placeholder")}
-              placeholderTextColor={colors.placeholder}
-              value={subject}
-              onChangeText={setSubject}
-            />
-          </ThemedView>
-
-          {/* Message */}
-          <ThemedText style={styles.inputLabel}>
-            {" "}
-            {t("contact.form.message")}{" "}
-          </ThemedText>
-          <ThemedView style={styles.row}>
-            <TextInput
-              style={[
-                styles.input,
-                { backgroundColor: colors.textInputBgColor, height: 120 },
-              ]}
+            <ThemedText style={styles.formLabel}>{t("contact.form.message")}</ThemedText>
+            <TextInput 
+              style={[styles.iosInput, { height: 120, paddingTop: 12, textAlignVertical: 'top' }]} 
+              multiline 
               placeholder={t("contact.form.message_placeholder")}
-              placeholderTextColor={colors.placeholder}
-              multiline
-              value={message}
-              onChangeText={setMessage}
+              placeholderTextColor="#666"
+              value={message} onChangeText={setMessage}
             />
-          </ThemedView>
 
-          <TouchableOpacity
-            style={[
-              styles.button,
-              { backgroundColor: isInvalidInput ? "#C40233" : "#007AFF" },
-            ]}
-            onPress={handleSubmit}
-          >
-            <ThemedText style={styles.buttonText}>{result}</ThemedText>
-          </TouchableOpacity>
-        </ThemedView>
-
-        {/* Contact Info */}
-        <ThemedView style={[styles.card, isLargeScreen && styles.cardHalf]}>
-          <ThemedText style={styles.cardTitle}>
-            {t("contact.info.title")}
-          </ThemedText>
-          <ThemedText style={styles.subheader}>
-            {t("contact.info.description")}
-          </ThemedText>
-
-          {contactInfo.map((info, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.infoRow}
-              onPress={() => Linking.openURL(info.href)}
+            <TouchableOpacity 
+              activeOpacity={0.8}
+              style={[styles.appleButton, { backgroundColor: isInvalidInput ? "#FF3B30" : "#007AFF" }]}
+              onPress={handleSubmit}
             >
-              {info.icon}
-              <ThemedView style={styles.infoText}>
-                <ThemedText style={styles.infoLabel}>{info.label}</ThemedText>
-                <ThemedText style={styles.infoValue}>{info.value}</ThemedText>
-              </ThemedView>
+              <ThemedText style={styles.buttonText}>{result}</ThemedText>
             </TouchableOpacity>
-          ))}
+          </View>
+        </View>
 
-          <ThemedText style={styles.socialTitle}>
-            {t("contact.social.title")}
-          </ThemedText>
-          {socialLinks.map((social, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.socialRow}
-              onPress={() => Linking.openURL(social.href)}
-            >
-              {social.icon}
-              <ThemedText style={styles.socialText}>
-                {social.username}
-              </ThemedText>
-            </TouchableOpacity>
-          ))}
-        </ThemedView>
-      </ThemedView>
+      </View>
     </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    alignItems: "center",
-    margin: 5,
+  outerContainer: {
+    paddingVertical: 60,
     width: "100%",
-    maxWidth: 1000,
+    alignItems: "center",
   },
-  header: {
-    fontSize: 28,
-    fontWeight: "bold",
+  headerWrapper: {
+    alignItems: "center",
+    marginBottom: 40,
+  },
+  sectionLabel: {
+    fontSize: 12,
+    letterSpacing: 4,
+    color: "#0A84FF",
+    fontWeight: "700",
     marginBottom: 8,
   },
-  subheader: {
-    fontSize: 16,
-    marginBottom: 20,
+  mainTitle: {
+    fontSize: 34,
+    fontWeight: "800",
+    letterSpacing: -1,
+    textAlign: 'center',
   },
   contentWrapper: {
-    justifyContent: "space-between",
-    gap: 24,
-    width: "100%",
+    width: "95%",
+    maxWidth: 1100,
+    gap: 20,
   },
-  card: {
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 24,
-    shadowColor: "#000",
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    elevation: 2,
-    width: "100%",
+  infoSide: {
+    width: '100%',
   },
-  cardHalf: {
-    flex: 1,
-    minWidth: 0,
-    width: "100%",
+  formSide: {
+    width: '100%',
   },
-  cardTitle: {
-    fontSize: 20,
-    fontWeight: "600",
+  glassCard: {
+    backgroundColor: "rgba(28, 28, 30, 0.6)",
+    borderRadius: 24,
+    padding: 24,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.1)",
+  },
+  cardHeaderSmall: {
+    fontSize: 11,
+    fontWeight: "700",
+    color: "#8E8E93",
+    letterSpacing: 1.2,
     marginBottom: 16,
   },
-  row: {
+  systemRow: {
     flexDirection: "row",
-    gap: 8,
-    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 16,
+    paddingVertical: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(255, 255, 255, 0.05)",
   },
-  inputLabel: {
-    fontSize: 14,
-    fontWeight: "600",
-    marginBottom: 12,
+  iconBox: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  input: {
+  rowTextStack: {
     flex: 1,
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 12,
-    marginHorizontal: 4,
   },
-  button: {
+  rowLabel: {
+    fontSize: 12,
+    color: "#8E8E93",
+    fontWeight: "500",
+    marginBottom: 2,
+  },
+  rowValue: {
+    fontSize: 15,
+    fontWeight: "600",
+  },
+  inputGrid: {
+    gap: 12,
+    marginBottom: 4,
+  },
+  formLabel: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: "#8E8E93",
+    marginBottom: 8,
+    paddingLeft: 4,
+  },
+  iosInput: {
+    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    borderRadius: 12,
     padding: 14,
-    borderRadius: 8,
+    fontSize: 15,
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.1)",
+    marginBottom: 16,
+    color: '#FFF',
+  },
+  appleButton: {
+    height: 52,
+    borderRadius: 14,
+    justifyContent: "center",
     alignItems: "center",
     marginTop: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
   },
   buttonText: {
-    fontWeight: "600",
-  },
-  infoRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 12,
-    gap: 12,
-  },
-  infoText: {
-    flexDirection: "column",
-  },
-  infoLabel: {
-    fontWeight: "600",
-  },
-  infoValue: {},
-  socialTitle: {
-    marginTop: 16,
-    fontWeight: "600",
+    color: "#FFF",
+    fontWeight: "700",
     fontSize: 16,
-  },
-  socialRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 10,
-    gap: 12,
-  },
-  socialText: {
-    fontSize: 14,
   },
 });
