@@ -1,4 +1,3 @@
-import React from "react";
 import { StyleSheet, useWindowDimensions, View, Platform, Pressable } from "react-native";
 import { Image } from "expo-image";
 import { ThemedText } from "../utils/ThemedText";
@@ -7,6 +6,7 @@ import { useThemeColors } from "../utils/useThemeColors";
 import TestFlightButton from "../utils/TestFlightButton";
 import { Ionicons } from "@expo/vector-icons";
 import { ThemedView } from "../utils/ThemedView";
+import { useTranslation } from "react-i18next";
 
 type ProjectCardProps = {
   title: string;
@@ -25,6 +25,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     const colors = useThemeColors();
   const { width } = useWindowDimensions();
   const isMobile = width < 600;
+  const { t } = useTranslation();
 
   // Combine media
   const mainMedia = gif?.[0] || images?.[0];
@@ -108,7 +109,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <View style={styles.footer}>
             <ExternalLink href={repoLink || "#"} style={styles.caseStudyLink}>
               <ThemedText style={styles.caseStudyText}>
-                {repoLink ? "View Source →" : "Case Study →"}
+                {t("projects.viewSource")}
               </ThemedText>
             </ExternalLink>
             

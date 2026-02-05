@@ -5,6 +5,7 @@ import { ThemedText } from "../utils/ThemedText";
 import { HelloWave } from "../utils/HelloWave";
 import { useThemeColors } from "../utils/useThemeColors";
 import { useTranslation } from "react-i18next";
+import SocialView from "../social/SocialView";
 
 const AboutMe: React.FC = () => {
   const colors = useThemeColors();
@@ -55,14 +56,16 @@ const AboutMe: React.FC = () => {
           ]}>
             {t("aboutMe.title_name")}
           </ThemedText>
+
+          <SocialView />
           
-          <ThemedText style={[
-            styles.heroSubtitle, 
+          {/* <ThemedText style={[
+            styles.heroSubtitle,  
             isMobile && { textAlign: 'center', fontSize: 18 },
             isSmallMobile && { fontSize: 16 }
           ]}>
             Engineering Precision Meets Mobile Innovation.
-          </ThemedText>
+          </ThemedText> */}
         </View>
 
         {/* Right Side: The Story Card */}

@@ -171,7 +171,7 @@ export default function HomeScreen({ section }: { section?: string }) {
             contentFit="contain"
           />
           <AboutMe />
-          {/* <SocialView setShowToast={setShowToast} /> */}
+          {/* <SocialView /> */}
         </View>
 
         {/* ✅ PROJECTS */}

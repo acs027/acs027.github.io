@@ -8,6 +8,7 @@ import {
   Platform,
   StyleSheet,
   TouchableWithoutFeedback,
+  useWindowDimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { askGemini } from "@/src/lib/askGemini";
@@ -16,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import { renderTextWithLinks } from "../utils/LinkTextHelper";
 
 export default function ChatOverlay() {
+  const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<{ from: string; text: string }[]>([]);
   const [input, setInput] = useState("");
@@ -25,6 +27,12 @@ export default function ChatOverlay() {
   const scrollRef = useRef<ScrollView>(null);
   const colors = useThemeColors();
   const { t } = useTranslation();
+
+  // Dynamic sizing based on screen width
+  const isSmallScreen = screenWidth < 450;
+  const chatWidth = isSmallScreen ? screenWidth - 40 : 360;
+  const chatBottom = isSmallScreen ? 20 : 40;
+  const chatRight = isSmallScreen ? 20 : 40;
 
   useEffect(() => {
     let id = localStorage.getItem("chat_session_id");
@@ -36,10 +44,12 @@ export default function ChatOverlay() {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      scrollRef.current?.scrollToEnd({ animated: true });
-    }, 150);
-  }, [messages]);
+    if (open) {
+      setTimeout(() => {
+        scrollRef.current?.scrollToEnd({ animated: true });
+      }, 150);
+    }
+  }, [messages, open]);
 
   const typeWriter = (fullText: string, callback: (txt: string) => void) => {
     let index = 0;
@@ -52,11 +62,15 @@ export default function ChatOverlay() {
 
   async function sendMessage() {
     if (!input.trim() || loading) return;
+
     const userText = input;
     setInput("");
     setLoading(true);
+
     setMessages((prev) => [...prev, { from: "user", text: userText }]);
+    
     const reply = await askGemini(userText, sessionId);
+    
     setMessages((prev) => [...prev, { from: "bot", text: "" }]);
 
     typeWriter(reply, (partial) => {
@@ -70,12 +84,13 @@ export default function ChatOverlay() {
         return updated;
       });
     });
+
     setLoading(false);
   }
 
   return (
     <>
-      {/* 1. Backdrop: Only rendered when open. Clicking this minimizes the bot */}
+      {/* 1. Backdrop to handle "Click Outside" minimize */}
       {open && (
         <Pressable 
           style={styles.backdrop} 
@@ -83,7 +98,13 @@ export default function ChatOverlay() {
         />
       )}
 
-      <View style={styles.anchor} pointerEvents="box-none">
+      <View 
+        style={[
+          styles.anchor, 
+          { bottom: chatBottom, right: chatRight }
+        ]} 
+        pointerEvents="box-none"
+      >
         {!open ? (
           <Pressable 
             onPress={() => setOpen(true)} 
@@ -110,9 +131,16 @@ export default function ChatOverlay() {
             )}
           </Pressable>
         ) : (
-          /* 2. Chat Window: Using pointerEvents to prevent click-through to backdrop */
+          /* 2. Chat Window */
           <TouchableWithoutFeedback>
-            <View style={[styles.chatWindow, { backgroundColor: 'rgba(28, 28, 30, 0.95)' }]}>
+            <View style={[
+              styles.chatWindow, 
+              { 
+                width: chatWidth, 
+                maxHeight: screenHeight - 100, 
+                backgroundColor: 'rgba(28, 28, 30, 0.95)' 
+              }
+            ]}>
               <View style={styles.header}>
                 <View style={styles.headerLeft}>
                   <View style={styles.botAvatar}>
@@ -148,7 +176,11 @@ export default function ChatOverlay() {
                       ]}
                     >
                       <Text style={[styles.messageText, { color: '#fff' }]}>
-                        {renderTextWithLinks(msg.text, "#fff", msg.from === "user" ? "#fff" : "#0A84FF")}
+                        {renderTextWithLinks(
+                          msg.text,
+                          "#fff",
+                          msg.from === "user" ? "#fff" : "#0A84FF"
+                        )}
                       </Text>
                     </View>
                   );
@@ -184,13 +216,11 @@ const styles = StyleSheet.create({
   backdrop: {
     ...StyleSheet.absoluteFillObject,
     position: Platform.OS === 'web' ? 'fixed' : 'absolute',
-    backgroundColor: 'transparent', // Fully transparent click-catcher
+    backgroundColor: 'transparent', 
     zIndex: 9998,
   },
   anchor: {
     position: Platform.OS === "web" ? "fixed" : "absolute",
-    bottom: 40,
-    right: 40,
     zIndex: 9999,
   },
   targetPill: {
@@ -219,14 +249,16 @@ const styles = StyleSheet.create({
     letterSpacing: -0.2,
   },
   chatWindow: {
-    width: 360,
     height: 520,
     borderRadius: 28,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.1)',
     overflow: 'hidden',
     ...Platform.select({
-      web: { backdropFilter: 'blur(20px)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }
+      web: { 
+        backdropFilter: 'blur(20px)', 
+        boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
+      }
     })
   },
   header: {
@@ -270,6 +302,12 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.08)",
     borderBottomLeftRadius: 4,
   },
+  listBubble: {
+    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    borderWidth: 1,
+    borderColor: "rgba(10, 132, 255, 0.3)",
+    width: '95%', 
+  },
   messageText: { fontSize: 15, lineHeight: 22 },
   inputContainer: {
     flexDirection: "row",
@@ -288,11 +326,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.1)',
     fontSize: 15,
-  },
-  listBubble: {
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
-    borderWidth: 1,
-    borderColor: "rgba(10, 132, 255, 0.3)",
-    width: '90%',
   },
 });

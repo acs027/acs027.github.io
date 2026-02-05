@@ -39,20 +39,25 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   headerWrapper: {
-    alignItems: "center",
+    alignItems: "center", // Centered children (the labels)
+    justifyContent: "center",
     marginBottom: 32,
+    width: "100%", // Ensure wrapper spans the container width
   },
   sectionLabel: {
     fontSize: 12,
     letterSpacing: 4,
-    color: "#30D158", // iOS System Green for "Community/Open Source"
+    color: "#30D158",
     fontWeight: "700",
     marginBottom: 8,
+    textAlign: "center", // Explicitly center the text
   },
   mainTitle: {
     fontSize: 34,
     fontWeight: "800",
     letterSpacing: -1,
+    textAlign: "center", // This is the crucial fix
+    paddingHorizontal: 20, // Prevents text touching edges on small screens
   },
   projectsContainer: {
     width: "100%",
