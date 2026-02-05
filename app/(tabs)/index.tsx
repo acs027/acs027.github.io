@@ -50,17 +50,11 @@ export default function HomeScreen({ section }: { section?: string }) {
       return;
     }
 
-    // On web, keep the active tab driven by header clicks only.
-    // This avoids mismatches when dynamic content (like Projects)
-    // changes height after navigation.
-    if (Platform.OS === "web") {
-      return;
-    }
-
-    // Native: use the ScrollView-based layout positions so the
-    // active section updates while the user scrolls.
     const y = event.nativeEvent.contentOffset.y;
     const layoutHeight = event.nativeEvent.layoutMeasurement.height;
+
+    // Use a point near the visual center of the viewport to decide
+    // which section is "active" to avoid snapping to contact too early.
     const focusY = y + layoutHeight * 0.35;
 
     const sortedSections = Object.entries(sectionPositions.current).sort(
@@ -71,6 +65,7 @@ export default function HomeScreen({ section }: { section?: string }) {
       return;
     }
 
+    // Find the last section whose top is above the focus point.
     let activeKey = sortedSections[0][0];
     for (const [key, pos] of sortedSections) {
       if (pos <= focusY) {
@@ -170,8 +165,6 @@ export default function HomeScreen({ section }: { section?: string }) {
           <AboutMe />
           {/* <SocialView setShowToast={setShowToast} /> */}
         </View>
-
-        
 
         {/* ✅ PROJECTS */}
         <View nativeID="projects" onLayout={onSectionLayout("projects")} style={sectionStyle}>
