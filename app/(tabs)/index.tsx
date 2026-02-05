@@ -50,11 +50,19 @@ export default function HomeScreen({ section }: { section?: string }) {
       return;
     }
 
+    // On web, keep the active tab driven only by header navigation
+    // and external section props to avoid mismatches caused by
+    // dynamic layout changes (like expanding the Projects section).
+    if (Platform.OS === "web") {
+      return;
+    }
+
+    // Native: update the active section while the user scrolls.
     const y = event.nativeEvent.contentOffset.y;
     const layoutHeight = event.nativeEvent.layoutMeasurement.height;
 
     // Use a point near the visual center of the viewport to decide
-    // which section is "active" to avoid snapping to contact too early.
+    // which section is "active".
     const focusY = y + layoutHeight * 0.35;
 
     const sortedSections = Object.entries(sectionPositions.current).sort(
