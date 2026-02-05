@@ -38,7 +38,7 @@ const AboutMe: React.FC = () => {
         {/* Left Side: Bold Intro */}
         <View style={[styles.introSide, isMobile && { alignItems: 'center', width: '100%' }]}>
           <View style={styles.badge}>
-            <ThemedText style={styles.badgeText}>IOS DEVELOPER</ThemedText>
+            <ThemedText style={styles.badgeText}>iOS DEVELOPER</ThemedText>
           </View>
           
           <ThemedText style={[
