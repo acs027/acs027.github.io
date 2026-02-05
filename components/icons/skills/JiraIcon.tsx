@@ -15,8 +15,8 @@ export function JiraIcon(props: { size?: number }) {
           y2="14.842"
           gradientTransform="translate(1.136 -13.247) scale(3.90869)"
         >
-          <Stop offset=".176" stop-color="#0052cc"></Stop>
-          <Stop offset="1" stop-color="#2684ff"></Stop>
+          <Stop offset=".176" stopColor="#0052cc" />
+          <Stop offset="1" stopColor="#2684ff" />
         </LinearGradient>
         <LinearGradient
           id="jira-original-wordmark-b"
@@ -27,8 +27,8 @@ export function JiraIcon(props: { size?: number }) {
           y2="21.094"
           gradientTransform="translate(1.136 -13.247) scale(3.90869)"
         >
-          <Stop offset=".176" stop-color="#0052cc"></Stop>
-          <Stop offset="1" stop-color="#2684ff"></Stop>
+          <Stop offset=".176" stopColor="#0052cc" />
+          <Stop offset="1" stopColor="#2684ff" />
         </LinearGradient>
       </Defs>
       <Path

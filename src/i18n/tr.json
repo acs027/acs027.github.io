@@ -24,6 +24,8 @@
 
   "projects": {
     "title": "Öne Çıkan Projeler",
+     "showMore": "Daha Fazla Göster",
+    "showLess": "Daha Az Göster",
 
     "E6B Flight Pro": {
       "title": "E6B Flight Pro",

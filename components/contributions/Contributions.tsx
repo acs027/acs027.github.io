@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { ThemedView } from "../utils/ThemedView";
 import { ThemedText } from "../utils/ThemedText";
 import { useThemeColors } from "../utils/useThemeColors";
@@ -12,9 +12,13 @@ const Contributions: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <ThemedView color={colors.background} style={[styles.sectionContainer]}>
-      <ThemedText type="subtitle"> {t("contributions.title")}</ThemedText>
-      <ThemedView color={colors.background} style={[styles.projectsContainer]}>
+    <ThemedView color={colors.background} style={styles.sectionContainer}>
+      <View style={styles.headerWrapper}>
+        <ThemedText style={styles.sectionLabel}>COMMUNITY</ThemedText>
+        <ThemedText type="subtitle" style={styles.mainTitle}>{t("contributions.title")}</ThemedText>
+      </View>
+      
+      <View style={styles.projectsContainer}>
         {contributions.map((c, index) => (
           <ContributionCard
             key={index}
@@ -23,27 +27,38 @@ const Contributions: React.FC = () => {
             items={c.contributions}
           />
         ))}
-      </ThemedView>
+      </View>
     </ThemedView>
   );
 };
 
 const styles = StyleSheet.create({
   sectionContainer: {
-    gap: 12,
-    marginBottom: 50,
+    paddingVertical: 40,
     alignItems: "center",
-    width: 1000,
-    maxWidth: "95%",
+    width: "100%",
   },
-
-  projectsContainer: {
-    gap: 12,
-    marginBottom: 24,
+  headerWrapper: {
     alignItems: "center",
-    flexWrap: "wrap",
-    flexDirection: "row",
-    justifyContent: "center",
+    marginBottom: 32,
+  },
+  sectionLabel: {
+    fontSize: 12,
+    letterSpacing: 4,
+    color: "#30D158", // iOS System Green for "Community/Open Source"
+    fontWeight: "700",
+    marginBottom: 8,
+  },
+  mainTitle: {
+    fontSize: 34,
+    fontWeight: "800",
+    letterSpacing: -1,
+  },
+  projectsContainer: {
+    width: "100%",
+    maxWidth: 1000,
+    gap: 16,
+    paddingHorizontal: 20,
   },
 });
 

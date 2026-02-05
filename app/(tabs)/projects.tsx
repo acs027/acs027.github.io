@@ -6,22 +6,6 @@ export default function ProjectsScreen() {
   document.title = "aCs";
 
   return <HomeScreen section="projects" />;
-  /*<>
-      <ParallaxScrollView
-        ref={scrollViewRef}
-        headerBackgroundColor={{ light: "#111", dark: "#000" }}
-        headerImage={
-          <Image
-            source={require("@/assets/images/acslogo.png")}
-            style={styles.reactLogo}
-          />
-        }
-      >
-        <View style={[styles.container]}>
-          <Projects />
-        </View>
-      </ParallaxScrollView>
-    </>*/
 }
 
 const styles = StyleSheet.create({

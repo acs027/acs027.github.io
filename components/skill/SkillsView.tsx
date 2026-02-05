@@ -3,7 +3,6 @@ import { StyleSheet, Pressable, View } from "react-native";
 import { ThemedView } from "../utils/ThemedView";
 import { ThemedText } from "../utils/ThemedText";
 import { SKILLS } from "@/constants/Skills";
-import { ShadowStyle } from "../utils/ShadowStyle";
 import { useThemeColors } from "../utils/useThemeColors";
 import { useTranslation } from "react-i18next";
 
@@ -12,126 +11,131 @@ const SkillsView: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <ThemedView color={colors.background} style={[styles.sectionContainer]}>
-      <ThemedText type="subtitle">{t("skills.title")}</ThemedText>
-      <ThemedView
-        color={colors.card}
-        style={[styles.roundedRect, ShadowStyle()]}
-      >
+    <ThemedView color={colors.background} style={styles.sectionContainer}>
+      {/* Section Header */}
+      <View style={styles.headerWrapper}>
+        <ThemedText style={styles.sectionLabel}>TECHNICAL STACK</ThemedText>
+        <ThemedText type="subtitle" style={styles.mainTitle}>{t("skills.title")}</ThemedText>
+      </View>
+
+      <View style={styles.masterGrid}>
         {SKILLS.map((category) => (
-          <ThemedView
-            color={colors.card}
-            key={category.title}
-            style={[styles.skillCategory]}
-          >
+          <View key={category.title} style={styles.categoryCard}>
             <ThemedText type="defaultSemiBold" style={styles.categoryTitle}>
-              {t(`skills.${category.title}`)}
+              {t(`skills.${category.title}`).toUpperCase()}
             </ThemedText>
-            <ThemedView color={colors.card} style={[styles.skillContainer]}>
-              <ThemedView color={colors.card} style={[styles.skillsGrid]}>
-                {category.skills.map((skill) => {
-                  if (!skill.Icon) return null;
-                  const SkillIcon = skill.Icon;
-                  return (
-                    <Pressable
-                      key={skill.name}
-                      style={({ pressed, hovered }) => [
-                        styles.skillBadge,
-                        { backgroundColor: colors.skillBadgeBgColor },
-                        pressed && styles.pressed,
-                        hovered && [
-                          styles.hovered,
-                          { backgroundColor: colors.skillHoveredColor },
-                        ], // Web hover effect
-                      ]}
-                    >
-                      <View style={[styles.iconWrapper]}>
-                        <SkillIcon size={32} />
-                      </View>
-                      <ThemedText style={[styles.skillText]}>
-                        {skill.name}
-                      </ThemedText>
-                    </Pressable>
-                  );
-                })}
-              </ThemedView>
-            </ThemedView>
-          </ThemedView>
+            
+            <View style={styles.skillsGrid}>
+              {category.skills.map((skill) => {
+                if (!skill.Icon) return null;
+                const SkillIcon = skill.Icon;
+                return (
+                  <Pressable
+                    key={skill.name}
+                    style={({ pressed, hovered }) => [
+                      styles.skillBadge,
+                      { borderColor: 'rgba(255,255,255,0.1)' },
+                      pressed && styles.pressed,
+                      hovered && styles.hovered,
+                    ]}
+                  >
+                    <View style={styles.iconWrapper}>
+                      <SkillIcon size={20} color={colors.text} />
+                    </View>
+                    <ThemedText style={styles.skillText}>
+                      {skill.name}
+                    </ThemedText>
+                  </Pressable>
+                );
+              })}
+            </View>
+          </View>
         ))}
-      </ThemedView>
+      </View>
     </ThemedView>
   );
 };
 
 const styles = StyleSheet.create({
   sectionContainer: {
-    // gap: 16,
-    marginBottom: 24,
+    paddingVertical: 60,
+    paddingHorizontal: 20,
     alignItems: "center",
+    width: "100%",
   },
-  roundedRect: {
-    borderRadius: 16,
-    padding: 16,
-    marginVertical: 8,
-    width: "95%",
-    maxWidth: 1000,
+  headerWrapper: {
+    alignItems: "center",
+    marginBottom: 40,
   },
-  skillContainer: {
-    // justifyContent: "center",
-    // alignItems: "center",
-    // alignSelf: "center",
-    // alignContent: "center",
-    width: "100%", // Ensures proper centering
-    paddingBottom: 20,
+  sectionLabel: {
+    fontSize: 12,
+    letterSpacing: 4,
+    color: "#007AFF", // iOS Blue
+    fontWeight: "700",
+    marginBottom: 8,
+  },
+  mainTitle: {
+    fontSize: 34,
+    fontWeight: "800",
+    letterSpacing: -1,
+    
+  },
+  masterGrid: {
+    width: "100%",
+    maxWidth: 1100,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: 20,
+  },
+  categoryCard: {
+    backgroundColor: "rgba(28, 28, 30, 0.5)", // System Gray 6 (Dark)
+    borderRadius: 24,
+    padding: 24,
+    width: "100%",
+    maxWidth: 500, // Two-column layout on wide screens
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.08)",
+  },
+  categoryTitle: {
+    fontSize: 11,
+    letterSpacing: 1.5,
+    opacity: 0.5,
+    marginBottom: 20,
+    fontWeight: "bold",
   },
   skillsGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 12,
-    // justifyContent: "center", // Ensures new rows start from the left
-    // alignItems: "center",
-    // alignSelf: "center",
-    // alignContent: "center", // Helps in multi-line centering
-  },
-  skillCategory: {
-    marginTop: 24,
-  },
-  categoryTitle: {
-    opacity: 0.8,
-    marginBottom: 8,
+    gap: 10,
   },
   skillBadge: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 6,
-    justifyContent: "space-between",
-    paddingHorizontal: 8,
-    paddingVertical: 6,
+    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    paddingHorizontal: 12,
+    paddingVertical: 8,
     borderRadius: 12,
-    maxWidth: 200,
-    minWidth: 100,
-    height: 40,
-    transition: "all 0.2s ease-in-out",
+    borderWidth: 1,
+    gap: 8,
   },
-  skillText: {
-    fontSize: 15,
-    fontWeight: "500",
-    textAlign: "right",
-  },
-  pressed: {
-    opacity: 0.8, // Effect when pressed on mobile
-  },
-  hovered: {
-    transform: [{ scale: 1.05 }], // Slightly increase size on hover
-  },
-
   iconWrapper: {
-    width: 32,
-    height: 32,
-    borderRadius: 12, // rounds the corners
-    overflow: "hidden", // crops the content
+    width: 20,
+    height: 20,
     justifyContent: "center",
     alignItems: "center",
+  },
+  skillText: {
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  pressed: {
+    opacity: 0.7,
+    transform: [{ scale: 0.98 }],
+  },
+  hovered: {
+    backgroundColor: "rgba(255, 255, 255, 0.12)",
+    borderColor: "#007AFF",
   },
 });
 

@@ -24,6 +24,8 @@
 
    "projects": {
     "title": "Featured Projects",
+    "showMore": "Show More",
+    "showLess": "Show Less",
      "E6B Flight Pro": {
       "title": "E6B Flight Pro",
       "description": "E6B Flight Pro is a precise digital replica of the classic E6B flight computer, built for pilots, student aviators, and aviation enthusiasts.",

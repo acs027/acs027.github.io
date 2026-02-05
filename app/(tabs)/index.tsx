@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import {
   StyleSheet,
   View,
@@ -6,6 +6,7 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
   useWindowDimensions,
+  Platform,
 } from "react-native";
 import { Image } from "expo-image";
 import { ExpandableInfo } from "@/components/utils/ExpandableInfo";
@@ -16,7 +17,6 @@ import AboutMe from "@/components/about/AboutMe";
 import { Toast } from "@/components/utils/Toast";
 import { useThemeColors } from "@/components/utils/useThemeColors";
 import HeaderNavBar from "@/components/header/HeaderNavBar";
-import { useNavigation } from "expo-router";
 import Footer from "@/components/footer/Footer";
 import Contact from "@/components/contact/Contact";
 import ReactGA from "react-ga4";
@@ -27,79 +27,126 @@ import "@/src/i18n";
 
 export default function HomeScreen({ section }: { section?: string }) {
   const { width, height } = useWindowDimensions();
-
-  const scrollViewRef = useRef<ScrollView>(null);
-  const projectViewRef = useRef<ScrollView>(null);
-
-  const [showToast, setShowToast] = useState(false);
   const colors = useThemeColors();
-  document.title = "aCs";
-
-  const navigation = useNavigation();
-
-  // ✅ REFS
-  const aboutRef = useRef<View>(null);
-  const skillsRef = useRef<View>(null);
-  const contributionsRef = useRef<View>(null);
-  const projectsRef = useRef<View>(null);
-  const contactRef = useRef<View>(null);
-
-  // ✅ Current section logic
+  const scrollViewRef = useRef<ScrollView>(null);
+  const isProgrammaticScroll = useRef(false);
+  const [showToast, setShowToast] = useState(false);
   const [currentSection, setCurrentSection] = useState(section ?? "about");
-
   const sectionPositions = useRef<Record<string, number>>({});
 
-  // Google Analytics
+  // Google Analytics Initialization
   useEffect(() => {
-    ReactGA.initialize("G-HC71E8M7SR");
-    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+    if (Platform.OS === 'web') {
+      ReactGA.initialize("G-HC71E8M7SR");
+      ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+      document.title = "Ali Cihan Saraç | iOS Developer";
+    }
   }, []);
 
+  // ✅ Optimized Scroll Handler
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    // Ignore scroll events triggered by our own navigation animations
+    if (isProgrammaticScroll.current) {
+      return;
+    }
+
+    // On web, keep the active tab driven by header clicks only.
+    // This avoids mismatches when dynamic content (like Projects)
+    // changes height after navigation.
+    if (Platform.OS === "web") {
+      return;
+    }
+
+    // Native: use the ScrollView-based layout positions so the
+    // active section updates while the user scrolls.
     const y = event.nativeEvent.contentOffset.y;
-    const buffer = 100;
+    const layoutHeight = event.nativeEvent.layoutMeasurement.height;
+    const focusY = y + layoutHeight * 0.35;
 
-    const current = Object.entries(sectionPositions.current)
-      .reverse()
-      .find(([_, pos]) => y + buffer >= pos);
+    const sortedSections = Object.entries(sectionPositions.current).sort(
+      (a, b) => a[1] - b[1]
+    );
 
-    if (current && current[0] !== currentSection) {
-      setCurrentSection(current[0]);
+    if (sortedSections.length === 0) {
+      return;
+    }
+
+    let activeKey = sortedSections[0][0];
+    for (const [key, pos] of sortedSections) {
+      if (pos <= focusY) {
+        activeKey = key;
+      } else {
+        break;
+      }
+    }
+
+    if (activeKey !== currentSection) {
+      setCurrentSection(activeKey);
     }
   };
 
-  const scrollToSection = (section: string) => {
-    const position = sectionPositions.current[section];
+  const scrollToSection = (sectionId: string) => {
+    // Mark that the upcoming scroll is triggered programmatically so that
+    // the scroll handler does not immediately override the active section.
+    isProgrammaticScroll.current = true;
+    setCurrentSection(sectionId);
+
+    const clearProgrammaticFlag = () => {
+      // Allow some time for the scroll animation to finish before re-enabling
+      // scroll-based section detection.
+      setTimeout(() => {
+        isProgrammaticScroll.current = false;
+      }, 600);
+    };
+
+    // On web, prefer DOM-based scrolling so dynamic layout changes
+    // (e.g. expanding the Projects section) are always respected.
+    if (Platform.OS === "web") {
+      try {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+          clearProgrammaticFlag();
+          return;
+        }
+      } catch {
+        // If anything goes wrong, fall back to ScrollView-based scrolling.
+      }
+    }
+
+    // Native / fallback: use cached layout positions.
+    const position = sectionPositions.current[sectionId];
     if (position !== undefined) {
       scrollViewRef.current?.scrollTo({ y: position, animated: true });
     }
+    clearProgrammaticFlag();
   };
 
+  // Handle external navigation (e.g., from a URL param)
   useEffect(() => {
-    navigation.setOptions({
-      tabBarStyle: { display: "none" },
-    });
-  }, [navigation]);
-
-  useEffect(() => {
-    if (section === "projects") {
-      scrollToSection("projects");
+    if (section) {
+      // Small timeout to ensure onLayout has finished
+      setTimeout(() => scrollToSection(section), 100);
     }
   }, [section]);
 
   const scrollToTop = () => {
-    projectViewRef.current?.scrollTo();
-    scrollViewRef.current?.scrollTo({
-      y: 0,
-      animated: true,
-    });
+    scrollViewRef.current?.scrollTo({ y: 0, animated: true });
   };
 
-  // ✅ COMMON STYLES
-  const fullHeight = width > 750 ? height : undefined;
+  // ✅ Helper to capture layout
+  const onSectionLayout = (name: string) => (e: any) => {
+    sectionPositions.current[name] = e.nativeEvent.layout.y;
+  };
+
+  const isLargeScreen = width > 750;
+  const sectionStyle = [
+    styles.section,
+    { backgroundColor: colors.background, minHeight: isLargeScreen ? undefined : undefined }
+  ];
 
   return (
-    <>
+    <View style={{ flex: 1, backgroundColor: colors.background }}>
       <HeaderNavBar
         onNavigate={scrollToSection}
         currentSection={currentSection}
@@ -108,120 +155,78 @@ export default function HomeScreen({ section }: { section?: string }) {
       <ScrollView
         ref={scrollViewRef}
         onScroll={handleScroll}
-        decelerationRate="fast"
+        scrollEventThrottle={32} // Balanced performance
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ flexGrow: 1 }}
-        scrollEventThrottle={16}
+        stickyHeaderIndices={Platform.OS === 'web' ? [] : undefined}
       >
         {/* ✅ ABOUT */}
-        <View
-          ref={aboutRef}
-          onLayout={(e) => {
-            sectionPositions.current["about"] = e.nativeEvent.layout.y;
-          }}
-          style={[
-            styles.section,
-            { backgroundColor: colors.background, minHeight: fullHeight },
-          ]}
-        >
+        <View nativeID="about" onLayout={onSectionLayout("about")} style={sectionStyle}>
           <Image
             source={require("@/assets/images/acslogo.png")}
             style={styles.reactLogo}
+            contentFit="contain"
           />
           <AboutMe />
-          <SocialView setShowToast={setShowToast} />
+          {/* <SocialView setShowToast={setShowToast} /> */}
         </View>
 
-        {/* ✅ CONTRIBUTIONS */}
-        <View
-          ref={contributionsRef}
-          onLayout={(e) => {
-            sectionPositions.current["contributions"] = e.nativeEvent.layout.y;
-          }}
-          style={[
-            styles.section,
-            { backgroundColor: colors.background, minHeight: fullHeight },
-          ]}
-        >
-          <Contributions />
-        </View>
+        
 
         {/* ✅ PROJECTS */}
-        <View
-          ref={projectsRef}
-          onLayout={(e) => {
-            sectionPositions.current["projects"] = e.nativeEvent.layout.y;
-          }}
-          style={[
-            styles.section,
-            { backgroundColor: colors.background, minHeight: fullHeight },
-          ]}
-        >
+        <View nativeID="projects" onLayout={onSectionLayout("projects")} style={sectionStyle}>
           <Projects />
         </View>
 
+        {/* ✅ CONTRIBUTIONS */}
+        <View nativeID="contributions" onLayout={onSectionLayout("contributions")} style={sectionStyle}>
+          <Contributions />
+        </View>
+
         {/* ✅ SKILLS */}
-        <View
-          ref={skillsRef}
-          onLayout={(e) => {
-            sectionPositions.current["skills"] = e.nativeEvent.layout.y;
-          }}
-          style={[
-            styles.section,
-            { backgroundColor: colors.background, minHeight: fullHeight },
-          ]}
-        >
+        <View nativeID="skills" onLayout={onSectionLayout("skills")} style={sectionStyle}>
           <SkillsView />
         </View>
 
         {/* ✅ CONTACT */}
-        <View
-          ref={contactRef}
-          onLayout={(e) => {
-            sectionPositions.current["contact"] = e.nativeEvent.layout.y;
-          }}
-          style={[
-            styles.section,
-            { backgroundColor: colors.background, minHeight: fullHeight },
-          ]}
-        >
+        <View nativeID="contact" onLayout={onSectionLayout("contact")} style={sectionStyle}>
           <Contact />
         </View>
 
         <Footer />
       </ScrollView>
 
-      {/* ✅ CHAT */}
       <ChatOverlay />
 
-      <ExpandableInfo
+      {/* <ExpandableInfo
         onPress={scrollToTop}
         name="Ali Cihan Saraç"
-        location="Başiskele / Kocaeli"
+        location="Kocaeli, TR"
         imageSource={require("@/assets/images/profile.png")}
-      />
+      /> */}
 
       <Toast
-        message="Phone number copied to clipboard!"
+        message="Copied to clipboard!"
         isVisible={showToast}
         onHide={() => setShowToast(false)}
       />
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   reactLogo: {
-    height: 290,
-    width: 290,
+    height: 300,
+    width: 300,
     position: "absolute",
-    top: "10%",
+    top: "5%",
     alignSelf: "center",
-    opacity: 0.8,
+    opacity: 0.05, // Subtle watermark look
     zIndex: -1,
   },
   section: {
     paddingHorizontal: 24,
+    paddingVertical: 40, // Added padding for better mobile spacing
     justifyContent: "center",
     alignItems: "center",
     width: "100%",

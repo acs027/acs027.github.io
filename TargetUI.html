@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali Cihan Saraç | iOS Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            scroll-behavior: smooth;
+        }
+
+        .glass {
+            background: rgba(28, 28, 30, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+        }
+
+        .bento-card {
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-5px);
+            border-color: #007AFF; /* iOS Blue */
+        }
+
+        .gradient-text {
+            background: linear-gradient(120deg, #ffffff, #a1a1a1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <nav class="max-w-6xl mx-auto flex justify-between items-center mb-16">
+        <div class="text-xl font-bold tracking-tighter">ACS<span class="text-blue-500">.</span></div>
+        <div class="space-x-8 text-sm font-medium text-gray-400">
+            <a href="#projects" class="hover:text-white transition">Projects</a>
+            <a href="#skills" class="hover:text-white transition">Skills</a>
+            <a href="#contact" class="px-5 py-2 glass hover:bg-white hover:text-black transition rounded-full">Contact</a>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto">
+        
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-20">
+            <div class="md:col-span-2 glass p-10 flex flex-col justify-center bento-card">
+                <span class="text-blue-500 font-semibold mb-4 block">iOS Developer</span>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 tracking-tight gradient-text">
+                    Engineering Precision,<br>Mobile Innovation.
+                </h1>
+                <p class="text-gray-400 text-lg max-w-lg leading-relaxed">
+                    I apply the rigorous logic of Mechanical Engineering to the iOS ecosystem. Specializing in Swift and modern frameworks to build clean, efficient apps.
+                </p>
+            </div>
+
+            <div class="glass p-8 flex flex-col justify-between bento-card text-center md:text-left">
+                <div class="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl mx-auto md:mx-0 mb-6 flex items-center justify-center text-3xl">
+                    👋
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold">Ali Cihan Saraç</h2>
+                    <p class="text-gray-400 mb-4">Based in Kocaeli, Türkiye</p>
+                    <div class="flex gap-4 justify-center md:justify-start">
+                        <a href="#" class="text-xl text-gray-400 hover:text-blue-500"><i class="fab fa-github"></i></a>
+                        <a href="#" class="text-xl text-gray-400 hover:text-blue-500"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="mb-20">
+            <h3 class="text-3xl font-bold mb-10 tracking-tight">Featured Projects</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div class="glass overflow-hidden group bento-card">
+                    <div class="h-64 bg-zinc-900 flex items-center justify-center relative overflow-hidden">
+                        <div class="w-40 h-80 bg-zinc-800 rounded-[2.5rem] border-[6px border-zinc-700 shadow-2xl transition group-hover:scale-105 duration-500">
+                             <div class="p-4 text-[10px] text-zinc-500">App Preview Mockup</div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="skill-tag">SwiftUI</span>
+                            <span class="skill-tag">MVVM</span>
+                            <span class="skill-tag">Fastlane</span>
+                        </div>
+                        <h4 class="text-2xl font-bold mb-2">E6B Flight Pro</h4>
+                        <p class="text-gray-400 mb-6">A digital replica of the E6B flight computer for pilots. Engineered for high-precision calculations.</p>
+                        <a href="#" class="text-blue-500 font-semibold hover:underline">View on GitHub →</a>
+                    </div>
+                </div>
+
+                <div class="glass overflow-hidden group bento-card">
+                    <div class="h-64 bg-zinc-900 flex items-center justify-center relative overflow-hidden">
+                        <div class="w-40 h-80 bg-zinc-800 rounded-[2.5rem] border-[6px] border-zinc-700 shadow-2xl transition group-hover:scale-105 duration-500">
+                            <div class="p-4 text-[10px] text-zinc-500 text-center mt-10 italic">AI Integration</div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="skill-tag">UIKit</span>
+                            <span class="skill-tag">VIPER</span>
+                            <span class="skill-tag">Gemini AI</span>
+                        </div>
+                        <h4 class="text-2xl font-bold mb-2">TravelPlanner</h4>
+                        <p class="text-gray-400 mb-6">AI-powered destination discovery using Google Gemini. Built with a modular VIPER architecture.</p>
+                        <a href="#" class="text-blue-500 font-semibold hover:underline">View on GitHub →</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="skills" class="mb-20 glass p-10">
+            <h3 class="text-3xl font-bold mb-10 tracking-tight text-center">Technical Stack</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h5 class="text-blue-500 font-bold mb-4 uppercase text-xs tracking-widest">Languages</h5>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>Swift</li>
+                        <li>TypeScript</li>
+                        <li>Python</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-blue-500 font-bold mb-4 uppercase text-xs tracking-widest">Frameworks</h5>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>SwiftUI / UIKit</li>
+                        <li>Combine</li>
+                        <li>CoreData / SwiftData</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-blue-500 font-bold mb-4 uppercase text-xs tracking-widest">Architecture</h5>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>MVVM / VIPER</li>
+                        <li>SOLID Principles</li>
+                        <li>Modularization</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-blue-500 font-bold mb-4 uppercase text-xs tracking-widest">Tools</h5>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>Xcode / Git</li>
+                        <li>GitHub Actions</li>
+                        <li>Fastlane / SPM</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="max-w-6xl mx-auto border-t border-zinc-800 pt-10 pb-20 text-center text-gray-500 text-sm">
+        <p>© 2026 Ali Cihan Saraç. Built for the Apple Ecosystem.</p>
+    </footer>
+
+</body>
+</html>
