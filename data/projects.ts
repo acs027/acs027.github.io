@@ -17,7 +17,7 @@ export const projects: Project[] = [
   {
     title: "E6B Flight Pro",
     repoLink: "https://github.com/acs027/FlightComputer",
-    appStoreLink: "https://apps.apple.com/tr/app/e6b-flight-pro/id6743019639",
+    appStoreLink: "https://apps.apple.com/us/app/e6b-flight-pro/id6743019639",
     description:
       "E6B Flight Pro is a precise digital replica of the classic E6B flight computer, built for pilots, student aviators, and aviation enthusiasts.",
     shortDescription:"A digital replica of the E6B flight computer for pilots and aviation students.",
