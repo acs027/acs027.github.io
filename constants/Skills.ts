@@ -28,36 +28,25 @@ export type SkillCategory = {
 
 export const SKILLS: SkillCategory[] = [
   {
-    title: 'Programming Languages',
+    title: 'Languages & Core',
     skills: [
       { name: 'Swift', Icon: SwiftIcon },
+      { name: 'SwiftUI', Icon: SwiftIcon },
+      { name: 'UIKit', Icon: UIKitIcon },
+      { name: 'Combine', Icon: SwiftIcon },
+      { name: 'React', Icon: ReactIcon },
+      { name: 'Expo', Icon: ExpoIcon },
       { name: 'JavaScript', Icon: JavaScriptIcon },
       { name: 'TypeScript', Icon: TypescriptIcon },
       { name: 'Python', Icon: PythonIcon },
     ],
   },
-
   {
-    title: 'iOS Frameworks & UI',
-    skills: [
-      { name: 'SwiftUI', Icon: SwiftIcon },
-      { name: 'UIKit', Icon: UIKitIcon },
-      { name: 'Combine', Icon: SwiftIcon },
-      { name: 'MapKit', Icon: SwiftIcon },
-      { name: 'WebKit', Icon: SwiftIcon },
-      { name: 'SnapKit', Icon: SwiftIcon },
-      { name: 'Programmatic UI', Icon: SwiftIcon },
-      { name: 'App Intents', Icon: SwiftIcon },
-    ],
-  },
-
-  {
-    title: 'Architectures & Principles',
+    title: 'Architectures',
     skills: [
       { name: 'MVVM', Icon: SwiftIcon },
       { name: 'VIPER', Icon: SwiftIcon },
       { name: 'Modular Architecture', Icon: SwiftIcon },
-      { name: 'SOLID Principles', Icon: SwiftIcon },
     ],
   },
 
@@ -76,6 +65,8 @@ export const SKILLS: SkillCategory[] = [
   {
     title: 'Developer Tools',
     skills: [
+      { name: 'Cursor', Icon: SwiftIcon },
+      { name: 'Gemini CLI', Icon: SwiftIcon },
       { name: 'Xcode', Icon: XCodeIcon },
       { name: 'Git', Icon: GitIcon },
       { name: 'GitHub Actions', Icon: GithubActionsIcon },
@@ -83,14 +74,6 @@ export const SKILLS: SkillCategory[] = [
       { name: 'SPM', Icon: SwiftIcon },
       { name: 'VSCode', Icon: VSCodeIcon },
       { name: 'Jira', Icon: JiraIcon },
-    ],
-  },
-
-  {
-    title: 'Design Tools',
-    skills: [
-      { name: 'Adobe Photoshop', Icon: PhotoshopIcon },
-      { name: 'Adobe Illustrator', Icon: IllustratorIcon },
     ],
   },
 ];

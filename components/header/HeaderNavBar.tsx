@@ -163,15 +163,15 @@ const styles = StyleSheet.create({
     color: "#8E8E93",
   },
   activeNavLink: {
-    color: "#FFF",
+    // color: "#FFF",
   },
   activeIndicator: {
-    position: 'absolute',
-    bottom: -4,
-    width: 4,
-    height: 4,
-    borderRadius: 2,
-    backgroundColor: '#0A84FF',
+    // position: 'absolute',
+    // bottom: -4,
+    // width: 4,
+    // height: 4,
+    // borderRadius: 2,
+    // backgroundColor: '#0A84FF',
   },
   rightTools: {
     flexDirection: 'row',
